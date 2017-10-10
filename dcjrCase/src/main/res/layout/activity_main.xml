@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+        <!--<include layout="@layout/custom_toolbar" />-->
+
+
+
+        <android.support.v4.widget.DrawerLayout
+            android:id="@+id/drawer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--主界面-->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!--<FrameLayout
+                    android:id="@+id/content_frame"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    &lt;!&ndash;<TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="这里放fragment" />&ndash;&gt;
+                </FrameLayout>-->
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:flipInterval="30"
+                    android:persistentDrawingCache="animation">
+
+                </android.support.v4.view.ViewPager>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal">
+
+                    <RadioGroup
+                        android:id="@+id/btn_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_bottom_home"
+                            style="@style/BottomBarItem"
+                            android:checked="true"
+                            android:drawableTop="@drawable/tab_icon_new"
+                            android:text="@string/btn_name1" />
+
+                        <RadioButton
+                            android:id="@+id/rb_bottom_case"
+                            style="@style/BottomBarItem"
+                            android:drawableTop="@drawable/tab_icon_tweet"
+                            android:text="@string/btn_name2" />
+
+
+                        <!--<FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="10dp"
+                            android:paddingLeft="15dp"
+                            android:paddingRight="15dp">
+
+                            <RadioButton
+                                style="@style/BottomBarItem"
+                                android:clickable="false" />
+
+                            <ImageView
+                                android:id="@+id/iv_bottom_brand"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:src="@drawable/btn_quickoption_selector" />
+                        </FrameLayout>-->
+
+                        <RadioButton
+                            android:id="@+id/rb_bottom_news"
+                            style="@style/BottomBarItem"
+                            android:drawableTop="@drawable/tab_icon_explore"
+                            android:text="@string/btn_name3" />
+
+                        <RadioButton
+                            android:id="@+id/rb_bottom_me"
+                            style="@style/BottomBarItem"
+                            android:drawableTop="@drawable/tab_icon_me"
+                            android:text="@string/btn_name4" />
+                    </RadioGroup>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--(左)侧滑菜单-->
+            <FrameLayout
+                android:id="@+id/drawer_left"
+                android:layout_width="240dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:background="#fff">
+
+                <ListView
+                    android:id="@+id/lv_drawer_left"
+                    android:layout_width="240dp"
+                    android:layout_height="match_parent"
+                    android:choiceMode="singleChoice"
+                    android:divider="@android:color/transparent"
+                    android:dividerHeight="0dp">
+
+                </ListView>
+
+            </FrameLayout>
+
+            <!--(右)侧滑菜单-->
+            <!--<RelativeLayout
+                android:id="@+id/drawer_right"
+                android:layout_width="220dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:background="#111"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="这是右边栏"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp" />
+            </RelativeLayout>-->
+        </android.support.v4.widget.DrawerLayout>
+
+</LinearLayout>

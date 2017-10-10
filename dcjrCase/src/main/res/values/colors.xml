@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#40AA53</color>
+    <color name="colorPrimaryDark">#40AA53</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="menu_bg_press">#cecece</color>
+    <color name="background_tab_pressed">@color/colorPrimary</color>
+
+    <!--TabLayout颜色属性-->
+    <color name="tab_background">@android:color/transparent</color>
+    <color name="tab_Selected_TextColor">@color/colorPrimary</color>
+    <color name="tab_TextColor">#cecece</color>
+    <color name="tab_IndicatorColor">@color/colorPrimary</color>
+
+</resources>

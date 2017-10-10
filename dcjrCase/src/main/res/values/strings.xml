@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">电磁兼容案例库</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+
+    <!--项目标题-->
+    <string name="title">"项目标题"</string>
+    <!--RadioGroup内容-->
+    <string name="btn_name1">"首页"</string>
+    <string name="btn_name2">"案例"</string>
+    <string name="btn_name3">"新闻"</string>
+    <string name="btn_name4">"我"</string>
+
+    <!--首页childfragment的tab标题-->
+    <string-array name="home_array">
+        <item>首页Tab1</item>
+        <item>首页Tab2</item>
+        <item>首页Tab3</item>
+        <item>首页Tab4</item>
+
+    </string-array>
+</resources>
