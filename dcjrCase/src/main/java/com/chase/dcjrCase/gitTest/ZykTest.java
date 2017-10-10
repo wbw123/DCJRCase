@@ -7,6 +7,6 @@ package com.chase.dcjrCase.gitTest;
 public class ZykTest {
     private String ZYK;
     public void test(){
-
+        int num = 20;
     }
 }
