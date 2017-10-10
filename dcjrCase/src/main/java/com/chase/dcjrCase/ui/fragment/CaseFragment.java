@@ -223,7 +223,6 @@ public class CaseFragment extends BaseFragment {
 
     }
 
-
     public static int getCount(){
         return count;
     }
