@@ -134,6 +134,7 @@ public class CaseFragment extends BaseFragment {
                 refreshlayout.getLayout().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+
                         count = 10;
                         getDataFromServer();//通过网络获取数据
                         refreshlayout.finishRefresh();//完成刷新
