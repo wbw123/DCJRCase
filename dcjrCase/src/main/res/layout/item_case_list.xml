@@ -20,7 +20,7 @@
             android:id="@+id/tv_case_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#9b9b9b"
+            android:textColor="#a000"
             android:gravity="center_vertical"
             android:textSize="20dp"
             android:lines="2"
@@ -33,7 +33,7 @@
             android:layout_marginRight="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#9b9b9b"
+            android:textColor="#a000"
             android:gravity="center_vertical"
             android:textSize="15dp"
             android:text="日期"/>

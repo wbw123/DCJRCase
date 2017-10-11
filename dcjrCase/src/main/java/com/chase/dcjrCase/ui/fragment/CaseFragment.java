@@ -1,6 +1,7 @@
 package com.chase.dcjrCase.ui.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -9,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chase.dcjrCase.R;
@@ -17,6 +19,7 @@ import com.chase.dcjrCase.bean.CaseData;
 import com.chase.dcjrCase.bean.CaseData.DataBean.CaseDataBean;
 import com.chase.dcjrCase.global.Constants;
 import com.chase.dcjrCase.ui.activity.CaseDetailActivity;
+import com.chase.dcjrCase.uitl.PrefUtils;
 import com.chase.dcjrCase.uitl.CacheUtils;
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
@@ -27,6 +30,7 @@ import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.chase.dcjrCase.bean.CaseData.DataBean.CaseDataBean;
 
 import java.util.ArrayList;
 
@@ -127,10 +131,26 @@ public class CaseFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                startActivity(new Intent(mActivity, CaseDetailActivity.class));
+                /*条目跳转*/
                 id = 16-id;
                 Intent intent = new Intent(mActivity, CaseDetailActivity.class);
                 intent.putExtra("url", Constants.HOME_URL+"/dcjr/case/case"+id+".html");//webView链接
                 mActivity.startActivity(intent);
+
+                /*点击条目标记已读状态*/
+                CaseDataBean caseDataBean = mCaseList.get(position);
+                //当前点击的item的标题颜色置灰
+                TextView tvTitle = view.findViewById(R.id.tv_case_title);
+                TextView tvDate = view.findViewById(R.id.tv_case_date);
+                tvTitle.setTextColor(Color.argb(255,155,155,155));
+                tvDate.setTextColor(Color.argb(255,155,155,155));
+                //将已读状态持久化到本地
+                //key:read_ids; value:id
+                String readIds = PrefUtils.getString("read_ids","",mActivity);
+                if (!readIds.contains(caseDataBean.id)) {
+                    readIds = readIds + caseDataBean.id + ",";
+                    PrefUtils.putString("read_ids", readIds, mActivity);
+                }
             }
         });
 
