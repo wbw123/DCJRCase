@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.chase.dcjrCase.R;
 import com.chase.dcjrCase.adapter.CaseAdapter;
 import com.chase.dcjrCase.bean.CaseData;
+import com.chase.dcjrCase.bean.CaseData.DataBean.CaseDataBean;
+import com.chase.dcjrCase.global.Constants;
 import com.chase.dcjrCase.ui.activity.CaseDetailActivity;
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
@@ -23,7 +25,6 @@ import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.chase.dcjrCase.bean.CaseData.DataBean.CaseDataBean;
 
 import java.util.ArrayList;
 
@@ -110,7 +111,11 @@ public class CaseFragment extends BaseFragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(mActivity, CaseDetailActivity.class));
+//                startActivity(new Intent(mActivity, CaseDetailActivity.class));
+                id = 16-id;
+                Intent intent = new Intent(mActivity, CaseDetailActivity.class);
+                intent.putExtra("url", Constants.HOME_URL+"/dcjr/case/case"+id+".html");//webView链接
+                mActivity.startActivity(intent);
             }
         });
 

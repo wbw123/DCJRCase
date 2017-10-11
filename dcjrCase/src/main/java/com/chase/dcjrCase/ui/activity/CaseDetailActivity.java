@@ -15,6 +15,7 @@ import com.chase.dcjrCase.R;
 public class CaseDetailActivity extends AppCompatActivity {
     private WebView mWebView;
     private ProgressBar pbLoading;
+    private String mUrl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,11 +25,12 @@ public class CaseDetailActivity extends AppCompatActivity {
         pbLoading = (ProgressBar) findViewById(R.id.pb_loading);
 
 
-//        mUrl = getIntent().getStringExtra("url");
+        mUrl = getIntent().getStringExtra("url");
 
+        System.out.println("mUrl:"+mUrl);
         // 加载网页
-        mWebView.loadUrl("http://192.168.141.81:8080/dcjr/case/case2.html");
-//        mWebView.loadUrl(mUrl);
+//        mWebView.loadUrl("http://192.168.141.81:8080/dcjr/case/case2.html");
+        mWebView.loadUrl(mUrl);
 
         WebSettings settings = mWebView.getSettings();
         settings.setBuiltInZoomControls(true);// 显示放大缩小按钮

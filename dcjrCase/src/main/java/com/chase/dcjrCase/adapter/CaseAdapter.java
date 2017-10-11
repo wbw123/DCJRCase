@@ -71,7 +71,7 @@ public class CaseAdapter extends BaseAdapter {
                 .load(Constants.HOME_URL+item.imgUrl)
 //                .fitCenter()//指定图片缩放类型为fitCenter
                 .centerCrop()// 指定图片缩放类型为centerCrop
-                .placeholder(R.mipmap.ic_launcher)
+                .placeholder(R.mipmap.loading)
                 .into(holder.iv_image);
         holder.tv_title.setText(item.title);
         holder.tv_date.setText(item.date);
