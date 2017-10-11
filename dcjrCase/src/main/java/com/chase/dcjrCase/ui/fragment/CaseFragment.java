@@ -19,8 +19,8 @@ import com.chase.dcjrCase.bean.CaseData;
 import com.chase.dcjrCase.bean.CaseData.DataBean.CaseDataBean;
 import com.chase.dcjrCase.global.Constants;
 import com.chase.dcjrCase.ui.activity.CaseDetailActivity;
-import com.chase.dcjrCase.uitl.PrefUtils;
 import com.chase.dcjrCase.uitl.CacheUtils;
+import com.chase.dcjrCase.uitl.PrefUtils;
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -30,7 +30,6 @@ import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.chase.dcjrCase.bean.CaseData.DataBean.CaseDataBean;
 
 import java.util.ArrayList;
 
@@ -131,6 +130,7 @@ public class CaseFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                startActivity(new Intent(mActivity, CaseDetailActivity.class));
+
                 /*条目跳转*/
                 id = 16-id;
                 Intent intent = new Intent(mActivity, CaseDetailActivity.class);
