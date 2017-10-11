@@ -3,6 +3,7 @@ package com.chase.dcjrCase.ui.fragment;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import com.chase.dcjrCase.bean.CaseData;
 import com.chase.dcjrCase.bean.CaseData.DataBean.CaseDataBean;
 import com.chase.dcjrCase.global.Constants;
 import com.chase.dcjrCase.ui.activity.CaseDetailActivity;
+import com.chase.dcjrCase.uitl.CacheUtils;
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -36,14 +38,19 @@ public class CaseFragment extends BaseFragment {
     private static final int CASEDATA_REQUEST_SUCCESS = 201;//请求成功码
     private static final int CASEDATA_REQUEST_FAILURE = 202;//请求失败码
 
+    /*控件*/
     private ListView mListView;
-    private ArrayList<String> mListItems;
-    private RefreshLayout mRefreshLayout;
-    private CaseAdapter mCaseAdapter;
-    private RelativeLayout mRlError;
-    private CaseData mCaseData;
-    private ArrayList<CaseDataBean> mCaseList;
+    private RefreshLayout mRefreshLayout;//整个布局
+    private Button mBtnReLoad;//加载失败时 重新加载按钮
+    private RelativeLayout mRlError;//加载失败布局
+
+    /*mvc*/
+    private CaseAdapter mCaseAdapter;//listview对应的adapter
+    private CaseData mCaseData;//需要显示的数据javabean
+    private ArrayList<CaseDataBean> mCaseList;//数据集合
+
     private static int count;//用来记录第一次加载的条目数,以及在加载更多后加载的条目数
+    private String mCache;//条目缓存数据 json字符串
 
     private Handler mHandler = new Handler() {
         @Override
@@ -55,19 +62,27 @@ public class CaseFragment extends BaseFragment {
                     mListView.setVisibility(View.VISIBLE);
                     //解析json数据
                     processResult(result,count);
-                    //写缓存
-//                    CacheUtils.setCache(mUrl, result, mActivity);
+                    //写缓存 将成功读取的json字符串写入XML中保存
+                    CacheUtils.setCache(Constants.CASEJSON_URL, result, mActivity);
 
                     //收起下拉刷新控件
 //                    mListView.onRefreshComplete(true);
                     break;
                 case CASEDATA_REQUEST_FAILURE:
                     String message = (String) msg.obj;
-                    Toast.makeText(mActivity, message, Toast.LENGTH_LONG).show();
-                    //添加加载失败布局
-                    mRlError.setVisibility(View.VISIBLE);
-                    mListView.setVisibility(View.GONE);
+//                    Toast.makeText(mActivity, message, Toast.LENGTH_LONG).show();
                     Toast.makeText(mActivity, "请检查是否连接网络!", Toast.LENGTH_SHORT).show();
+                    if (!TextUtils.isEmpty(mCache)) {
+                        // 有缓存 读取缓存数据 显示布局
+                        System.out.println("发现缓存....");
+//                        processResult(mCache, count);
+                        mRlError.setVisibility(View.GONE);
+                        mListView.setVisibility(View.VISIBLE);
+                    }else {
+                        //没有缓存 添加加载失败布局
+                        mRlError.setVisibility(View.VISIBLE);
+                        mListView.setVisibility(View.GONE);
+                    }
                     break;
 //                case MORE_REQUEST_SUCCESS:
 //                    String resultMore = (String) msg.obj;
@@ -88,7 +103,7 @@ public class CaseFragment extends BaseFragment {
             }
         }
     };
-    private Button mBtnReLoad;
+
 
 
     @Override
@@ -124,7 +139,8 @@ public class CaseFragment extends BaseFragment {
     @Override
     public void initData() {
         System.out.println("casefragment 加载了");
-
+        //获取缓存
+        mCache = CacheUtils.getCache(Constants.CASEJSON_URL, mActivity);
 
         //        SystemClock.sleep(1000);/*模拟请求服务器的延时过程*/
 
@@ -141,6 +157,13 @@ public class CaseFragment extends BaseFragment {
                     public void run() {
 
                         count = 10;
+
+                        if (!TextUtils.isEmpty(mCache)) {
+                            // 有缓存 解析json缓存
+                            System.out.println("发现缓存....");
+                            processResult(mCache, count);
+                        }
+                        // 即使发现有缓存,仍继续调用网络, 获取最新数据
                         getDataFromServer();//通过网络获取数据
                         refreshlayout.finishRefresh();//完成刷新
                         refreshlayout.setLoadmoreFinished(false);//可以出发加载更多事件
@@ -157,8 +180,12 @@ public class CaseFragment extends BaseFragment {
                     @Override
                     public void run() {
                         count+=10;
+                        if (!TextUtils.isEmpty(mCache)) {
+                            // 有缓存 解析json缓存
+                            System.out.println("发现缓存....");
+                            processResult(mCache, count);
+                        }
                         getDataFromServer();//通过网络获取数据
-//                        caseAdapter.notifyDataSetChanged();//刷新adapter
                         refreshlayout.finishLoadmore();//完成加载更多
                         System.out.println("mCaseList大小:"+mCaseList.size());
                         System.out.println("count:"+count);
@@ -182,7 +209,7 @@ public class CaseFragment extends BaseFragment {
             @Override
             public void run() {
                 HttpUtils utils = new HttpUtils();
-                utils.send(HttpMethod.GET, "http://192.168.141.81:8080/dcjr/caseItem.json", new RequestCallBack<String>() {
+                utils.send(HttpMethod.GET, Constants.CASEJSON_URL, new RequestCallBack<String>() {
                     @Override
                     public void onSuccess(ResponseInfo<String> responseInfo) {
                         System.out.println("请求成功");
