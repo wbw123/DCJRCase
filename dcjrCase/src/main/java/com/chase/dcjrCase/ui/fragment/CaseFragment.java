@@ -151,7 +151,7 @@ public class CaseFragment extends BaseFragment {
             @Override
             public void onRefresh(final RefreshLayout refreshlayout) {
                 System.out.println("home detail1 下拉刷新 加载数据");
-                refreshlayout.finishRefresh(2000);
+                refreshlayout.finishRefresh(1500);
                 refreshlayout.getLayout().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -168,14 +168,14 @@ public class CaseFragment extends BaseFragment {
                         refreshlayout.finishRefresh();//完成刷新
                         refreshlayout.setLoadmoreFinished(false);//可以出发加载更多事件
                     }
-                }, 2000);
+                }, 1500);
             }
         });
         mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(final RefreshLayout refreshlayout) {
                 System.out.println("home detail1 下拉 加载数据");
-                refreshlayout.finishLoadmore(2000);
+                refreshlayout.finishLoadmore(1000);
                 refreshlayout.getLayout().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -194,7 +194,7 @@ public class CaseFragment extends BaseFragment {
                             refreshlayout.setLoadmoreFinished(true);//将不会再次触发加载更多事件
                         }
                     }
-                }, 2000);
+                }, 1000);
             }
         });
 
