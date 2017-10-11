@@ -218,7 +218,7 @@ public class NewsFragment extends BaseFragment {
                 ;
             };
 
-            // 延时2秒切换广告条
+            //  延时2秒切换广告条
             mHandler.sendEmptyMessageDelayed(0, 2000);
 
             mViewPager.setOnTouchListener(new View.OnTouchListener() {
