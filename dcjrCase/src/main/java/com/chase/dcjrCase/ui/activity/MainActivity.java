@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 //    private RelativeLayout mDrawerRight;
     private ListView mDrawerList;
     /*定义模拟数据*/
-    private String mMenuName[] = {"首页", "Menu2", "Menu3", "Menu4", "Menu5"};
+    private String mMenuName[] = {"首页", "前沿结束", "标博技术", "展会信息", "招聘信息"};
     private int mMenuPicId[] = {R.mipmap.ic_launcher, R.mipmap.ic_launcher,
             R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher};
     private ArrayList<Menu> mMenuList;

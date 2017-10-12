@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:textColor="#9b9b9b"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:textSize="18dp"
         android:text="menu内容"/>
 
