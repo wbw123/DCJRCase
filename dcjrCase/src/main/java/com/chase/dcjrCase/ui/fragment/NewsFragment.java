@@ -3,9 +3,11 @@ package com.chase.dcjrCase.ui.fragment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -18,6 +20,7 @@ import com.chase.dcjrCase.bean.NewsData;
 import com.chase.dcjrCase.bean.NewsData.DataBean.NewsDataBean;
 import com.chase.dcjrCase.bean.NewsData.DataBean.TopNewsBean;
 import com.chase.dcjrCase.global.Constants;
+import com.chase.dcjrCase.uitl.CacheUtils;
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -43,9 +46,10 @@ public class NewsFragment extends BaseFragment {
     private RefreshLayout mRefreshLayout;//整个布局
     private Button mBtnReLoad;//加载失败时 重新加载按钮
     private RelativeLayout mRlError;//加载失败布局
-    private CirclePageIndicator mIndicator;
-    private TextView mTopNewsTitle;
-    private ViewPager mViewPager;
+    private FrameLayout mFrameLayout;//轮播图整体布局
+    private CirclePageIndicator mIndicator;//小红点指示器
+    private TextView mTopNewsTitle;//轮播图标题
+    private ViewPager mViewPager;//轮播图viewpager
 
     /*mvc*/
     private ArrayList<TopNewsBean> mTopnews;// 头条新闻的网络数据
@@ -65,32 +69,34 @@ public class NewsFragment extends BaseFragment {
                     String result = (String) msg.obj;
                     mRlError.setVisibility(View.GONE);
                     mListView.setVisibility(View.VISIBLE);
+                    mFrameLayout.setVisibility(View.VISIBLE);
                     //解析json数据
                     processResult(result);
                     //写缓存 将成功读取的json字符串写入XML中保存
-//                    CacheUtils.setCache(Constants.CASEJSON_URL, result, mActivity);
+                    CacheUtils.setCache(Constants.NEWSJSON_URL, result, mActivity);
 
                     break;
                 case NEWSDATA_REQUEST_FAILURE:
                     String message = (String) msg.obj;
 //                    Toast.makeText(mActivity, message, Toast.LENGTH_LONG).show();
                     Toast.makeText(mActivity, "请检查是否连接网络!", Toast.LENGTH_SHORT).show();
-//                    if (!TextUtils.isEmpty(mCache)) {
-//                        // 有缓存 读取缓存数据 显示布局
-//                        System.out.println("发现缓存....");
-////                        processResult(mCache);
-//                        mRlError.setVisibility(View.GONE);
-//                        mListView.setVisibility(View.VISIBLE);
-//                    }else {
-//                        //没有缓存 添加加载失败布局
-//                        mRlError.setVisibility(View.VISIBLE);
-//                        mListView.setVisibility(View.GONE);
-//                    }
+                    if (!TextUtils.isEmpty(mCache)) {
+                        // 有缓存 读取缓存数据 显示布局
+                        System.out.println("发现缓存....");
+//                        processResult(mCache);
+                        mRlError.setVisibility(View.GONE);
+                        mListView.setVisibility(View.VISIBLE);
+                        mFrameLayout.setVisibility(View.VISIBLE);
+                    }else {
+                        //没有缓存 添加加载失败布局
+                        mRlError.setVisibility(View.VISIBLE);
+                        mListView.setVisibility(View.GONE);
+                        mFrameLayout.setVisibility(View.GONE);
+                    }
                     break;
             }
         }
     };
-
 
 
     @Override
@@ -101,34 +107,45 @@ public class NewsFragment extends BaseFragment {
         mRlError = view.findViewById(R.id.rl_error);
         mBtnReLoad = view.findViewById(R.id.btn_reload);
 
+        mFrameLayout = view.findViewById(R.id.fl_viewpager);
         mViewPager = view.findViewById(R.id.news_viewpager);
         mIndicator = view.findViewById(R.id.indicator);
         mTopNewsTitle = view.findViewById(R.id.news_vp_title);
+
+
+        mBtnReLoad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("重新加载被点击了");
+                initData();
+            }
+        });
 
         return view;
     }
 
     @Override
     public void initData() {
+
+        //获取缓存
+        mCache = CacheUtils.getCache(Constants.NEWSJSON_URL, mActivity);
         //触发自动刷新
         mRefreshLayout.autoRefresh();
-        System.out.println("home detail1 加载数据");
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(final RefreshLayout refreshlayout) {
-                System.out.println("home detail1 下拉刷新 加载数据");
+                System.out.println("news fragment 下拉刷新 加载数据");
                 refreshlayout.finishRefresh(1500);
                 refreshlayout.getLayout().postDelayed(new Runnable() {
                     @Override
                     public void run() {
 
                         count = 10;
-//
-//                        if (!TextUtils.isEmpty(mCache)) {
-//                            // 有缓存 解析json缓存
-//                            System.out.println("发现缓存....");
-//                            processResult(mCache);
-//                        }
+                        if (!TextUtils.isEmpty(mCache)) {
+                            // 有缓存 解析json缓存
+                            System.out.println("发现缓存....");
+                            processResult(mCache);
+                        }
                         // 即使发现有缓存,仍继续调用网络, 获取最新数据
                         getDataFromServer();//通过网络获取数据
                         refreshlayout.finishRefresh();//完成刷新
@@ -146,11 +163,11 @@ public class NewsFragment extends BaseFragment {
                     @Override
                     public void run() {
                         count+=10;
-//                        if (!TextUtils.isEmpty(mCache)) {
-//                            // 有缓存 解析json缓存
-//                            System.out.println("发现缓存....");
-//                            processResult(mCache);
-//                        }
+                        if (!TextUtils.isEmpty(mCache)) {
+                            // 有缓存 解析json缓存
+                            System.out.println("发现缓存....");
+                            processResult(mCache);
+                        }
                         getDataFromServer();//通过网络获取数据
                         refreshlayout.finishLoadmore();//完成加载更多
                         System.out.println("mListNews的大小:"+mListNews.size());

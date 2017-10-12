@@ -147,11 +147,10 @@ public class CaseFragment extends BaseFragment {
 
         //触发自动刷新
         mRefreshLayout.autoRefresh();
-        System.out.println("home detail1 加载数据");
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(final RefreshLayout refreshlayout) {
-                System.out.println("home detail1 下拉刷新 加载数据");
+                System.out.println("case fragment 下拉刷新 加载数据");
                 refreshlayout.finishRefresh(1500);
                 refreshlayout.getLayout().postDelayed(new Runnable() {
                     @Override
