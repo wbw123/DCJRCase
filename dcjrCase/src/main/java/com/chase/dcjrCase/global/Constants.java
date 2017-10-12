@@ -5,6 +5,10 @@ public class Constants {
     public static final String HOME_URL = "http://192.168.141.81:8080";
     //casejson后半部分url
     public static final String CHILD_CASEJSON_URL = "/dcjr/caseItem.json";
+    //newsjson后半部分url
+    public static final String CHILD_NEWSJSON_URL = "/dcjr/news.json";
     //casejson url
     public static final String CASEJSON_URL = HOME_URL+CHILD_CASEJSON_URL;
+    //newsjson url
+    public static final String NEWSJSON_URL = HOME_URL+CHILD_NEWSJSON_URL;
 }

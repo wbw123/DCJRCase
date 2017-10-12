@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class NewsData {
 
     /**
-     * data : {"countcommenturl":"http://zhbj.qianlong.com/client/content/countComment/","more":"/10007/list_2.json","news":[{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35319","id":35311,"listimage":"http://10.0.2.2:8080/zhbj/10007/2078369924F9UO.jpg","pubdate":"2014-10-1113:18","title":"网上大讲堂第368期预告：义务环保人人有责","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35319","id":35312,"listimage":"http://10.0.2.2:8080/zhbj/10007/1509585620ASS3.jpg","pubdate":"2014-10-1111:20","title":"马路改建为停车场车位年费高达3000元","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35319","id":35313,"listimage":"http://10.0.2.2:8080/zhbj/10007/1506815057D99I.jpg","pubdate":"2014-10-1110:34","title":"北京两年内将迁出1200家工业污染企业","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35319","id":35314,"listimage":"http://10.0.2.2:8080/zhbj/10007/1505891536Z82T.jpg","pubdate":"2014-10-1110:08","title":"大雾再锁京城机场航班全部延误","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35319","id":35315,"listimage":"http://10.0.2.2:8080/zhbj/10007/1483727032VMXT.jpg","pubdate":"2014-10-1110:03","title":"APEC会议期间调休企业员工盼同步放假","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35319","id":35316,"listimage":"http://10.0.2.2:8080/zhbj/10007/1481879990BEMG.jpg","pubdate":"2014-10-1109:59","title":"机械\u201c龙马\u201d巡演17日亮相奥园","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35319","id":35310,"listimage":"http://10.0.2.2:8080/zhbj/10007/14800329488K7F.jpg","pubdate":"2014-10-1109:54","title":"门头沟获批100套限价房","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35319","id":35318,"listimage":"http://10.0.2.2:8080/zhbj/10007/14791094274LT9.jpg","pubdate":"2014-10-1109:52","title":"APEC期间净空区放带灯风筝可拘留","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35314","id":35314,"listimage":"http://10.0.2.2:8080/zhbj/10007/1478185906G9WQ.jpg","pubdate":"2014-10-1109:48","title":"今起两自住房摇号","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35117","id":35117,"listimage":"http://10.0.2.2:8080/zhbj/10007/1477262385PASS.jpg","pubdate":"2014-10-1109:45","title":"故宫神武门广场拟夜间开放停车","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"}],"title":"北京","topic":[{"description":"11111111","id":10101,"listimage":"http://10.0.2.2:8080/zhbj/10007/1452327318UU91.jpg","sort":1,"title":"北京","url":"http://10.0.2.2:8080/zhbj/10007/list_1.json"},{"description":"22222222","id":10100,"listimage":"http://10.0.2.2:8080/zhbj/10007/1452327318UU91.jpg","sort":2,"title":"222222222222","url":"http://10.0.2.2:8080/zhbj/10007/list_1.json"}],"topnews":[{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35301","id":35301,"pubdate":"2014-04-0814:24","title":"蜗居生活","topimage":"http://10.0.2.2:8080/zhbj/10007/1452327318UU91.jpg","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35125","id":35125,"pubdate":"2014-04-0809:09","title":"中秋赏月","topimage":"http://10.0.2.2:8080/zhbj/10007/1452327318UU92.jpg","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35125","id":35126,"pubdate":"2014-04-0809:09","title":"天空翱翔","topimage":"http://10.0.2.2:8080/zhbj/10007/1452327318UU93.jpg","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35125","id":35127,"pubdate":"2014-04-0809:09","title":"感官设计","topimage":"http://10.0.2.2:8080/zhbj/10007/1452327318UU94.png","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"}]}
+     * data : {"newsData":[{"id":3024,"title":"2017IEC/CISPR年会圆满结束，中国专家团队获新突破","date":"2017-10-9 21:29","imgUrl":"/dcjr/news/newsImg/news_image24.jpg"},{"id":3023,"title":"欧盟最新修订家电类EMC标准 将于10月28日生效","date":"2017-10-9 11:13","imgUrl":"/dcjr/news/newsImg/news_image23.jpg"},{"id":3022,"title":"中国科协中科院发出倡议\u2014\u2014科技界开展向南仁东学习活动","date":"2017-9-27 10:33","imgUrl":"/dcjr/news/newsImg/news_image22.jpg"},{"id":3021,"title":"访北京泰派斯特科技发展有限公司总经理郭晋安先生","date":"2017-8-30 14:54","imgUrl":"/dcjr/news/newsImg/news_image21.jpg"},{"id":3020,"title":"喜讯：罗德与施瓦茨汽车电子测试方案开放实验室主题日活动","date":"2017-8-17 23:49","imgUrl":"/dcjr/news/newsImg/news_image20.jpg"},{"id":3019,"title":"喜讯：RS、安捷伦、泰克等70余种高端仪器出租","date":"2017-8-11 22:09","imgUrl":"/dcjr/news/newsImg/news_image19.jpg"},{"id":3018,"title":"热烈祝贺我国电磁兼容专家郑军奇当选国际CISPR委员会副主席","date":"2017-8-1 11:35","imgUrl":"/dcjr/news/newsImg/news_image18.jpg"},{"id":3017,"title":"9月9日深圳站第二届电磁兼容（EMC）与电路保护技术研讨会报名","date":"2017-7-27 11:03","imgUrl":"/dcjr/news/newsImg/news_image17.jpg"},{"id":3016,"title":"骄阳似火\u201c烤\u201d验真爱，争相赴会难掩情深\u2014\u2014第二届电磁兼容","date":"2017-7-24 14:37","imgUrl":"/dcjr/news/newsImg/news_image16.jpg"},{"id":3015,"title":"旗舰再度领航\u2014\u2014罗德与施瓦茨EMI认证测试接收机扩展到500GHz","date":"2017-7-20 20:04","imgUrl":"/dcjr/news/newsImg/news_image15.jpg"},{"id":3014,"title":"北京交通大学电磁兼容实验室助力「复兴号」","date":"2017-7-4 12:36","imgUrl":"/dcjr/news/newsImg/news_image14.jpg"},{"id":3013,"title":"EN 62368-1：2014 法规强制生效日期 (DOW) 延长18个月","date":"2017-7-4 12:19","imgUrl":"/dcjr/news/newsImg/news_image13.jpg"},{"id":3012,"title":"电动汽车用驱动电机系统安全认证规则修订","date":"2017-7-4 12:10","imgUrl":"/dcjr/news/newsImg/news_image12.jpg"},{"id":3011,"title":"西安站-泰派斯特20周年庆暨全国巡回电磁兼容技术研讨会报名中","date":"2017-5-22 11:21","imgUrl":"/dcjr/news/newsImg/news_image11.jpg"},{"id":3010,"title":"4月22日北京站第二届电磁兼容（EMC）与电路保护技术研讨会","date":"2017-4-17 15:26","imgUrl":"/dcjr/news/newsImg/news_image10.jpg"},{"id":3009,"title":"泰派斯特20周年庆电磁兼容技术研讨会南京站圆满落幕","date":"2017-3-28 17:11","imgUrl":"/dcjr/news/newsImg/news_image9.jpg"},{"id":3008,"title":"如何挑选健康安全的电磁炉产品? 认清EMC标志","date":"2017-2-28 15:42","imgUrl":"/dcjr/news/newsImg/news_image8.jpg"},{"id":3007,"title":"北京泰派斯特20周年庆暨全国巡回电磁兼容技术研讨会-南京站火热","date":"2017-2-24 12:56","imgUrl":"/dcjr/news/newsImg/news_image7.jpg"},{"id":3006,"title":"南昌地铁2号线首列车完成电磁兼容试验","date":"2017-1-20 13:48","imgUrl":"/dcjr/news/newsImg/news_image6.jpg"},{"id":3005,"title":"专家：安全可靠是未来无人机经济必须跨过的门槛","date":"2017-1-20 13:44","imgUrl":"/dcjr/news/newsImg/news_image5.jpg"},{"id":3004,"title":"TUV南德聚焦汕头澄海工作坊，解读欧美玩具法规最新要求","date":"2017-1-20 13:28","imgUrl":"/dcjr/news/newsImg/news_image4.jpg"},{"id":3003,"title":"重庆出台《工业机器人电磁兼容性检测规范》地方标准","date":"2017-1-20 13:03","imgUrl":"/dcjr/news/newsImg/news_image3.jpg"},{"id":3002,"title":"四项电磁兼容国家标准送审稿已通过 完善EMC体系","date":"2017-1-20 12:52","imgUrl":"/dcjr/news/newsImg/news_image2.jpg"},{"id":3001,"title":"\u201c十二五\u201d国家科技支撑计划\u201c纯电驱动动力平台电磁兼容分析与测","date":"2017-1-20 11:47","imgUrl":"/dcjr/news/newsImg/news_image1.jpg"}],"topNews":[{"id":301,"title":"2017IEC/CISPR年会圆满结束","date":"2017-10-9 21:29","imgUrl":"/dcjr/news/topNewsImg/topNews_image1.jpg","url":"/dcjr/news/news24.html"},{"id":302,"title":"欧盟最新修订家电类EMC标准","date":"2017-10-9 11:13","imgUrl":"/dcjr/news/topNewsImg/topNews_image2.jpg","url":"/dcjr/news/news23.html"},{"id":303,"title":"科技界开展向南仁东学习","date":"2017-9-27 10:33","imgUrl":"/dcjr/news/topNewsImg/topNews_image3.jpg","url":"/dcjr/news/news22.html"},{"id":304,"title":"第二届电磁兼容与电路保护研讨会","date":"2017-7-24 14:37","imgUrl":"/dcjr/news/topNewsImg/topNews_image4.jpg","url":"/dcjr/news/news16.html"}]}
      * retcode : 200
      */
 
@@ -21,137 +21,63 @@ public class NewsData {
     }
 
     public class DataBean {
-        /**
-         * countcommenturl : http://zhbj.qianlong.com/client/content/countComment/
-         * more : /10007/list_2.json
-         * news : [{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35319","id":35311,"listimage":"http://10.0.2.2:8080/zhbj/10007/2078369924F9UO.jpg","pubdate":"2014-10-1113:18","title":"网上大讲堂第368期预告：义务环保人人有责","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35319","id":35312,"listimage":"http://10.0.2.2:8080/zhbj/10007/1509585620ASS3.jpg","pubdate":"2014-10-1111:20","title":"马路改建为停车场车位年费高达3000元","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35319","id":35313,"listimage":"http://10.0.2.2:8080/zhbj/10007/1506815057D99I.jpg","pubdate":"2014-10-1110:34","title":"北京两年内将迁出1200家工业污染企业","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35319","id":35314,"listimage":"http://10.0.2.2:8080/zhbj/10007/1505891536Z82T.jpg","pubdate":"2014-10-1110:08","title":"大雾再锁京城机场航班全部延误","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35319","id":35315,"listimage":"http://10.0.2.2:8080/zhbj/10007/1483727032VMXT.jpg","pubdate":"2014-10-1110:03","title":"APEC会议期间调休企业员工盼同步放假","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35319","id":35316,"listimage":"http://10.0.2.2:8080/zhbj/10007/1481879990BEMG.jpg","pubdate":"2014-10-1109:59","title":"机械\u201c龙马\u201d巡演17日亮相奥园","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35319","id":35310,"listimage":"http://10.0.2.2:8080/zhbj/10007/14800329488K7F.jpg","pubdate":"2014-10-1109:54","title":"门头沟获批100套限价房","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35319","id":35318,"listimage":"http://10.0.2.2:8080/zhbj/10007/14791094274LT9.jpg","pubdate":"2014-10-1109:52","title":"APEC期间净空区放带灯风筝可拘留","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35314","id":35314,"listimage":"http://10.0.2.2:8080/zhbj/10007/1478185906G9WQ.jpg","pubdate":"2014-10-1109:48","title":"今起两自住房摇号","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35117","id":35117,"listimage":"http://10.0.2.2:8080/zhbj/10007/1477262385PASS.jpg","pubdate":"2014-10-1109:45","title":"故宫神武门广场拟夜间开放停车","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"}]
-         * title : 北京
-         * topic : [{"description":"11111111","id":10101,"listimage":"http://10.0.2.2:8080/zhbj/10007/1452327318UU91.jpg","sort":1,"title":"北京","url":"http://10.0.2.2:8080/zhbj/10007/list_1.json"},{"description":"22222222","id":10100,"listimage":"http://10.0.2.2:8080/zhbj/10007/1452327318UU91.jpg","sort":2,"title":"222222222222","url":"http://10.0.2.2:8080/zhbj/10007/list_1.json"}]
-         * topnews : [{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35301","id":35301,"pubdate":"2014-04-0814:24","title":"蜗居生活","topimage":"http://10.0.2.2:8080/zhbj/10007/1452327318UU91.jpg","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35125","id":35125,"pubdate":"2014-04-0809:09","title":"中秋赏月","topimage":"http://10.0.2.2:8080/zhbj/10007/1452327318UU92.jpg","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35125","id":35126,"pubdate":"2014-04-0809:09","title":"天空翱翔","topimage":"http://10.0.2.2:8080/zhbj/10007/1452327318UU93.jpg","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"},{"comment":true,"commentlist":"http://10.0.2.2:8080/zhbj/10007/comment_1.json","commenturl":"http://zhbj.qianlong.com/client/user/newComment/35125","id":35127,"pubdate":"2014-04-0809:09","title":"感官设计","topimage":"http://10.0.2.2:8080/zhbj/10007/1452327318UU94.png","type":"news","url":"http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html"}]
-         */
-
-        public String countcommenturl;
-        public String more;
-        public String title;
-        public ArrayList<NewsBean> news;
-        public ArrayList<TopicBean> topic;
-        public ArrayList<TopnewsBean> topnews;
+        public ArrayList<NewsDataBean> newsData;
+        public ArrayList<TopNewsBean> topNews;
 
         @Override
         public String toString() {
             return "DataBean{" +
-                    "countcommenturl='" + countcommenturl + '\'' +
-                    ", more='" + more + '\'' +
-                    ", title='" + title + '\'' +
-                    ", news=" + news +
-                    ", topic=" + topic +
-                    ", topnews=" + topnews +
+                    "newsData=" + newsData +
+                    ", topNews=" + topNews +
                     '}';
         }
 
-        public class NewsBean {
+        public class NewsDataBean {
             /**
-             * comment : true
-             * commentlist : http://10.0.2.2:8080/zhbj/10007/comment_1.json
-             * commenturl : http://zhbj.qianlong.com/client/user/newComment/35319
-             * id : 35311
-             * listimage : http://10.0.2.2:8080/zhbj/10007/2078369924F9UO.jpg
-             * pubdate : 2014-10-1113:18
-             * title : 网上大讲堂第368期预告：义务环保人人有责
-             * type : news
-             * url : http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html
+             * id : 3024
+             * title : 2017IEC/CISPR年会圆满结束，中国专家团队获新突破
+             * date : 2017-10-9 21:29
+             * imgUrl : /dcjr/news/newsImg/news_image24.jpg
              */
 
-            public boolean comment;
-            public String commentlist;
-            public String commenturl;
             public String id;
-            public String listimage;
-            public String pubdate;
             public String title;
-            public String type;
-            public String url;
+            public String date;
+            public String imgUrl;
 
             @Override
             public String toString() {
-                return "NewsBean{" +
-                        "comment=" + comment +
-                        ", commentlist='" + commentlist + '\'' +
-                        ", commenturl='" + commenturl + '\'' +
-                        ", id='" + id + '\'' +
-                        ", listimage='" + listimage + '\'' +
-                        ", pubdate='" + pubdate + '\'' +
+                return "NewsDataBean{" +
+                        "id='" + id + '\'' +
                         ", title='" + title + '\'' +
-                        ", type='" + type + '\'' +
-                        ", url='" + url + '\'' +
+                        ", date='" + date + '\'' +
+                        ", imgUrl='" + imgUrl + '\'' +
                         '}';
             }
         }
 
-        public class TopicBean {
+        public class TopNewsBean {
             /**
-             * description : 11111111
-             * id : 10101
-             * listimage : http://10.0.2.2:8080/zhbj/10007/1452327318UU91.jpg
-             * sort : 1
-             * title : 北京
-             * url : http://10.0.2.2:8080/zhbj/10007/list_1.json
+             * id : 301
+             * title : 2017IEC/CISPR年会圆满结束
+             * date : 2017-10-9 21:29
+             * imgUrl : /dcjr/news/topNewsImg/topNews_image1.jpg
+             * url : /dcjr/news/news24.html
              */
 
-            public String description;
             public String id;
-            public String listimage;
-            public int sort;
             public String title;
+            public String date;
+            public String imgUrl;
             public String url;
 
             @Override
             public String toString() {
-                return "TopicBean{" +
-                        "description='" + description + '\'' +
-                        ", id='" + id + '\'' +
-                        ", listimage='" + listimage + '\'' +
-                        ", sort=" + sort +
+                return "TopNewsBean{" +
+                        "id='" + id + '\'' +
                         ", title='" + title + '\'' +
-                        ", url='" + url + '\'' +
-                        '}';
-            }
-        }
-
-        public class TopnewsBean {
-            /**
-             * comment : true
-             * commentlist : http://10.0.2.2:8080/zhbj/10007/comment_1.json
-             * commenturl : http://zhbj.qianlong.com/client/user/newComment/35301
-             * id : 35301
-             * pubdate : 2014-04-0814:24
-             * title : 蜗居生活
-             * topimage : http://10.0.2.2:8080/zhbj/10007/1452327318UU91.jpg
-             * type : news
-             * url : http://10.0.2.2:8080/zhbj/10007/724D6A55496A11726628.html
-             */
-
-            public boolean comment;
-            public String commentlist;
-            public String commenturl;
-            public String id;
-            public String pubdate;
-            public String title;
-            public String topimage;
-            public String type;
-            public String url;
-
-            @Override
-            public String toString() {
-                return "TopnewsBean{" +
-                        "comment=" + comment +
-                        ", commentlist='" + commentlist + '\'' +
-                        ", commenturl='" + commenturl + '\'' +
-                        ", id='" + id + '\'' +
-                        ", pubdate='" + pubdate + '\'' +
-                        ", title='" + title + '\'' +
-                        ", topimage='" + topimage + '\'' +
-                        ", type='" + type + '\'' +
+                        ", date='" + date + '\'' +
+                        ", imgUrl='" + imgUrl + '\'' +
                         ", url='" + url + '\'' +
                         '}';
             }

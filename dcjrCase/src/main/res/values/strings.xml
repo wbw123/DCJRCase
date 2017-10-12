@@ -20,6 +20,7 @@
 
     </string-array>
 
+    <!--登陆页面-->
     <string name="btn_skip">跳过</string>
     <string name="login">登录</string>
     <string name="phone">请输入您的电话号码</string>

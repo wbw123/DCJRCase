@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.chase.dcjrCase.R;
 import com.chase.dcjrCase.bean.NewsData;
+import com.chase.dcjrCase.bean.NewsData.DataBean.TopNewsBean;
+import com.chase.dcjrCase.global.Constants;
 import com.google.gson.Gson;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
@@ -43,7 +45,7 @@ public class NewsFragment extends BaseFragment {
     private ViewPager mViewPager;
     private Handler mHandler = null;
     // 头条新闻的网络数据
-    private ArrayList<NewsData.DataBean.TopnewsBean> mTopnews;
+    private ArrayList<TopNewsBean> mTopnews;
     private NewsAdapter mNewsAdapter;
 
     @Override
@@ -126,7 +128,7 @@ public class NewsFragment extends BaseFragment {
             @Override
             public void run() {
                 HttpUtils utils = new HttpUtils();
-                utils.send(HttpMethod.GET, "http://192.168.141.81:8080/zhbj/10007/list_1.json", new RequestCallBack<String>() {
+                utils.send(HttpMethod.GET, Constants.NEWSJSON_URL, new RequestCallBack<String>() {
                     @Override
                     public void onSuccess(ResponseInfo<String> responseInfo) {
                         System.out.println("请求成功");
@@ -162,9 +164,9 @@ public class NewsFragment extends BaseFragment {
     private void processResult(String result) {
         Gson gson = new Gson();
         NewsData mNewsData = gson.fromJson(result, NewsData.class);
-        System.out.println("mCaseData解析结果:" + mNewsData.toString());
+        System.out.println("mNewsData解析结果:" + mNewsData.toString());
 
-        mTopnews = mNewsData.data.topnews;
+        mTopnews = mNewsData.data.topNews;
         if (mNewsAdapter == null) {
             mNewsAdapter = new NewsAdapter();
             mViewPager.setAdapter(mNewsAdapter);
@@ -184,8 +186,8 @@ public class NewsFragment extends BaseFragment {
             @Override
             public void onPageSelected(int position) {
                 //标题
-                NewsData.DataBean.TopnewsBean topnewsBean = mTopnews.get(position);
-                mTopNewsTitle.setText(topnewsBean.title);
+                TopNewsBean topNewsBean = mTopnews.get(position);
+                mTopNewsTitle.setText(topNewsBean.title);
             }
 
             @Override
@@ -271,7 +273,7 @@ public class NewsFragment extends BaseFragment {
             ImageView view = new ImageView(mActivity);
             view.setScaleType(ImageView.ScaleType.FIT_XY);// 设置图片填充效果, 表示填充父窗体
             // 获取图片链接, 使用链接下载图片, 将图片设置给ImageView, 考虑内存溢出问题, 图片本地缓存
-            mBitmapUtils.display(view, mTopnews.get(position).topimage);
+            mBitmapUtils.display(view, Constants.HOME_URL+mTopnews.get(position).imgUrl);
             container.addView(view);
 
             return view;
