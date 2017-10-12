@@ -19,6 +19,7 @@
         <item>未定</item>
 
     </string-array>
+
     <string name="btn_skip">跳过</string>
     <string name="login">登录</string>
     <string name="phone">请输入您的电话号码</string>
@@ -26,4 +27,7 @@
     <string name="use_third_account">第三方账号登录</string>
     <string name="create_account">创建账号</string>
     <string name="forget_password">忘记密码</string>
+    <string name="user_rule">用户协议</string>
+    <string name="send_verification_code">获取验证码</string>
+    <string name="reset_pwd">重置密码</string>
 </resources>
