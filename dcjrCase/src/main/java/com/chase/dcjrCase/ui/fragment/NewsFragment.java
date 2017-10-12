@@ -1,23 +1,20 @@
 package com.chase.dcjrCase.ui.fragment;
 
 import android.os.Handler;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chase.dcjrCase.R;
+import com.chase.dcjrCase.adapter.TopNewsAdapter;
 import com.chase.dcjrCase.bean.NewsData;
 import com.chase.dcjrCase.bean.NewsData.DataBean.TopNewsBean;
 import com.chase.dcjrCase.global.Constants;
 import com.google.gson.Gson;
-import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -46,7 +43,7 @@ public class NewsFragment extends BaseFragment {
     private Handler mHandler = null;
     // 头条新闻的网络数据
     private ArrayList<TopNewsBean> mTopnews;
-    private NewsAdapter mNewsAdapter;
+    private TopNewsAdapter mNewsAdapter;
 
     @Override
     public View initView() {
@@ -168,12 +165,25 @@ public class NewsFragment extends BaseFragment {
 
         mTopnews = mNewsData.data.topNews;
         if (mNewsAdapter == null) {
-            mNewsAdapter = new NewsAdapter();
+            mNewsAdapter = new TopNewsAdapter(mTopnews,mActivity);
             mViewPager.setAdapter(mNewsAdapter);
         } else {
             mNewsAdapter.notifyDataSetChanged();
             System.out.println("刷新adapter notifyDataSetChanged");
         }
+
+        //indicator绑定ViewPager
+        indicatorBindViewPager();
+
+        //TopNews两秒切换一次
+        autoChangeAfter2s();
+
+    }
+
+    /**
+     * indicator绑定ViewPager
+     */
+    private void indicatorBindViewPager() {
         mIndicator.setViewPager(mViewPager);//将轮播图和指示器绑定
         mIndicator.setSnap(true);// 快照模式 取消则为粘性模式
 //        mIndicator.onPageSelected(0);// 将小圆点位置归零, 解决它会在页面销毁时仍记录上次位置的bug
@@ -199,8 +209,12 @@ public class NewsFragment extends BaseFragment {
         //当前viewpager是哪一页就设置哪一页的标题
         int currentItem = mViewPager.getCurrentItem();
         mTopNewsTitle.setText(mTopnews.get(currentItem).title);
+    }
 
-
+    /**
+     * TopNews两秒切换一次
+     */
+    private void autoChangeAfter2s() {
         if (mHandler == null) {
             mHandler = new Handler() {
                 public void handleMessage(android.os.Message msg) {
@@ -246,44 +260,9 @@ public class NewsFragment extends BaseFragment {
                 }
             });
         }
-
     }
 
-    class NewsAdapter extends PagerAdapter {
-        private BitmapUtils mBitmapUtils;
 
-        @Override
-        public int getCount() {
-            return mTopnews.size();
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            if (mBitmapUtils == null) {
-                // 初始化xutils中的加载图片的工具
-                mBitmapUtils = new BitmapUtils(mActivity);
-            }
-            // 设置默认加载图片
-            mBitmapUtils.configDefaultLoadingImage(R.mipmap.ic_launcher);
-            ImageView view = new ImageView(mActivity);
-            view.setScaleType(ImageView.ScaleType.FIT_XY);// 设置图片填充效果, 表示填充父窗体
-            // 获取图片链接, 使用链接下载图片, 将图片设置给ImageView, 考虑内存溢出问题, 图片本地缓存
-            mBitmapUtils.display(view, Constants.HOME_URL+mTopnews.get(position).imgUrl);
-            container.addView(view);
-
-            return view;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((View) object);
-        }
-    }
 
 //    /**
 //     * ListView的Adapter
