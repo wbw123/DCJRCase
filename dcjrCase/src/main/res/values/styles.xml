@@ -36,4 +36,18 @@
         <item name="android:maxHeight">8dip</item>
         <item name="android:minHeight">8dip</item>
     </style>
+    
+    <style name="login_edit_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:textColor">#333333</item>
+        <item name="android:textColorHint">#969696</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:cursorVisible">true</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:drawableRight">@drawable/ic_delete_grey</item>
+        <item name="android:paddingLeft">15dp</item>
+    </style>
 </resources>
