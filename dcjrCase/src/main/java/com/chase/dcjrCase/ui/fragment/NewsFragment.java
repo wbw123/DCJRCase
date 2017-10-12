@@ -1,6 +1,7 @@
 package com.chase.dcjrCase.ui.fragment;
 
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.view.MotionEvent;
 import android.view.View;
@@ -8,10 +9,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chase.dcjrCase.R;
+import com.chase.dcjrCase.adapter.NewsAdapter;
 import com.chase.dcjrCase.adapter.TopNewsAdapter;
 import com.chase.dcjrCase.bean.NewsData;
+import com.chase.dcjrCase.bean.NewsData.DataBean.NewsDataBean;
 import com.chase.dcjrCase.bean.NewsData.DataBean.TopNewsBean;
 import com.chase.dcjrCase.global.Constants;
 import com.google.gson.Gson;
@@ -32,6 +36,8 @@ import java.util.ArrayList;
  */
 
 public class NewsFragment extends BaseFragment {
+    private static final int NEWSDATA_REQUEST_SUCCESS = 301;//请求成功码
+    private static final int NEWSDATA_REQUEST_FAILURE = 302;//请求失败码
     /*控件*/
     private ListView mListView;
     private RefreshLayout mRefreshLayout;//整个布局
@@ -40,10 +46,52 @@ public class NewsFragment extends BaseFragment {
     private CirclePageIndicator mIndicator;
     private TextView mTopNewsTitle;
     private ViewPager mViewPager;
-    private Handler mHandler = null;
-    // 头条新闻的网络数据
-    private ArrayList<TopNewsBean> mTopnews;
-    private TopNewsAdapter mNewsAdapter;
+
+    /*mvc*/
+    private ArrayList<TopNewsBean> mTopnews;// 头条新闻的网络数据
+    private ArrayList<NewsDataBean> mListNews;//list新闻的网络数据
+    private TopNewsAdapter mTopNewsAdapter;//头条新闻适配器
+    private NewsAdapter mListNewsAdapter;//条目新闻适配器
+
+    private static int count;//用来记录第一次加载的条目数,以及在加载更多后加载的条目数
+    private String mCache;//条目缓存数据 json字符串
+    /*handler*/
+    private Handler mIndicatorHandler = null;
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case NEWSDATA_REQUEST_SUCCESS:
+                    String result = (String) msg.obj;
+                    mRlError.setVisibility(View.GONE);
+                    mListView.setVisibility(View.VISIBLE);
+                    //解析json数据
+                    processResult(result);
+                    //写缓存 将成功读取的json字符串写入XML中保存
+//                    CacheUtils.setCache(Constants.CASEJSON_URL, result, mActivity);
+
+                    break;
+                case NEWSDATA_REQUEST_FAILURE:
+                    String message = (String) msg.obj;
+//                    Toast.makeText(mActivity, message, Toast.LENGTH_LONG).show();
+                    Toast.makeText(mActivity, "请检查是否连接网络!", Toast.LENGTH_SHORT).show();
+//                    if (!TextUtils.isEmpty(mCache)) {
+//                        // 有缓存 读取缓存数据 显示布局
+//                        System.out.println("发现缓存....");
+////                        processResult(mCache);
+//                        mRlError.setVisibility(View.GONE);
+//                        mListView.setVisibility(View.VISIBLE);
+//                    }else {
+//                        //没有缓存 添加加载失败布局
+//                        mRlError.setVisibility(View.VISIBLE);
+//                        mListView.setVisibility(View.GONE);
+//                    }
+                    break;
+            }
+        }
+    };
+
+
 
     @Override
     public View initView() {
@@ -74,12 +122,12 @@ public class NewsFragment extends BaseFragment {
                     @Override
                     public void run() {
 
-//                        count = 10;
+                        count = 10;
 //
 //                        if (!TextUtils.isEmpty(mCache)) {
 //                            // 有缓存 解析json缓存
 //                            System.out.println("发现缓存....");
-//                            processResult(mCache, count);
+//                            processResult(mCache);
 //                        }
                         // 即使发现有缓存,仍继续调用网络, 获取最新数据
                         getDataFromServer();//通过网络获取数据
@@ -97,20 +145,20 @@ public class NewsFragment extends BaseFragment {
                 refreshlayout.getLayout().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-//                        count+=10;
+                        count+=10;
 //                        if (!TextUtils.isEmpty(mCache)) {
 //                            // 有缓存 解析json缓存
 //                            System.out.println("发现缓存....");
-//                            processResult(mCache, count);
+//                            processResult(mCache);
 //                        }
                         getDataFromServer();//通过网络获取数据
                         refreshlayout.finishLoadmore();//完成加载更多
-//                        System.out.println("mCaseList大小:"+mCaseList.size());
-//                        System.out.println("count:"+count);
-//                        if (count > mCaseList.size()) {
-//                            Toast.makeText(mActivity, "数据全部加载完毕", Toast.LENGTH_SHORT).show();
-//                            refreshlayout.setLoadmoreFinished(true);//将不会再次触发加载更多事件
-//                        }
+                        System.out.println("mListNews的大小:"+mListNews.size());
+                        System.out.println("count:"+count);
+                        if (count > mListNews.size()) {
+                            Toast.makeText(mActivity, "数据全部加载完毕", Toast.LENGTH_SHORT).show();
+                            refreshlayout.setLoadmoreFinished(true);//将不会再次触发加载更多事件
+                        }
                     }
                 }, 1000);
             }
@@ -131,11 +179,10 @@ public class NewsFragment extends BaseFragment {
                         System.out.println("请求成功");
                         String result = responseInfo.result;
                         System.out.println(result);
-                        processResult(result);
-//                        Message msg = new Message();
-//                        msg.obj = result;
-//                        msg.what = CASEDATA_REQUEST_SUCCESS;
-//                        mHandler.sendMessage(msg);
+                        Message msg = new Message();
+                        msg.obj = result;
+                        msg.what = NEWSDATA_REQUEST_SUCCESS;
+                        mHandler.sendMessage(msg);
 
                     }
 
@@ -144,10 +191,10 @@ public class NewsFragment extends BaseFragment {
                         System.out.println("请求失败");
                         System.out.println("msg:" + msg);
                         e.printStackTrace();
-//                        Message message = new Message();
-//                        message.what = CASEDATA_REQUEST_FAILURE;
-//                        message.obj = msg;
-//                        mHandler.sendMessage(message);
+                        Message message = new Message();
+                        message.what = NEWSDATA_REQUEST_FAILURE;
+                        message.obj = msg;
+                        mHandler.sendMessage(message);
                     }
                 });
             }
@@ -163,14 +210,26 @@ public class NewsFragment extends BaseFragment {
         NewsData mNewsData = gson.fromJson(result, NewsData.class);
         System.out.println("mNewsData解析结果:" + mNewsData.toString());
 
+        /*头条新闻*/
         mTopnews = mNewsData.data.topNews;
-        if (mNewsAdapter == null) {
-            mNewsAdapter = new TopNewsAdapter(mTopnews,mActivity);
-            mViewPager.setAdapter(mNewsAdapter);
+        if (mTopNewsAdapter == null) {
+            mTopNewsAdapter = new TopNewsAdapter(mTopnews, mActivity);
+            mViewPager.setAdapter(mTopNewsAdapter);
         } else {
-            mNewsAdapter.notifyDataSetChanged();
+            mTopNewsAdapter.notifyDataSetChanged();
             System.out.println("刷新adapter notifyDataSetChanged");
         }
+
+        /*list条目新闻*/
+        mListNews = mNewsData.data.newsData;
+        System.out.println("mListNews=="+mListNews);
+        if (mListNewsAdapter == null) {
+            mListNewsAdapter = new NewsAdapter(mActivity, mListNews);
+            mListView.setAdapter(mListNewsAdapter);
+        }else{
+            mListNewsAdapter.notifyDataSetChanged();
+        }
+
 
         //indicator绑定ViewPager
         indicatorBindViewPager();
@@ -179,6 +238,7 @@ public class NewsFragment extends BaseFragment {
         autoChangeAfter2s();
 
     }
+
 
     /**
      * indicator绑定ViewPager
@@ -215,9 +275,9 @@ public class NewsFragment extends BaseFragment {
      * TopNews两秒切换一次
      */
     private void autoChangeAfter2s() {
-        if (mHandler == null) {
-            mHandler = new Handler() {
-                public void handleMessage(android.os.Message msg) {
+        if (mIndicatorHandler == null) {
+            mIndicatorHandler = new Handler() {
+                public void handleMessage(Message msg) {
                     int currentItem = mViewPager.getCurrentItem();
 
                     if (currentItem < mTopnews.size() - 1) {
@@ -228,14 +288,14 @@ public class NewsFragment extends BaseFragment {
 
                     mViewPager.setCurrentItem(currentItem);
 
-                    mHandler.sendEmptyMessageDelayed(0, 2000);
+                    mIndicatorHandler.sendEmptyMessageDelayed(0, 2000);
                 }
 
                 ;
             };
 
             //  延时2秒切换广告条
-            mHandler.sendEmptyMessageDelayed(0, 2000);
+            mIndicatorHandler.sendEmptyMessageDelayed(0, 2000);
 
             mViewPager.setOnTouchListener(new View.OnTouchListener() {
 
@@ -245,13 +305,13 @@ public class NewsFragment extends BaseFragment {
                         case MotionEvent.ACTION_DOWN:
                             System.out.println("ACTION_DOWN");
                             // 删除所有消息
-                            mHandler.removeCallbacksAndMessages(null);
+                            mIndicatorHandler.removeCallbacksAndMessages(null);
                             break;
                         case MotionEvent.ACTION_CANCEL:// 事件取消(当按下后,然后移动下拉刷新,导致抬起后无法响应ACTION_UP,
                             // 但此时会响应ACTION_CANCEL,也需要继续播放轮播条)
                         case MotionEvent.ACTION_UP:
                             // 延时2秒切换广告条
-                            mHandler.sendEmptyMessageDelayed(0, 2000);
+                            mIndicatorHandler.sendEmptyMessageDelayed(0, 2000);
                             break;
                         default:
                             break;
@@ -262,74 +322,8 @@ public class NewsFragment extends BaseFragment {
         }
     }
 
-
-
-//    /**
-//     * ListView的Adapter
-//     */
-//    class MyListAdapter extends BaseAdapter {
-//
-//        private final BitmapUtils bitmapUtils;
-//
-//        public MyListAdapter() {
-//            bitmapUtils = new BitmapUtils(mActivity);
-//            bitmapUtils.configDefaultLoadingImage(R.mipmap.ic_launcher);
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return mNewsList.size();
-//        }
-//
-//        @Override
-//        public NewsData.DataBean.NewsBean getItem(int position) {
-//            return mNewsList.get(position);
-//        }
-//
-//        @Override
-//        public long getItemId(int position) {
-//            return position;
-//        }
-//
-//        @Override
-//        public View getView(int position, View convertView, ViewGroup viewGroup) {
-//            ViewHolder holder = null;
-//            if (convertView == null) {
-//                convertView = View.inflate(mActivity, R.layout.item_list_news, null);
-//                holder = new ViewHolder(convertView);
-//                convertView.setTag(holder);
-//            } else {
-//                holder = (ViewHolder) convertView.getTag();
-//            }
-//            NewsData.DataBean.NewsBean newsBean = getItem(position);
-//
-//            holder.tv_date.setText(newsBean.pubdate);
-//            holder.tv_title.setText(newsBean.title);
-//            bitmapUtils.display(holder.iv_icon, newsBean.listimage);
-////            // 标记已读和未读
-////            String readIds = PrefUtils.getString("read_ids", "", mActivity);
-////            if (readIds.contains(newsBean.id)) {
-////                // 已读
-////                holder.tv_title.setTextColor(Color.GRAY);
-////            } else {
-////                // 未读
-////                holder.tv_title.setTextColor(Color.BLACK);
-////            }
-//            return convertView;
-//        }
-//
-//        class ViewHolder {
-//            public ImageView iv_icon;
-//            public TextView tv_title;
-//            public TextView tv_date;
-//
-//            public ViewHolder(View view) {
-//                iv_icon = (ImageView) view.findViewById(R.id.iv_icon);
-//                tv_title = (TextView) view.findViewById(R.id.tv_title);
-//                tv_date = (TextView) view.findViewById(R.id.tv_date);
-//            }
-//
-//        }
-//    }
+    public static int getCount(){
+        return count;
+    }
 
 }

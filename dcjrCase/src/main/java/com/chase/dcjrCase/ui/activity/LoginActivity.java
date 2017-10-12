@@ -1,13 +1,11 @@
 package com.chase.dcjrCase.ui.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 
 import com.chase.dcjrCase.R;
-import com.chase.dcjrCase.view.CleanEditText;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -46,18 +44,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void enterForgetPwd() {
         Intent intent = new Intent(this, ForgetPasswordActivity.class);
         startActivity(intent);
+        finish();
     }
 
     //跳过登录页
     private void skipLogin() {
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
     //跳转到注册页面
     private void enterRegister() {
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
+        finish();
     }
 
     @Override

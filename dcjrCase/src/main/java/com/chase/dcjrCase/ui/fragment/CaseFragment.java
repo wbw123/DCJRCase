@@ -64,12 +64,9 @@ public class CaseFragment extends BaseFragment {
                     mRlError.setVisibility(View.GONE);
                     mListView.setVisibility(View.VISIBLE);
                     //解析json数据
-                    processResult(result,count);
+                    processResult(result);
                     //写缓存 将成功读取的json字符串写入XML中保存
                     CacheUtils.setCache(Constants.CASEJSON_URL, result, mActivity);
-
-                    //收起下拉刷新控件
-//                    mListView.onRefreshComplete(true);
                     break;
                 case CASEDATA_REQUEST_FAILURE:
                     String message = (String) msg.obj;
@@ -87,22 +84,6 @@ public class CaseFragment extends BaseFragment {
                         mListView.setVisibility(View.GONE);
                     }
                     break;
-//                case MORE_REQUEST_SUCCESS:
-//                    String resultMore = (String) msg.obj;
-//                    //解析json数据
-//                    processResult(resultMore, true);
-//                    //写缓存
-//                    CacheUtils.setCache(mUrl, resultMore, mActivity);
-//
-//                    //收起下拉刷新控件
-//                    mListView.onRefreshComplete(true);
-//                    break;
-//                case MORE_REQUEST_FAILURE:
-//                    String messageMore = (String) msg.obj;
-//                    Toast.makeText(mActivity, messageMore, Toast.LENGTH_LONG).show();
-//                    //收起下拉刷新控件
-//                    mListView.onRefreshComplete(false);
-//                    break;
             }
         }
     };
@@ -181,7 +162,7 @@ public class CaseFragment extends BaseFragment {
                         if (!TextUtils.isEmpty(mCache)) {
                             // 有缓存 解析json缓存
                             System.out.println("发现缓存....");
-                            processResult(mCache, count);
+                            processResult(mCache);
                         }
                         // 即使发现有缓存,仍继续调用网络, 获取最新数据
                         getDataFromServer();//通过网络获取数据
@@ -203,7 +184,7 @@ public class CaseFragment extends BaseFragment {
                         if (!TextUtils.isEmpty(mCache)) {
                             // 有缓存 解析json缓存
                             System.out.println("发现缓存....");
-                            processResult(mCache, count);
+                            processResult(mCache);
                         }
                         getDataFromServer();//通过网络获取数据
                         refreshlayout.finishLoadmore();//完成加载更多
@@ -260,7 +241,7 @@ public class CaseFragment extends BaseFragment {
     /**
      * 解析json数据
      */
-    private void processResult(String result,int count) {
+    private void processResult(String result) {
         Gson gson = new Gson();
         mCaseData = gson.fromJson(result, CaseData.class);
         System.out.println("mCaseData解析结果:" + mCaseData.toString());
