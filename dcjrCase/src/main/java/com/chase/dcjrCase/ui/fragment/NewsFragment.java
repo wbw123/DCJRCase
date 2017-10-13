@@ -26,6 +26,7 @@ import com.chase.dcjrCase.global.Constants;
 import com.chase.dcjrCase.ui.activity.WebViewActivity;
 import com.chase.dcjrCase.uitl.CacheUtils;
 import com.chase.dcjrCase.uitl.PrefUtils;
+import com.chase.dcjrCase.view.HorizontalScrollViewPager;
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -54,7 +55,7 @@ public class NewsFragment extends BaseFragment {
     private FrameLayout mFrameLayout;//轮播图整体布局
     private CirclePageIndicator mIndicator;//小红点指示器
     private TextView mTopNewsTitle;//轮播图标题
-    private ViewPager mViewPager;//轮播图viewpager
+    private HorizontalScrollViewPager mViewPager;//轮播图viewpager
 
     /*mvc*/
     private ArrayList<TopNewsBean> mTopnews;// 头条新闻的网络数据
@@ -92,7 +93,7 @@ public class NewsFragment extends BaseFragment {
                         mRlError.setVisibility(View.GONE);
                         mListView.setVisibility(View.VISIBLE);
                         mFrameLayout.setVisibility(View.VISIBLE);
-                    }else {
+                    } else {
                         //没有缓存 添加加载失败布局
                         mRlError.setVisibility(View.VISIBLE);
                         mListView.setVisibility(View.GONE);
@@ -102,8 +103,25 @@ public class NewsFragment extends BaseFragment {
             }
         }
     };
+    private NewsData mNewsData;
 
 
+    /*private OnClickListener onClickListener;
+    *//**
+     * 设置监听
+     *//*
+    public void setClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
+
+    */
+
+    /**
+     * 自定义监听接口
+     *//*
+    public interface OnClickListener {
+        void onClick(int position);
+    }*/
     @Override
     public View initView() {
         View view = View.inflate(mActivity, R.layout.fragment_news, null);
@@ -126,14 +144,17 @@ public class NewsFragment extends BaseFragment {
             }
         });
 
+        /*轮播图条目点击时间*/
+
+        /*listview条目点击事件*/
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 /*条目跳转*/
-                id = 24-id;
+                id = 24 - id;
                 Intent intent = new Intent(mActivity, WebViewActivity.class);
-                intent.putExtra("url", Constants.HOME_URL+"/dcjr/news/news"+id+".html");//webView链接
+                intent.putExtra("url", Constants.HOME_URL + "/dcjr/news/news" + id + ".html");//webView链接
                 mActivity.startActivity(intent);
 
                 /*点击条目标记已读状态*/
@@ -141,11 +162,11 @@ public class NewsFragment extends BaseFragment {
                 //当前点击的item的标题颜色置灰
                 TextView tvTitle = view.findViewById(R.id.tv_news_title);
                 TextView tvDate = view.findViewById(R.id.tv_news_date);
-                tvTitle.setTextColor(Color.argb(255,155,155,155));
-                tvDate.setTextColor(Color.argb(255,155,155,155));
+                tvTitle.setTextColor(Color.argb(255, 155, 155, 155));
+                tvDate.setTextColor(Color.argb(255, 155, 155, 155));
                 //将已读状态持久化到本地
                 //key:read_ids; value:id
-                String readIds = PrefUtils.getString("read_ids","",mActivity);
+                String readIds = PrefUtils.getString("read_ids", "", mActivity);
                 if (!readIds.contains(newsDataBean.id)) {
                     readIds = readIds + newsDataBean.id + ",";
                     PrefUtils.putString("read_ids", readIds, mActivity);
@@ -194,7 +215,7 @@ public class NewsFragment extends BaseFragment {
                 refreshlayout.getLayout().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        count+=10;
+                        count += 10;
                         if (!TextUtils.isEmpty(mCache)) {
                             // 有缓存 解析json缓存
                             System.out.println("发现缓存....");
@@ -202,8 +223,8 @@ public class NewsFragment extends BaseFragment {
                         }
                         getDataFromServer();//通过网络获取数据
                         refreshlayout.finishLoadmore();//完成加载更多
-                        System.out.println("mListNews的大小:"+mListNews.size());
-                        System.out.println("count:"+count);
+                        System.out.println("mListNews的大小:" + mListNews.size());
+                        System.out.println("count:" + count);
                         if (count > mListNews.size()) {
                             Toast.makeText(mActivity, "数据全部加载完毕", Toast.LENGTH_SHORT).show();
                             refreshlayout.setLoadmoreFinished(true);//将不会再次触发加载更多事件
@@ -256,7 +277,7 @@ public class NewsFragment extends BaseFragment {
      */
     private void processResult(String result) {
         Gson gson = new Gson();
-        NewsData mNewsData = gson.fromJson(result, NewsData.class);
+        mNewsData = gson.fromJson(result, NewsData.class);
         System.out.println("mNewsData解析结果:" + mNewsData.toString());
 
         /*头条新闻*/
@@ -271,11 +292,11 @@ public class NewsFragment extends BaseFragment {
 
         /*list条目新闻*/
         mListNews = mNewsData.data.newsData;
-        System.out.println("mListNews=="+mListNews);
+        System.out.println("mListNews==" + mListNews);
         if (mListNewsAdapter == null) {
             mListNewsAdapter = new NewsAdapter(mActivity, mListNews);
             mListView.setAdapter(mListNewsAdapter);
-        }else{
+        } else {
             mListNewsAdapter.notifyDataSetChanged();
         }
 
@@ -347,18 +368,38 @@ public class NewsFragment extends BaseFragment {
             mIndicatorHandler.sendEmptyMessageDelayed(0, 2000);
 
             mViewPager.setOnTouchListener(new View.OnTouchListener() {
-
+                private float mDownX;
+                private float mDownY;
+                private long mDownTime;
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN:
                             System.out.println("ACTION_DOWN");
+                            mDownX = event.getX();
+                            mDownY = event.getY();
+                            mDownTime = System.currentTimeMillis();
                             // 删除所有消息
                             mIndicatorHandler.removeCallbacksAndMessages(null);
                             break;
                         case MotionEvent.ACTION_CANCEL:// 事件取消(当按下后,然后移动下拉刷新,导致抬起后无法响应ACTION_UP,
                             // 但此时会响应ACTION_CANCEL,也需要继续播放轮播条)
                         case MotionEvent.ACTION_UP:
+
+                            float upX = event.getX();
+                            float upY = event.getY();
+                            long upTime = System.currentTimeMillis();
+                            // 设置轮播图点击事件
+                            if (mDownX == upX && mDownY == upY) {
+                                if (upTime - mDownTime < 500) {
+//                                onClickListener.onClick(mViewPager.getCurrentItem() % mTopnews.size());
+                                    int positon = mViewPager.getCurrentItem();
+                                    System.out.println("当前viewpager："+positon);
+                                    Intent TopNewIntent = new Intent(mActivity, WebViewActivity.class);
+                                    TopNewIntent.putExtra("url", Constants.HOME_URL + mTopnews.get(positon).url);//webView链接
+                                    mActivity.startActivity(TopNewIntent);
+                                }
+                            }
                             // 延时2秒切换广告条
                             mIndicatorHandler.sendEmptyMessageDelayed(0, 2000);
                             break;
@@ -371,7 +412,7 @@ public class NewsFragment extends BaseFragment {
         }
     }
 
-    public static int getCount(){
+    public static int getCount() {
         return count;
     }
 
