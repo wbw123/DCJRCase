@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.chase.dcjrCase.ui.activity.CaseDetailActivity">
+    tools:context="com.chase.dcjrCase.ui.activity.WebViewActivity">
     <ProgressBar
         android:id="@+id/pb_loading"
         style="@style/HorizontalProgressBar"

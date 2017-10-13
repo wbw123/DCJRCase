@@ -12,7 +12,7 @@ import android.widget.ProgressBar;
 
 import com.chase.dcjrCase.R;
 
-public class CaseDetailActivity extends AppCompatActivity {
+public class WebViewActivity extends AppCompatActivity {
     private WebView mWebView;
     private ProgressBar pbLoading;
     private String mUrl;

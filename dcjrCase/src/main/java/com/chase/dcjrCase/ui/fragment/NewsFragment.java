@@ -1,11 +1,14 @@
 package com.chase.dcjrCase.ui.fragment;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ListView;
@@ -20,7 +23,9 @@ import com.chase.dcjrCase.bean.NewsData;
 import com.chase.dcjrCase.bean.NewsData.DataBean.NewsDataBean;
 import com.chase.dcjrCase.bean.NewsData.DataBean.TopNewsBean;
 import com.chase.dcjrCase.global.Constants;
+import com.chase.dcjrCase.ui.activity.WebViewActivity;
 import com.chase.dcjrCase.uitl.CacheUtils;
+import com.chase.dcjrCase.uitl.PrefUtils;
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -118,6 +123,33 @@ public class NewsFragment extends BaseFragment {
             public void onClick(View v) {
                 System.out.println("重新加载被点击了");
                 initData();
+            }
+        });
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                /*条目跳转*/
+                id = 24-id;
+                Intent intent = new Intent(mActivity, WebViewActivity.class);
+                intent.putExtra("url", Constants.HOME_URL+"/dcjr/news/news"+id+".html");//webView链接
+                mActivity.startActivity(intent);
+
+                /*点击条目标记已读状态*/
+                NewsDataBean newsDataBean = mListNews.get(position);
+                //当前点击的item的标题颜色置灰
+                TextView tvTitle = view.findViewById(R.id.tv_news_title);
+                TextView tvDate = view.findViewById(R.id.tv_news_date);
+                tvTitle.setTextColor(Color.argb(255,155,155,155));
+                tvDate.setTextColor(Color.argb(255,155,155,155));
+                //将已读状态持久化到本地
+                //key:read_ids; value:id
+                String readIds = PrefUtils.getString("read_ids","",mActivity);
+                if (!readIds.contains(newsDataBean.id)) {
+                    readIds = readIds + newsDataBean.id + ",";
+                    PrefUtils.putString("read_ids", readIds, mActivity);
+                }
             }
         });
 

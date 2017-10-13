@@ -18,7 +18,7 @@ import com.chase.dcjrCase.adapter.CaseAdapter;
 import com.chase.dcjrCase.bean.CaseData;
 import com.chase.dcjrCase.bean.CaseData.DataBean.CaseDataBean;
 import com.chase.dcjrCase.global.Constants;
-import com.chase.dcjrCase.ui.activity.CaseDetailActivity;
+import com.chase.dcjrCase.ui.activity.WebViewActivity;
 import com.chase.dcjrCase.uitl.CacheUtils;
 import com.chase.dcjrCase.uitl.PrefUtils;
 import com.google.gson.Gson;
@@ -110,11 +110,11 @@ public class CaseFragment extends BaseFragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                startActivity(new Intent(mActivity, CaseDetailActivity.class));
+//                startActivity(new Intent(mActivity, WebViewActivity.class));
 
                 /*条目跳转*/
                 id = 16-id;
-                Intent intent = new Intent(mActivity, CaseDetailActivity.class);
+                Intent intent = new Intent(mActivity, WebViewActivity.class);
                 intent.putExtra("url", Constants.HOME_URL+"/dcjr/case/case"+id+".html");//webView链接
                 mActivity.startActivity(intent);
 
