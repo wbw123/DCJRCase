@@ -103,25 +103,7 @@ public class NewsFragment extends BaseFragment {
             }
         }
     };
-    private NewsData mNewsData;
 
-
-    /*private OnClickListener onClickListener;
-    *//**
-     * 设置监听
-     *//*
-    public void setClickListener(OnClickListener onClickListener) {
-        this.onClickListener = onClickListener;
-    }
-
-    */
-
-    /**
-     * 自定义监听接口
-     *//*
-    public interface OnClickListener {
-        void onClick(int position);
-    }*/
     @Override
     public View initView() {
         View view = View.inflate(mActivity, R.layout.fragment_news, null);
@@ -143,8 +125,6 @@ public class NewsFragment extends BaseFragment {
                 initData();
             }
         });
-
-        /*轮播图条目点击时间*/
 
         /*listview条目点击事件*/
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -277,7 +257,7 @@ public class NewsFragment extends BaseFragment {
      */
     private void processResult(String result) {
         Gson gson = new Gson();
-        mNewsData = gson.fromJson(result, NewsData.class);
+        NewsData mNewsData = gson.fromJson(result, NewsData.class);
         System.out.println("mNewsData解析结果:" + mNewsData.toString());
 
         /*头条新闻*/
