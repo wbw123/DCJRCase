@@ -259,5 +259,4 @@ public class CaseFragment extends BaseFragment {
         return count;
     }
 
-
 }

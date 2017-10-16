@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 //    private RelativeLayout mDrawerRight;
     private ListView mDrawerList;
     /*定义模拟数据*/
-    private String mMenuName[] = {"首页", "前沿结束", "标博技术", "展会信息", "招聘信息"};
+    private String mMenuName[] = {"首页", "前沿技术", "展会信息", "招聘信息", "关于我们"};
     private int mMenuPicId[] = {R.mipmap.ic_launcher, R.mipmap.ic_launcher,
             R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher};
     private ArrayList<Menu> mMenuList;
@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
     private MyFragmentPageAdapter myAdapter;
     private ArrayList<Fragment> mFragmentLists;
     private ActionBar actionBar;
+
+    private boolean ifShowSearchMenu = false;//是否显示搜索按钮
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         mFragmentLists.add(meFragment);
 
         //获取FragmentManager对象  
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        final FragmentManager fragmentManager = getSupportFragmentManager();
         //获取FragmentPageAdapter对象  
         myAdapter = new MyFragmentPageAdapter(fragmentManager, mFragmentLists);
         //设置Adapter，使ViewPager 与 Adapter 进行绑定  
@@ -128,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
                         mViewPager.setCurrentItem(0, false);// false禁用页面切换的动画效果
                         break;
                     case R.id.rb_bottom_case:
+                        System.out.println("invalidateOptionsMenu");
+                        ifShowSearchMenu = true;
                         mViewPager.setCurrentItem(1, false);
                         break;
                     case R.id.rb_bottom_news:
@@ -137,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
                         mViewPager.setCurrentItem(3, false);
                         break;
                 }
+                invalidateOptionsMenu();//更新actonbar的menu,会走onCreateOptionsMenu和onPrepareOptionsMenu
             }
 
         });
@@ -227,15 +232,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        System.out.println("onCreateOptionsMenu");
+        getMenuInflater().inflate(R.menu.layout_actionbar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(android.view.Menu menu) {
+        System.out.println("onPrepareOptionsMenu");
+        if (!ifShowSearchMenu) {
+            menu.clear();
+        }
+        ifShowSearchMenu = false;
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        System.out.println("onOptionsItemSelected");
         switch (item.getItemId()) {
             case android.R.id.home:
                 mActionBarDrawerToggle.onOptionsItemSelected(item);
                 break;
-//            case R.id.search:
-//                System.out.println("搜索~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            case R.id.action_search:
+                System.out.println("搜索~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 //                startActivity(new Intent(OsChinaApp.context, FindActivity.class));
-//                break;
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

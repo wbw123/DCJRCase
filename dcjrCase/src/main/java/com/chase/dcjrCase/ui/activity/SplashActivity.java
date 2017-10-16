@@ -36,7 +36,7 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(it); //执行
             }
         };
-        timer.schedule(task, 1000*6); //6秒后
+        timer.schedule(task, 1000*3); //6秒后
     }
 
     private void initsView(){
@@ -49,11 +49,16 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onEnd(WowSplashView wowSplashView) {
                 mWowSplashView.setVisibility(View.GONE);
-                mWowView.setVisibility(View.VISIBLE);
-                mWowView.startAnimate(wowSplashView.getDrawingCache());
+//                mWowView.setVisibility(View.VISIBLE);
+//                mWowView.startAnimate(wowSplashView.getDrawingCache());
 
             }
         });
     }
 
+    @Override
+    protected void onStop() {
+        finish();
+        super.onStop();
+    }
 }

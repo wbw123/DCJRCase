@@ -13,10 +13,10 @@
 
     <!--首页childfragment的tab标题-->
     <string-array name="home_array">
-        <item>安规</item>
         <item>电磁兼容</item>
-        <item>未定</item>
-        <item>未定</item>
+        <item>EMC技术</item>
+        <item>EMC设计</item>
+        <item>EMC测试</item>
 
     </string-array>
 
