@@ -2,7 +2,9 @@ package com.chase.dcjrCase.ui.activity;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -16,10 +18,13 @@ public class WebViewActivity extends AppCompatActivity {
     private WebView mWebView;
     private ProgressBar pbLoading;
     private String mUrl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_case_detail);
+        /*初始化actionbar*/
+        initActionBar();
 
         mWebView = (WebView) findViewById(R.id.wv_webview);
         pbLoading = (ProgressBar) findViewById(R.id.pb_loading);
@@ -27,7 +32,7 @@ public class WebViewActivity extends AppCompatActivity {
 
         mUrl = getIntent().getStringExtra("url");
 
-        System.out.println("mUrl:"+mUrl);
+        System.out.println("mUrl:" + mUrl);
         // 加载网页
 //        mWebView.loadUrl("http://192.168.141.81:8080/dcjr/case/case2.html");
         mWebView.loadUrl(mUrl);
@@ -88,5 +93,35 @@ public class WebViewActivity extends AppCompatActivity {
                 super.onReceivedIcon(view, icon);
             }
         });
+    }
+
+    /*初始化actionbar*/
+    private void initActionBar() {
+    /*得到actionbar*/
+        ActionBar actionBar = getSupportActionBar();
+        /*去掉actionbar底部的阴影线*/
+        actionBar.setElevation(0);
+        /*设置标题*/
+        actionBar.setTitle(R.string.title);
+        /*设置ActionBar可见，并且切换菜单和内容视图*/
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+    }
+
+
+    /*@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_menu_back, menu);
+        return super.onCreateOptionsMenu(menu);
+    }*/
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
