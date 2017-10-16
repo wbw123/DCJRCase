@@ -18,10 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.chase.dcjrCase.R;
-import com.chase.dcjrCase.ui.activity.LoginActivity;
-import com.chase.dcjrCase.ui.activity.MainActivity;
 import com.chase.dcjrCase.uitl.PrefUtils;
-
 
 import java.util.ArrayList;
 
@@ -134,7 +131,7 @@ public class GuideActivity extends Activity implements View.OnClickListener{
                 //开始体验
                 //记录新手引导已经被展示的状态，下次启动不再展示
                 PrefUtils.putBoolean("is_guide_show",true,this);
-                startActivity(new Intent(this,LoginActivity.class));
+                startActivity(new Intent(this,SplashActivity.class));
                 System.out.println("已展示过，不再展示");
                 finish();
                 break;
