@@ -46,6 +46,13 @@ public class GuideActivity extends Activity implements View.OnClickListener{
         //去掉标题栏
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_guide);
+
+        boolean is_guide_show = PrefUtils.getBoolean("is_guide_show", false, this);
+        if (is_guide_show){
+            startActivity(new Intent(this,SplashActivity.class));
+            finish();
+        }
+
         mviewPager = findViewById(R.id.vp_pager);
         llContainer = findViewById(R.id.ll_container);
         ivRedPoint = findViewById(R.id.iv_red_point);

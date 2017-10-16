@@ -20,6 +20,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private WowSplashView mWowSplashView;
     private WowView mWowView;
+    private boolean isPause= false;//用于判断闪屏动画执行过程中,退出应用时,不再跳转activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +33,13 @@ public class SplashActivity extends AppCompatActivity {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                //动画结束后跳转到主页面
-                final Intent it = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(it);
+                if (isPause){
+                    finish();
+                }else {
+                    //动画结束后跳转到主页面
+                    final Intent it = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(it);
+                }
             }
         };
         timer.schedule(task, 1000 * 3); //6秒后
@@ -57,8 +62,10 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
+    protected void onPause() {
+        isPause = true;
+        System.out.println("SplashActivity onPause");
         finish();
-        super.onStop();
+        super.onPause();
     }
 }

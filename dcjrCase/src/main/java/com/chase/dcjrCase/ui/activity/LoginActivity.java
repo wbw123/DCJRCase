@@ -21,6 +21,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()){
             case R.id.btn_skip:
                     skipLogin();
+                finish();
                 break;
             case R.id.btn_login:
                 break;
@@ -61,8 +62,4 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         finish();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
 }
