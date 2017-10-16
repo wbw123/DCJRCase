@@ -14,10 +14,7 @@
         <activity android:name=".ui.activity.MainActivity">
         </activity>
         <activity android:name=".ui.activity.WebViewActivity" />
-        <activity
-            android:name=".ui.activity.LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
+
         <activity
             android:name=".ui.activity.SignUpActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -33,6 +30,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".ui.activity.GuideActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.activity.LoginActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
     </application>
 
