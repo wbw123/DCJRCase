@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                         mViewPager.setCurrentItem(0, false);
                         break;
                     case 1:
-
+                        startActivity(new Intent(MainActivity.this,TechActivity.class));
                         break;
                     case 2:
 
