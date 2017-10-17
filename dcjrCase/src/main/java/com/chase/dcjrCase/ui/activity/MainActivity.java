@@ -1,5 +1,6 @@
 package com.chase.dcjrCase.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -235,6 +236,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         System.out.println("onCreateOptionsMenu");
         getMenuInflater().inflate(R.menu.action_menu_search, menu);
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -257,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.action_search:
                 System.out.println("搜索~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-//                startActivity(new Intent(OsChinaApp.context, FindActivity.class));
+               startActivity(new Intent(this, SearchActivity.class));
                 break;
         }
         return super.onOptionsItemSelected(item);

@@ -7,6 +7,15 @@
 
         <!--<include layout="@layout/custom_toolbar" />-->
 
+       <!-- <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="custom"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            />-->
+
+
 
 
         <android.support.v4.widget.DrawerLayout

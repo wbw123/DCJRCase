@@ -5,6 +5,7 @@ package com.chase.dcjrCase.ui.activity;
  */
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -42,7 +43,7 @@ public class SplashActivity extends AppCompatActivity {
                 }
             }
         };
-        timer.schedule(task, 1000 * 3); //6秒后
+        timer.schedule(task, 1000 * 4); //4秒后
     }
 
     private void initsView() {
@@ -51,12 +52,13 @@ public class SplashActivity extends AppCompatActivity {
 
         mWowSplashView.startAnimate();
 
+
         mWowSplashView.setOnEndListener(new WowSplashView.OnEndListener() {
             @Override
             public void onEnd(WowSplashView wowSplashView) {
                 mWowSplashView.setVisibility(View.GONE);
-//                mWowView.setVisibility(View.VISIBLE);
-//                mWowView.startAnimate(wowSplashView.getDrawingCache());
+//              mWowView.setVisibility(View.VISIBLE);
+//              mWowView.startAnimate(wowSplashView.getDrawingCache());
             }
         });
     }

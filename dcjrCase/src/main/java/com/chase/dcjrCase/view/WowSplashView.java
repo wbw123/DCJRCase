@@ -273,9 +273,9 @@ public class WowSplashView extends View {
             @Override
             public void onAnimationEnd(Animator animation) {
                 va.removeAllUpdateListeners();
-                if (mListener != null) {
+                /*if (mListener != null) {
                     mListener.onEnd(WowSplashView.this);
-                }
+                }*/
             }
 
             @Override
