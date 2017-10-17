@@ -1,5 +1,6 @@
 package com.chase.dcjrCase.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -192,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                         mViewPager.setCurrentItem(0, false);
                         break;
                     case 1:
-
+                        startActivity(new Intent(MainActivity.this,TechActivity.class));
                         break;
                     case 2:
 
