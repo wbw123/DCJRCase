@@ -60,12 +60,12 @@ public class HomeDetailFragment4 extends BaseChildFragment {
                             mListItems.clear();//清空所有数据
                         }
                         initData();//加载第一页数据(因为数据已经清空了)
-                        if (myAdapter == null) {
+//                        if (myAdapter == null) {
                             myAdapter = new HomeDetailAdapter1(mActivity, mListItems);
                             mListView.setAdapter(myAdapter);
-                        } else {
-                            myAdapter.notifyDataSetChanged();
-                        }
+//                        } else {
+//                            myAdapter.notifyDataSetChanged();
+//                        }
 //                        mAdapter.refresh(initData());
                         refreshlayout.finishRefresh();//完成刷新
                         refreshlayout.setLoadmoreFinished(false);//可以出发加载更多事件

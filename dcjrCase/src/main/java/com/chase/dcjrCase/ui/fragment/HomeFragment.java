@@ -49,6 +49,6 @@ public class HomeFragment extends BaseFragment {
 
         /*一次性加载4页,解决来回切换数据丢失*/
         /*这个办法并不好,因为会一次性加载4个fragment,浪费用户流量,但有没找到其他办法,我也很无奈*/
-        viewPagerHome.setOffscreenPageLimit(3);
+//        viewPagerHome.setOffscreenPageLimit(3);
     }
 }
