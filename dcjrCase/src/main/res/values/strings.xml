@@ -21,6 +21,15 @@
 
     </string-array>
 
+    <!--MeFragment-->
+    <string name="history_name">历史记录</string>
+    <string name="collection_name">我的收藏</string>
+    <string name="night_name">夜间模式</string>
+    <string name="day_name">日间模式</string>
+    <string name="clean_name">消除缓存</string>
+    <string name="feedback_name">用户反馈</string>
+    <string name="setting_name">设置</string>
+
     <!--登陆页面-->
     <string name="btn_skip">跳过</string>
     <string name="login">登录</string>
