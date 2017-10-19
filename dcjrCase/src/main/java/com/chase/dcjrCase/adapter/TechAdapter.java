@@ -81,6 +81,7 @@ public class TechAdapter extends BaseAdapter {
         * */
         String readIds = PrefUtils.getString("read_ids","",mContext);
         TechDataBean techDataBean = mTechList.get(position);
+        System.out.println("______________+__________"+techDataBean);
         if (readIds.contains(techDataBean.id)){
             //已读
             holder.tv_title.setTextColor(Color.argb(255,155,155,155));

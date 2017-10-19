@@ -120,6 +120,7 @@ public class CaseFragment extends BaseFragment {
 
                 /*点击条目标记已读状态*/
                 CaseDataBean caseDataBean = mCaseList.get(position);
+                System.out.println("!!!!!!!!!!!!!!!!!!!!"+caseDataBean);
                 //当前点击的item的标题颜色置灰
                 TextView tvTitle = view.findViewById(R.id.tv_case_title);
                 TextView tvDate = view.findViewById(R.id.tv_case_date);

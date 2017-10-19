@@ -12,6 +12,9 @@
         android:gravity="center_horizontal"
         android:background="#fff">
         <ImageView
+            android:id="@+id/iv_me_login"
+            android:clickable="true"
+            android:onClick="onClick"
             android:paddingTop="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,8 +27,10 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_history"
         android:layout_marginTop="50dp"
         android:padding="5dp"
+        android:onClick="onClick"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:clickable="true"
@@ -37,11 +42,8 @@
             android:layout_gravity="center_vertical"
             android:src="@drawable/btn_history_selector"/>
         <TextView
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/history_name"
-            android:textSize="15sp"/>
+            style="@style/meFrag_tv_style"
+            android:text="@string/history_name" />
     </LinearLayout>
     <View
         android:layout_width="350dp"
@@ -49,7 +51,9 @@
         android:background="#4000"
         android:layout_gravity="center"/>
     <LinearLayout
+        android:id="@+id/ll_collection"
         android:padding="5dp"
+        android:onClick="onClick"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:clickable="true"
@@ -61,11 +65,8 @@
             android:layout_gravity="center_vertical"
             android:src="@drawable/btn_collection_selector"/>
         <TextView
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/collection_name"
-            android:textSize="15sp"/>
+            style="@style/meFrag_tv_style"
+            android:text="@string/collection_name" />
     </LinearLayout>
 
     <View
@@ -77,6 +78,7 @@
     <LinearLayout
         android:id="@+id/ll_night_mode"
         android:padding="5dp"
+        android:onClick="onClick"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:clickable="true"
@@ -104,7 +106,9 @@
         android:layout_gravity="center"/>
 
     <LinearLayout
+        android:id="@+id/ll_clean"
         android:padding="5dp"
+        android:onClick="onClick"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#fff"
@@ -116,11 +120,8 @@
             android:layout_gravity="center_vertical"
             android:src="@drawable/btn_clean_selector"/>
         <TextView
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/clean_name"
-            android:textSize="15sp"/>
+            style="@style/meFrag_tv_style"
+            android:text="@string/clean_name" />
     </LinearLayout>
 
     <View
@@ -130,7 +131,9 @@
         android:layout_gravity="center"/>
 
     <LinearLayout
+        android:id="@+id/ll_feedback"
         android:padding="5dp"
+        android:onClick="onClick"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#fff"
@@ -142,14 +145,13 @@
             android:layout_gravity="center_vertical"
             android:src="@drawable/btn_feedback_selector"/>
         <TextView
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/feedback_name"
-            android:textSize="15sp"/>
+            style="@style/meFrag_tv_style"
+            android:text="@string/feedback_name" />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/ll_setting"
         android:padding="5dp"
+        android:onClick="onClick"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -162,11 +164,8 @@
             android:layout_gravity="center_vertical"
             android:src="@drawable/btn_setting_selector"/>
         <TextView
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/setting_name"
-            android:textSize="15sp"/>
+            style="@style/meFrag_tv_style"
+            android:text="@string/setting_name" />
     </LinearLayout>
 
 </LinearLayout>

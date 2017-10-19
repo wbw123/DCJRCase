@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.chase.dcjrCase.R;
 import com.chase.dcjrCase.adapter.TechAdapter;
 import com.chase.dcjrCase.adapter.TopTechAdapter;
+import com.chase.dcjrCase.bean.HistoryBean;
 import com.chase.dcjrCase.bean.NewsData;
 import com.chase.dcjrCase.bean.TechData;
 import com.chase.dcjrCase.bean.TechData.DataBean.TechDataBean;
@@ -63,6 +64,8 @@ public class TechActivity extends AppCompatActivity {
     private TopTechAdapter mTopTechAdapter;//头条科技适配器
     private ArrayList<TechDataBean> mListTech;//科技的网络数据
     private TechAdapter mTechAdapter;//条目的适配器
+    private ArrayList<HistoryBean> mTechHistory =new ArrayList<>();;
+    private ArrayList<HistoryBean> mTopTechHistory = new ArrayList<>();;
 
     private static int count;//用来记录第一次加载的条目数,以及在加载更多后加载的条目数
     private String mCache;//条目缓存数据 json字符串
@@ -102,6 +105,10 @@ public class TechActivity extends AppCompatActivity {
             }
         }
     };
+    private TechDataBean techDataBean;
+    private HistoryBean mTeachHistoryBean;
+    private HistoryBean mTopTechHistoeyBean;
+    private TopTechBean topTechBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +116,7 @@ public class TechActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tech);
         initView();
         initData();
+
     }
 
     public void initView() {
@@ -134,13 +142,16 @@ public class TechActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                  /*条目跳转*/
-                id = 24 - id;
+                id = mListTech.size() - id;
+                System.out.println(mListTech.size());
                 Intent intent = new Intent(TechActivity.this, WebViewActivity.class);
                 intent.putExtra("url", Constants.HOME_URL + "/dcjr/tech/tech" + id + ".html");//webView链接
                 startActivity(intent);
 
                  /*点击条目标记已读状态*/
-                TechDataBean techDataBean = mListTech.get(position);
+                techDataBean = mListTech.get(position);
+
+                System.out.println("++++++++++++++++++++++++++++"+ techDataBean);
                 //当前点击的item的标题颜色置灰
                 TextView tvTitle = view.findViewById(R.id.tv_tech_title);
                 TextView tvDate = view.findViewById(R.id.tv_tech_date);
@@ -149,10 +160,20 @@ public class TechActivity extends AppCompatActivity {
                 //将已读状态持久化到本地
                 //key:read_ids; value:id
                 String readIds = PrefUtils.getString("read_ids", "", getApplicationContext());
+                System.out.println("________________________"+readIds);
                 if (!readIds.contains(techDataBean.id)) {
                     readIds = readIds + techDataBean.id + ",";
                     PrefUtils.putString("read_ids", readIds, getApplicationContext());
                 }
+
+//                mTechHistory= new ArrayList<>();
+                mTeachHistoryBean = new HistoryBean();
+                mTeachHistoryBean.id = techDataBean.id;
+                mTeachHistoryBean.title = techDataBean.title;
+                mTeachHistoryBean.date = techDataBean.date;
+                mTeachHistoryBean.imgUrl = techDataBean.imgUrl;
+                mTeachHistoryBean.url = Constants.HOME_URL + "/dcjr/tech/tech" + id + ".html";
+                mTechHistory.add(mTeachHistoryBean);
             }
         });
 
@@ -293,8 +314,8 @@ public class TechActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 //标题
-                TopTechBean topNewsBean = mTopTech.get(position);
-                mTopTechTitle.setText(topNewsBean.title);
+                TopTechBean topTechBean = mTopTech.get(position);
+                mTopTechTitle.setText(topTechBean.title);
             }
 
             @Override
@@ -310,6 +331,7 @@ public class TechActivity extends AppCompatActivity {
     /**
      * TopTech两秒切换一次
      */
+
     private void autoChangeAfter2s() {
         if (mIndicatorHandler == null) {
             mIndicatorHandler = new Handler() {
@@ -358,24 +380,40 @@ public class TechActivity extends AppCompatActivity {
                                 if (upTime - mDownTime < 500) {
 //                                onClickListener.onClick(mViewPager.getCurrentItem() % mTopnews.size());
                                     int position = mViewPager.getCurrentItem();
+                                    topTechBean = mTopTech.get(position);
                                     System.out.println("当前viewpager："+position);
+                                    System.out.println("当前mTopTech："+topTechBean);
                                     Intent TopTechIntent = new Intent(getApplicationContext(), WebViewActivity.class);
                                     TopTechIntent.putExtra("url", Constants.HOME_URL + mTopTech.get(position).url);//webView链接
                                     startActivity(TopTechIntent);
+//                                    mTopTechHistory = new ArrayList<>();
+                                    mTopTechHistoeyBean = new HistoryBean();
+                                    mTeachHistoryBean.id = topTechBean.id;
+                                    mTeachHistoryBean.title = topTechBean.title;
+                                    mTeachHistoryBean.date = topTechBean.date;
+                                    mTeachHistoryBean.imgUrl = topTechBean.imgUrl;
+                                    mTeachHistoryBean.url = Constants.HOME_URL + topTechBean.url;
+                                    mTopTechHistory.add(mTopTechHistoeyBean);
+
                                 }
                             }
+
                             // 延时2秒切换广告条
                             mIndicatorHandler.sendEmptyMessageDelayed(0, 2000);
                             break;
                         default:
                             break;
                     }
+
                     return false;
                 }
+
             });
         }
     }
+
     public static int getCount() {
         return count;
     }
+
 }
