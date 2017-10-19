@@ -116,7 +116,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.Sear
     /**
      * 初始化数据
      */
-    private void initData()  {
+    private void initData() {
         //从数据库获取数据
         getDbData();
         //初始化热搜版数据
