@@ -2,11 +2,11 @@ package com.chase.dcjrCase.ui.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,7 +23,6 @@ import com.chase.dcjrCase.R;
 import com.chase.dcjrCase.adapter.TechAdapter;
 import com.chase.dcjrCase.adapter.TopTechAdapter;
 import com.chase.dcjrCase.bean.HistoryBean;
-import com.chase.dcjrCase.bean.NewsData;
 import com.chase.dcjrCase.bean.TechData;
 import com.chase.dcjrCase.bean.TechData.DataBean.TechDataBean;
 import com.chase.dcjrCase.bean.TechData.DataBean.TopTechBean;
@@ -43,7 +42,6 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TechActivity extends AppCompatActivity {
 
@@ -64,17 +62,17 @@ public class TechActivity extends AppCompatActivity {
     private TopTechAdapter mTopTechAdapter;//头条科技适配器
     private ArrayList<TechDataBean> mListTech;//科技的网络数据
     private TechAdapter mTechAdapter;//条目的适配器
-    private ArrayList<HistoryBean> mTechHistory =new ArrayList<>();;
-    private ArrayList<HistoryBean> mTopTechHistory = new ArrayList<>();;
+    private ArrayList<HistoryBean> mTechHistory = new ArrayList<>();
+    private ArrayList<HistoryBean> mTopTechHistory = new ArrayList<>();
 
-    private static int count;//用来记录第一次加载的条目数,以及在加载更多后加载的条目数
+    private static int count = 10;//用来记录第一次加载的条目数,以及在加载更多后加载的条目数
     private String mCache;//条目缓存数据 json字符串
 
     private Handler mIndicatorHandler = null;
-    private Handler mHandler = new Handler(){
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
                 case TECHDATA_REQUEST_SUCCESS:
                     String result = (String) msg.obj;
                     mRlError.setVisibility(View.GONE);
@@ -83,23 +81,23 @@ public class TechActivity extends AppCompatActivity {
                     //解析json数据
                     processResult(result);
                     //写缓存 将成功读取的json字符串写入XML中保存
-                    CacheUtils.setCache(Constants.TECHJSON_URL,result,getApplicationContext());
+                    CacheUtils.setCache(Constants.TECHJSON_URL, result, getApplicationContext());
                     break;
                 case TECHDATA_REQUEST_FAILURE:
                     String message = (String) msg.obj;
                     Toast.makeText(getApplicationContext(), "请检查是否连接网络!", Toast.LENGTH_SHORT).show();
-                   if (!TextUtils.isEmpty(mCache)){
-                       //发现缓存 读缓存 显示布局
-                       System.out.println("tech 发现缓存");
-                       mRlError.setVisibility(View.GONE);
-                       mListView.setVisibility(View.VISIBLE);
-                       mFrameLayout.setVisibility(View.VISIBLE);
-                }else {
-                       //没有缓存 添加加载失败布局
-                    mRlError.setVisibility(View.VISIBLE);
-                    mListView.setVisibility(View.GONE);
-                    mFrameLayout.setVisibility(View.GONE);
-                   }
+                    if (!TextUtils.isEmpty(mCache)) {
+                        //发现缓存 读缓存 显示布局
+                        System.out.println("tech 发现缓存");
+                        mRlError.setVisibility(View.GONE);
+                        mListView.setVisibility(View.VISIBLE);
+                        mFrameLayout.setVisibility(View.VISIBLE);
+                    } else {
+                        //没有缓存 添加加载失败布局
+                        mRlError.setVisibility(View.VISIBLE);
+                        mListView.setVisibility(View.GONE);
+                        mFrameLayout.setVisibility(View.GONE);
+                    }
 
                     break;
             }
@@ -151,7 +149,7 @@ public class TechActivity extends AppCompatActivity {
                  /*点击条目标记已读状态*/
                 techDataBean = mListTech.get(position);
 
-                System.out.println("++++++++++++++++++++++++++++"+ techDataBean);
+                System.out.println("++++++++++++++++++++++++++++" + techDataBean);
                 //当前点击的item的标题颜色置灰
                 TextView tvTitle = view.findViewById(R.id.tv_tech_title);
                 TextView tvDate = view.findViewById(R.id.tv_tech_date);
@@ -160,7 +158,7 @@ public class TechActivity extends AppCompatActivity {
                 //将已读状态持久化到本地
                 //key:read_ids; value:id
                 String readIds = PrefUtils.getString("read_ids", "", getApplicationContext());
-                System.out.println("________________________"+readIds);
+                System.out.println("________________________" + readIds);
                 if (!readIds.contains(techDataBean.id)) {
                     readIds = readIds + techDataBean.id + ",";
                     PrefUtils.putString("read_ids", readIds, getApplicationContext());
@@ -182,8 +180,14 @@ public class TechActivity extends AppCompatActivity {
     public void initData() {
         //获取缓存
         mCache = CacheUtils.getCache(Constants.TECHJSON_URL, this);
-        //触发自动刷新
-        mRefreshLayout.autoRefresh();
+        if (!TextUtils.isEmpty(mCache)) {
+            System.out.println("有缓存  不自动刷新");
+            processResult(mCache);
+        } else {
+            //触发自动刷新
+            mRefreshLayout.autoRefresh();
+            System.out.println("无缓存  自动刷新");
+        }
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(final RefreshLayout refreshlayout) {
@@ -191,8 +195,8 @@ public class TechActivity extends AppCompatActivity {
                 refreshlayout.getLayout().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        count=10;
-                        if (!TextUtils.isEmpty(mCache)){
+                        count = 10;
+                        if (!TextUtils.isEmpty(mCache)) {
                             // 有缓存 解析json缓存
                             System.out.println("发现缓存....");
                             processResult(mCache);
@@ -202,7 +206,7 @@ public class TechActivity extends AppCompatActivity {
                         refreshlayout.finishRefresh();//完成刷新
                         refreshlayout.setLoadmoreFinished(false);//可以出发加载更多事件
                     }
-                },1500);
+                }, 1500);
             }
         });
         mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
@@ -213,7 +217,7 @@ public class TechActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         count += 10;
-                        if (!TextUtils.isEmpty(mCache)){
+                        if (!TextUtils.isEmpty(mCache)) {
                             // 有缓存 解析json缓存
                             System.out.println("发现缓存....");
                             processResult(mCache);
@@ -227,7 +231,7 @@ public class TechActivity extends AppCompatActivity {
                             refreshlayout.setLoadmoreFinished(true);//将不会再次触发加载更多事件
                         }
                     }
-                },1000);
+                }, 1000);
             }
         });
     }
@@ -235,8 +239,8 @@ public class TechActivity extends AppCompatActivity {
     /*
     * 请求网络数据
     * */
-    public void getDataFromServer(){
-        new Thread(){
+    public void getDataFromServer() {
+        new Thread() {
             @Override
             public void run() {
                 HttpUtils utils = new HttpUtils();
@@ -255,8 +259,8 @@ public class TechActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(HttpException e, String msg) {
-                        System.out.println("tech 请求成功");
-                        System.out.println("msg:"+msg);
+                        System.out.println("tech 请求失败");
+                        System.out.println("msg:" + msg);
                         e.printStackTrace();
                         Message message = new Message();
                         message.what = TECHDATA_REQUEST_FAILURE;
@@ -267,29 +271,30 @@ public class TechActivity extends AppCompatActivity {
             }
         }.start();
     }
+
     /*
     * 解析json数据
     * */
     public void processResult(String result) {
         Gson gson = new Gson();
         TechData mTechData = gson.fromJson(result, TechData.class);
-        System.out.println("tech解析结果"+mTechData.toString());
+        System.out.println("tech解析结果" + mTechData.toString());
 
         /*头条科技*/
         mTopTech = mTechData.data.topTech;
-        if (mTopTechAdapter == null){
-            mTopTechAdapter = new TopTechAdapter(mTopTech,this);
+        if (mTopTechAdapter == null) {
+            mTopTechAdapter = new TopTechAdapter(mTopTech, this);
             mViewPager.setAdapter(mTopTechAdapter);
-        }else {
+        } else {
             mTopTechAdapter.notifyDataSetChanged();
         }
 
         /*前沿科技list条目*/
         mListTech = mTechData.data.techData;
-        if (mTechAdapter == null){
-            mTechAdapter = new TechAdapter(mListTech,this);
+        if (mTechAdapter == null) {
+            mTechAdapter = new TechAdapter(mListTech, this);
             mListView.setAdapter(mTechAdapter);
-        }else {
+        } else {
             mTechAdapter.notifyDataSetChanged();
         }
         //indicator绑定ViewPager
@@ -328,6 +333,7 @@ public class TechActivity extends AppCompatActivity {
         int currentItem = mViewPager.getCurrentItem();
         mTopTechTitle.setText(mTopTech.get(currentItem).title);
     }
+
     /**
      * TopTech两秒切换一次
      */
@@ -357,6 +363,7 @@ public class TechActivity extends AppCompatActivity {
                 private float mDownX;
                 private float mDownY;
                 private long mDownTime;
+
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     switch (event.getAction()) {
@@ -381,18 +388,18 @@ public class TechActivity extends AppCompatActivity {
 //                                onClickListener.onClick(mViewPager.getCurrentItem() % mTopnews.size());
                                     int position = mViewPager.getCurrentItem();
                                     topTechBean = mTopTech.get(position);
-                                    System.out.println("当前viewpager："+position);
-                                    System.out.println("当前mTopTech："+topTechBean);
+                                    System.out.println("当前viewpager：" + position);
+                                    System.out.println("当前mTopTech：" + topTechBean);
                                     Intent TopTechIntent = new Intent(getApplicationContext(), WebViewActivity.class);
                                     TopTechIntent.putExtra("url", Constants.HOME_URL + mTopTech.get(position).url);//webView链接
                                     startActivity(TopTechIntent);
 //                                    mTopTechHistory = new ArrayList<>();
                                     mTopTechHistoeyBean = new HistoryBean();
-                                    mTeachHistoryBean.id = topTechBean.id;
-                                    mTeachHistoryBean.title = topTechBean.title;
-                                    mTeachHistoryBean.date = topTechBean.date;
-                                    mTeachHistoryBean.imgUrl = topTechBean.imgUrl;
-                                    mTeachHistoryBean.url = Constants.HOME_URL + topTechBean.url;
+                                    mTopTechHistoeyBean.id = topTechBean.id;
+                                    mTopTechHistoeyBean.title = topTechBean.title;
+                                    mTopTechHistoeyBean.date = topTechBean.date;
+                                    mTopTechHistoeyBean.imgUrl = topTechBean.imgUrl;
+                                    mTopTechHistoeyBean.url = Constants.HOME_URL + topTechBean.url;
                                     mTopTechHistory.add(mTopTechHistoeyBean);
 
                                 }

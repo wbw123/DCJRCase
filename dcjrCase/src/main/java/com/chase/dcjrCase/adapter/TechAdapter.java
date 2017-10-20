@@ -10,14 +10,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.chase.dcjrCase.R;
-
-import java.util.ArrayList;
-
-import com.chase.dcjrCase.bean.NewsData;
 import com.chase.dcjrCase.bean.TechData.DataBean.TechDataBean;
 import com.chase.dcjrCase.global.Constants;
 import com.chase.dcjrCase.ui.activity.TechActivity;
 import com.chase.dcjrCase.uitl.PrefUtils;
+
+import java.util.ArrayList;
 
 
 /**
@@ -38,34 +36,39 @@ public class TechAdapter extends BaseAdapter {
     public int getCount() {
         mCount = TechActivity.getCount();
         if (mCount>=mTechList.size()){
+            System.out.println("getCount:"+mTechList.size());
             return mTechList.size();
         }else {
+            System.out.println("getCount:"+mCount);
             return mCount;
         }
 
     }
 
     @Override
-    public Object getItem(int position) {
+    public TechDataBean getItem(int position) {
+        System.out.println("getItem");
         return mTechList.get(position);
     }
 
     @Override
     public long getItemId(int position) {
+        System.out.println("getItemId");
         return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        System.out.println("getView");
         ViewHolder holder = null;
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.item_tech_list, null);
-            holder = new TechAdapter.ViewHolder(convertView);
+            holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         } else {
-            holder = (TechAdapter.ViewHolder) convertView.getTag();
+            holder = (ViewHolder) convertView.getTag();
         }
-        TechDataBean item = (TechDataBean) getItem(position);
+        TechDataBean item = getItem(position);
 //        holder.iv_image.setImageResource();
         Glide.with(mContext)
                 .load(Constants.HOME_URL+item.imgUrl)
