@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:midtable="http://schemas.android.com/apk/com.chase.dcjrCase"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/fl_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <com.chase.dcjrCase.view.HorizontalScrollViewPager
+            android:id="@+id/news_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="#a000"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/news_vp_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="标题"
+                android:textColor="#fff"
+                android:textSize="18sp" />
+
+            <com.viewpagerindicator.CirclePageIndicator
+                android:id="@+id/indicator"
+                app:fillColor="#f00"
+                app:pageColor="#9e9e9e"
+                app:radius="3dp"
+                app:strokeWidth="0dp"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="10dip" />
+        </RelativeLayout>
+    </FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
+        <com.chase.dcjrCase.view.ImageTextButton
+            android:id="@+id/itb_case"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            midtable:title="案例"
+            midtable:src="@drawable/btn_midcase_selector"
+            midtable:textColor="@color/text_me_selector"
+            >
+
+        </com.chase.dcjrCase.view.ImageTextButton>
+        <com.chase.dcjrCase.view.ImageTextButton
+            android:id="@+id/itb_news"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            midtable:title="新闻"
+            midtable:src="@drawable/btn_midnews_selector"
+            midtable:textColor="@color/text_me_selector"
+            >
+
+        </com.chase.dcjrCase.view.ImageTextButton>
+        <com.chase.dcjrCase.view.ImageTextButton
+            android:id="@+id/itb_tech"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            midtable:title="技术"
+            midtable:src="@drawable/btn_midtech_selector"
+            midtable:textColor="@color/text_me_selector"
+            >
+
+        </com.chase.dcjrCase.view.ImageTextButton>
+    </LinearLayout>
+</LinearLayout>

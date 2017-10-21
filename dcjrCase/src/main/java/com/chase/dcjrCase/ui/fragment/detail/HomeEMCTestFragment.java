@@ -5,7 +5,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.chase.dcjrCase.R;
-import com.chase.dcjrCase.adapter.HomeDetailAdapter1;
+import com.chase.dcjrCase.adapter.HomeDetailAdapter4;
+import com.scwang.smartrefresh.header.WaveSwipeHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -16,54 +17,26 @@ import java.util.ArrayList;
  * Created by chase on 2017/9/6.
  */
 
-public class HomeDetailFragment1 extends BaseChildFragment {
-
+public class HomeEMCTestFragment extends BaseChildFragment {
     private ListView mListView;
     private ArrayList<String> mListItems;
     private RefreshLayout mRefreshLayout;
-    private HomeDetailAdapter1 myAdapter;
+    private HomeDetailAdapter4 myAdapter;
+    private WaveSwipeHeader mRefreshHeader;
 
     @Override
     protected View getSuccessView() {
 //        TextView view = new TextView(mActivity);
-//        view.setText("HomeDetailFragment1");
+//        view.setText("HomeEMCFragment");
 //        view.setTextColor(Color.RED);
 //        view.setTextSize(22);
 //        view.setGravity(Gravity.CENTER);
-        View view = View.inflate(mActivity, R.layout.fragment_home_detail1, null);
+        View view = View.inflate(mActivity, R.layout.fragment_home_detail4, null);
         mRefreshLayout = view.findViewById(R.id.refresh_layout);
         mListView = view.findViewById(R.id.lv_list);
-
-        System.out.println("home detail1 加载布局");
+        System.out.println("home detail4 加载布局");
         return view;
     }
-
-    /*@Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        final ActionBar actionBar = mActivity.getActionBar();
-        mListView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        // 触摸按下时的操作
-                        actionBar.hide();
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        // 触摸移动时的操作
-
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        // 触摸抬起时的操作
-                        actionBar.show();
-                        break;
-                }
-                return false;
-
-            }
-        });
-    }*/
 
     @Override
     protected Object requestData() {
@@ -71,11 +44,14 @@ public class HomeDetailFragment1 extends BaseChildFragment {
 
         //触发自动刷新
         mRefreshLayout.autoRefresh();
-        System.out.println("home detail1 加载数据");
+
+        //内容不偏移
+        mRefreshLayout.setEnableHeaderTranslationContent(false);
+        System.out.println("home detail4 加载数据");
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(final RefreshLayout refreshlayout) {
-                System.out.println("home detail1 下拉刷新 加载数据");
+                System.out.println("home detail4 下拉刷新 加载数据");
 //                refreshlayout.finishRefresh(2000);
                 refreshlayout.getLayout().postDelayed(new Runnable() {
                     @Override
@@ -84,12 +60,14 @@ public class HomeDetailFragment1 extends BaseChildFragment {
                             mListItems.clear();//清空所有数据
                         }
                         initData();//加载第一页数据(因为数据已经清空了)
-//                        if (myAdapter == null) {
-                            myAdapter = new HomeDetailAdapter1(mActivity, mListItems);
+                        if (myAdapter == null) {
+                            myAdapter = new HomeDetailAdapter4(mActivity, mListItems);
+                            System.out.println("new HomeDetailAdapter4:"+myAdapter);
                             mListView.setAdapter(myAdapter);
-//                        } else {
-//                            myAdapter.notifyDataSetChanged();
-//                        }
+                        } else {
+                            System.out.println("HomeDetailAdapter4 notifyDataSetChanged");
+                            myAdapter.notifyDataSetChanged();
+                        }
 //                        mAdapter.refresh(initData());
                         refreshlayout.finishRefresh();//完成刷新
                         refreshlayout.setLoadmoreFinished(false);//可以出发加载更多事件
@@ -100,7 +78,7 @@ public class HomeDetailFragment1 extends BaseChildFragment {
         mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(final RefreshLayout refreshlayout) {
-                System.out.println("home detail1 下拉 加载数据");
+                System.out.println("home detail4 下拉 加载数据");
 //                refreshlayout.finishLoadmore(2000);
                 refreshlayout.getLayout().postDelayed(new Runnable() {
                     @Override
@@ -128,5 +106,12 @@ public class HomeDetailFragment1 extends BaseChildFragment {
         for (int i = 1; i <= 15; i++) {
             mListItems.add("数据");
         }
+    }
+
+    @Override
+    public void onDetach() {
+        myAdapter = null;
+        System.out.println("myAdapter:"+myAdapter);
+        super.onDetach();
     }
 }

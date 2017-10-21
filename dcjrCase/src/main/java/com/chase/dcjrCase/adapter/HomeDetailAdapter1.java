@@ -28,6 +28,7 @@ public class HomeDetailAdapter1 extends BaseAdapter {
 
     @Override
     public int getCount() {
+        System.out.println("getCount:"+mListItems.size());
         return mListItems.size();
     }
 
@@ -43,6 +44,7 @@ public class HomeDetailAdapter1 extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        System.out.println("getView");
         ViewHolder holder = null;
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.item_home_detail1_list, null);

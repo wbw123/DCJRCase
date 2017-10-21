@@ -7,10 +7,10 @@ import android.view.View;
 import com.chase.dcjrCase.R;
 import com.chase.dcjrCase.adapter.FragmentHomeAdpter;
 import com.chase.dcjrCase.bean.HomeFragmentInfo;
-import com.chase.dcjrCase.ui.fragment.detail.HomeDetailFragment1;
-import com.chase.dcjrCase.ui.fragment.detail.HomeDetailFragment2;
-import com.chase.dcjrCase.ui.fragment.detail.HomeDetailFragment3;
-import com.chase.dcjrCase.ui.fragment.detail.HomeDetailFragment4;
+import com.chase.dcjrCase.ui.fragment.detail.HomeEMCDesignFragment;
+import com.chase.dcjrCase.ui.fragment.detail.HomeEMCFragment;
+import com.chase.dcjrCase.ui.fragment.detail.HomeEMCTechFragment;
+import com.chase.dcjrCase.ui.fragment.detail.HomeEMCTestFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +39,10 @@ public class HomeFragment extends BaseFragment {
     public void initData() {
         String[] homeArray = getResources().getStringArray(R.array.home_array);
         mFragmentItems.clear();
-        mFragmentItems.add(new HomeFragmentInfo(homeArray[0], new HomeDetailFragment1()));
-        mFragmentItems.add(new HomeFragmentInfo(homeArray[1], new HomeDetailFragment2()));
-        mFragmentItems.add(new HomeFragmentInfo(homeArray[2], new HomeDetailFragment3()));
-        mFragmentItems.add(new HomeFragmentInfo(homeArray[3], new HomeDetailFragment4()));
+        mFragmentItems.add(new HomeFragmentInfo(homeArray[0], new HomeEMCFragment()));
+        mFragmentItems.add(new HomeFragmentInfo(homeArray[1], new HomeEMCTechFragment()));
+        mFragmentItems.add(new HomeFragmentInfo(homeArray[2], new HomeEMCDesignFragment()));
+        mFragmentItems.add(new HomeFragmentInfo(homeArray[3], new HomeEMCTestFragment()));
         /*因为是activity所以第一个参数传getSupportFragmentManager(),fragment要传getChildFragmentManager()*/
         viewPagerHome.setAdapter(new FragmentHomeAdpter(getChildFragmentManager(), mFragmentItems));
         tabHomeTitle.setupWithViewPager(viewPagerHome);
