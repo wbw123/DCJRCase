@@ -2,11 +2,11 @@ package com.chase.dcjrCase.ui.fragment.detail;
 
 import android.view.View;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.chase.dcjrCase.R;
 import com.chase.dcjrCase.adapter.HomeDetailAdapter1;
-import com.chase.dcjrCase.view.ImageTextButton;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -17,15 +17,15 @@ import java.util.ArrayList;
  * Created by chase on 2017/9/6.
  */
 
-public class HomeEMCFragment extends BaseChildFragment {
+public class HomeEMCFragment extends BaseChildFragment implements View.OnClickListener{
 
     private ListView mListView;
     private ArrayList<String> mListItems;
     private RefreshLayout mRefreshLayout;
     private HomeDetailAdapter1 myAdapter;
-    private ImageTextButton mItbCase;
-    private ImageTextButton mItbNews;
-    private ImageTextButton mItbTech;
+    private RelativeLayout mRlCase;
+    private RelativeLayout mRlNews;
+    private RelativeLayout mRlTech;
 
     @Override
     protected View getSuccessView() {
@@ -39,13 +39,13 @@ public class HomeEMCFragment extends BaseChildFragment {
 
         mRefreshLayout = view.findViewById(R.id.refresh_layout);
         mListView = view.findViewById(R.id.lv_list);
-        mItbCase = topMiddleView.findViewById(R.id.itb_case);
-        mItbNews = topMiddleView.findViewById(R.id.itb_news);
-        mItbTech = topMiddleView.findViewById(R.id.itb_tech);
+        mRlCase = topMiddleView.findViewById(R.id.rl_case);
+        mRlNews = topMiddleView.findViewById(R.id.rl_news);
+        mRlTech = topMiddleView.findViewById(R.id.rl_tech);
 
-//        mItbCase.setImage(R.drawable.emc_case_nor);
-//        mItbNews.setImage(R.drawable.emc_news_nor);
-//        mItbTech.setImage(R.drawable.emc_tech_nor);
+        mRlCase.setOnClickListener(this);
+        mRlNews.setOnClickListener(this);
+        mRlTech.setOnClickListener(this);
 
 
 
@@ -152,5 +152,21 @@ public class HomeEMCFragment extends BaseChildFragment {
         myAdapter = null;
         System.out.println("myAdapter:"+myAdapter);
         super.onDetach();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.rl_case:
+
+                break;
+            case R.id.rl_news:
+
+                break;
+            case R.id.rl_tech:
+
+                break;
+
+        }
     }
 }
