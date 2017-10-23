@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:midtable="http://schemas.android.com/apk/com.chase.dcjrCase"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -12,11 +11,12 @@
         android:layout_height="200dp">
 
         <com.chase.dcjrCase.view.HorizontalScrollViewPager
-            android:id="@+id/news_viewpager"
+            android:id="@+id/emc_viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <RelativeLayout
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -24,9 +24,12 @@
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/news_vp_title"
-                android:layout_width="wrap_content"
+                android:id="@+id/emc_vp_title"
+                android:layout_width="0dp"
+                android:layout_weight="4"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1"
                 android:text="标题"
                 android:textColor="#fff"
                 android:textSize="18sp" />
@@ -37,11 +40,11 @@
                 app:pageColor="#9e9e9e"
                 app:radius="3dp"
                 app:strokeWidth="0dp"
-                android:layout_width="40dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:padding="10dip" />
-        </RelativeLayout>
+        </LinearLayout>
     </FrameLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,7 +56,6 @@
             android:clickable="true"
             android:layout_width="wrap_content"
             android:layout_height="80dp">
-
             <ImageView
                 android:id="@+id/iv_case_image"
                 android:layout_width="wrap_content"
@@ -63,21 +65,14 @@
             <TextView
                 android:layout_below="@+id/iv_case_image"
                 android:id="@+id/tv_case_text"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_marginTop="2dp"
-                android:layout_centerHorizontal="true"
                 android:text="案例"
-                android:textColor="@color/text_me_selector"
-                android:textSize="14sp" />
+                style="@style/home_emc_midView" />
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/rl_news"
             android:clickable="true"
             android:layout_width="wrap_content"
             android:layout_height="80dp">
-
-
             <ImageView
                 android:id="@+id/iv_news_image"
                 android:layout_width="wrap_content"
@@ -87,13 +82,8 @@
             <TextView
                 android:layout_below="@+id/iv_news_image"
                 android:id="@+id/tv_news_text"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_marginTop="2dp"
-                android:layout_centerHorizontal="true"
                 android:text="新闻"
-                android:textColor="@color/text_me_selector"
-                android:textSize="14sp" />
+                style="@style/home_emc_midView" />
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/rl_tech"
@@ -109,13 +99,21 @@
             <TextView
                 android:layout_below="@+id/iv_tech_image"
                 android:id="@+id/tv_tech_text"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_marginTop="2dp"
-                android:layout_centerHorizontal="true"
                 android:text="技术"
-                android:textColor="@color/text_me_selector"
-                android:textSize="14sp" />
+                style="@style/home_emc_midView" />
         </RelativeLayout>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#1000"
+        android:layout_gravity="center"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:text="推荐图文"
+        android:textSize="14sp"/>
 </LinearLayout>

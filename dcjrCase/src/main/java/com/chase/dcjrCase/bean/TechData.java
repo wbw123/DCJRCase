@@ -1,7 +1,6 @@
 package com.chase.dcjrCase.bean;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by ZYK on 2017/10/16.
@@ -49,6 +48,10 @@ public class TechData {
             public String title;
             public String date;
             public String imgUrl;
+            public String url;
+            public String author;
+            public String from;
+            public int type;
 
             @Override
             public String toString() {
@@ -57,6 +60,10 @@ public class TechData {
                         ", title='" + title + '\'' +
                         ", date='" + date + '\'' +
                         ", imgUrl='" + imgUrl + '\'' +
+                        ", url='" + url + '\'' +
+                        ", author='" + author + '\'' +
+                        ", from='" + from + '\'' +
+                        ", type='" + type + '\'' +
                         '}';
             }
         }
@@ -75,6 +82,9 @@ public class TechData {
             public String date;
             public String imgUrl;
             public String url;
+            public String author;
+            public String from;
+            public int type;
 
             @Override
             public String toString() {
@@ -84,6 +94,9 @@ public class TechData {
                         ", date='" + date + '\'' +
                         ", imgUrl='" + imgUrl + '\'' +
                         ", url='" + url + '\'' +
+                        ", author='" + author + '\'' +
+                        ", from='" + from + '\'' +
+                        ", type='" + type + '\'' +
                         '}';
             }
         }

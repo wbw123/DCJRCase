@@ -132,13 +132,13 @@ public class NewsFragment extends BaseFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 /*条目跳转*/
-                id = 24 - id;
+                NewsDataBean newsDataBean = mListNews.get(position);
                 Intent intent = new Intent(mActivity, WebViewActivity.class);
-                intent.putExtra("url", Constants.HOME_URL + "/dcjr/news/news" + id + ".html");//webView链接
+                intent.putExtra("url", Constants.HOME_URL + newsDataBean.url);//webView链接
                 mActivity.startActivity(intent);
 
                 /*点击条目标记已读状态*/
-                NewsDataBean newsDataBean = mListNews.get(position);
+
                 //当前点击的item的标题颜色置灰
                 TextView tvTitle = view.findViewById(R.id.tv_news_title);
                 TextView tvDate = view.findViewById(R.id.tv_news_date);

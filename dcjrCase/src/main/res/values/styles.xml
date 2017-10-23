@@ -60,4 +60,13 @@
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/text_me_selector</item>
     </style>
+    <!--HomeEMCFragment mid view-->
+    <style name="home_emc_midView">
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_me_selector</item>
+        <item name="android:layout_marginTop">2dp</item>
+    </style>
 </resources>

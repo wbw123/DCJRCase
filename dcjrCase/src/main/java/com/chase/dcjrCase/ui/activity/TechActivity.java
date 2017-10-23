@@ -140,15 +140,13 @@ public class TechActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                  /*条目跳转*/
-                id = mListTech.size() - id;
+                techDataBean = mListTech.get(position);
                 System.out.println(mListTech.size());
                 Intent intent = new Intent(TechActivity.this, WebViewActivity.class);
-                intent.putExtra("url", Constants.HOME_URL + "/dcjr/tech/tech" + id + ".html");//webView链接
+                intent.putExtra("url", Constants.HOME_URL + techDataBean.url);//webView链接
                 startActivity(intent);
 
                  /*点击条目标记已读状态*/
-                techDataBean = mListTech.get(position);
-
                 System.out.println("++++++++++++++++++++++++++++" + techDataBean);
                 //当前点击的item的标题颜色置灰
                 TextView tvTitle = view.findViewById(R.id.tv_tech_title);

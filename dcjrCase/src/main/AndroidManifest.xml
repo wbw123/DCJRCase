@@ -36,9 +36,9 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".ui.activity.TechActivity"
-            android:label="@string/tech_activity_name"></activity>
-        <activity android:name=".ui.activity.SearchActivity"></activity>
-        <activity android:name=".ui.activity.HistoryActivity"></activity>
+            android:label="@string/tech_activity_name" />
+        <activity android:name=".ui.activity.SearchActivity" />
+        <activity android:name=".ui.activity.HistoryActivity" />
     </application>
 
 </manifest>

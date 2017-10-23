@@ -46,6 +46,10 @@ public class CaseData {
             public String title;
             public String date;
             public String imgUrl;
+            public String url;
+            public String author;
+            public String from;
+            public int type;
             @Override
             public String toString() {
                 return "CaseDataBean{" +
@@ -53,6 +57,10 @@ public class CaseData {
                         ", title='" + title + '\'' +
                         ", date='" + date + '\'' +
                         ", imgUrl='" + imgUrl + '\'' +
+                        ", url='" + url + '\'' +
+                        ", author='" + author + '\'' +
+                        ", from='" + from + '\'' +
+                        ", type='" + type + '\'' +
                         '}';
             }
         }

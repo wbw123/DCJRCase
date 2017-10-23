@@ -113,13 +113,13 @@ public class CaseFragment extends BaseFragment {
 //                startActivity(new Intent(mActivity, WebViewActivity.class));
 
                 /*条目跳转*/
-                id = 16-id;
+                CaseDataBean caseDataBean = mCaseList.get(position);
                 Intent intent = new Intent(mActivity, WebViewActivity.class);
-                intent.putExtra("url", Constants.HOME_URL+"/dcjr/case/case"+id+".html");//webView链接
+                intent.putExtra("url", Constants.HOME_URL+caseDataBean.url);//webView链接
                 mActivity.startActivity(intent);
 
                 /*点击条目标记已读状态*/
-                CaseDataBean caseDataBean = mCaseList.get(position);
+
                 System.out.println("!!!!!!!!!!!!!!!!!!!!"+caseDataBean);
                 //当前点击的item的标题颜色置灰
                 TextView tvTitle = view.findViewById(R.id.tv_case_title);

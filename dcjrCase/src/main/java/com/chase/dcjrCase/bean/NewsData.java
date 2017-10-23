@@ -44,6 +44,10 @@ public class NewsData {
             public String title;
             public String date;
             public String imgUrl;
+            public String url;
+            public String author;
+            public String from;
+            public int type;
 
             @Override
             public String toString() {
@@ -52,6 +56,10 @@ public class NewsData {
                         ", title='" + title + '\'' +
                         ", date='" + date + '\'' +
                         ", imgUrl='" + imgUrl + '\'' +
+                        ", url='" + url + '\'' +
+                        ", author='" + author + '\'' +
+                        ", from='" + from + '\'' +
+                        ", type='" + type + '\'' +
                         '}';
             }
         }
@@ -70,6 +78,9 @@ public class NewsData {
             public String date;
             public String imgUrl;
             public String url;
+            public String author;
+            public String from;
+            public int type;
 
             @Override
             public String toString() {
@@ -79,6 +90,9 @@ public class NewsData {
                         ", date='" + date + '\'' +
                         ", imgUrl='" + imgUrl + '\'' +
                         ", url='" + url + '\'' +
+                        ", author='" + author + '\'' +
+                        ", from='" + from + '\'' +
+                        ", type='" + type + '\'' +
                         '}';
             }
         }
