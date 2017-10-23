@@ -98,7 +98,6 @@ public class CaseFragment extends BaseFragment {
         mListView = view.findViewById(R.id.lv_list_case);
         mRlError = view.findViewById(R.id.rl_error);
         mBtnReLoad = view.findViewById(R.id.btn_reload);
-
         mBtnReLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,8 +123,10 @@ public class CaseFragment extends BaseFragment {
                 //当前点击的item的标题颜色置灰
                 TextView tvTitle = view.findViewById(R.id.tv_case_title);
                 TextView tvDate = view.findViewById(R.id.tv_case_date);
+                TextView tvFrom = view.findViewById(R.id.tv_case_from);
                 tvTitle.setTextColor(Color.argb(255,155,155,155));
                 tvDate.setTextColor(Color.argb(255,155,155,155));
+                tvFrom.setTextColor(Color.argb(255,155,155,155));
                 //将已读状态持久化到本地
                 //key:read_ids; value:id
                 String readIds = PrefUtils.getString("read_ids","",mActivity);

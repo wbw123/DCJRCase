@@ -54,7 +54,8 @@
         <RelativeLayout
             android:id="@+id/rl_case"
             android:clickable="true"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="80dp">
             <ImageView
                 android:id="@+id/iv_case_image"
@@ -71,7 +72,8 @@
         <RelativeLayout
             android:id="@+id/rl_news"
             android:clickable="true"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="80dp">
             <ImageView
                 android:id="@+id/iv_news_image"
@@ -88,7 +90,8 @@
         <RelativeLayout
             android:id="@+id/rl_tech"
             android:clickable="true"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="80dp">
             <ImageView
                 android:id="@+id/iv_tech_image"

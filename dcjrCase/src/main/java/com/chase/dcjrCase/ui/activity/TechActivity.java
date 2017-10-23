@@ -147,16 +147,16 @@ public class TechActivity extends AppCompatActivity {
                 startActivity(intent);
 
                  /*点击条目标记已读状态*/
-                System.out.println("++++++++++++++++++++++++++++" + techDataBean);
                 //当前点击的item的标题颜色置灰
                 TextView tvTitle = view.findViewById(R.id.tv_tech_title);
                 TextView tvDate = view.findViewById(R.id.tv_tech_date);
+                TextView tvFrom= view.findViewById(R.id.tv_tech_from);
                 tvTitle.setTextColor(Color.argb(255, 155, 155, 155));
                 tvDate.setTextColor(Color.argb(255, 155, 155, 155));
+                tvFrom.setTextColor(Color.argb(255, 155, 155, 155));
                 //将已读状态持久化到本地
                 //key:read_ids; value:id
                 String readIds = PrefUtils.getString("read_ids", "", getApplicationContext());
-                System.out.println("________________________" + readIds);
                 if (!readIds.contains(techDataBean.id)) {
                     readIds = readIds + techDataBean.id + ",";
                     PrefUtils.putString("read_ids", readIds, getApplicationContext());

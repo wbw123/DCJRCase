@@ -78,21 +78,23 @@ public class TechAdapter extends BaseAdapter {
                 .into(holder.iv_image);
         holder.tv_title.setText(item.title);
         holder.tv_date.setText(item.date);
+        holder.tv_from.setText("来源:"+item.from);
 
          /*
         * 标记已读或未读
         * */
         String readIds = PrefUtils.getString("read_ids","",mContext);
         TechDataBean techDataBean = mTechList.get(position);
-        System.out.println("______________+__________"+techDataBean);
         if (readIds.contains(techDataBean.id)){
             //已读
             holder.tv_title.setTextColor(Color.argb(255,155,155,155));
             holder.tv_date.setTextColor(Color.argb(255,155,155,155));
+            holder.tv_from.setTextColor(Color.argb(255,155,155,155));
         }else {
             //未读
             holder.tv_title.setTextColor(Color.argb(170,0,0,0));
             holder.tv_date.setTextColor(Color.argb(170,0,0,0));
+            holder.tv_from.setTextColor(Color.argb(170,0,0,0));
         }
         return convertView;
     }
@@ -101,11 +103,13 @@ public class TechAdapter extends BaseAdapter {
         public ImageView iv_image;
         public TextView tv_title;
         public TextView tv_date;
+        public TextView tv_from;
 
         public ViewHolder(View view) {
             iv_image = view.findViewById(R.id.iv_tech_image);
             tv_title = view.findViewById(R.id.tv_tech_title);
             tv_date = view.findViewById(R.id.tv_tech_date);
+            tv_from = view.findViewById(R.id.tv_tech_from);
         }
     }
 }

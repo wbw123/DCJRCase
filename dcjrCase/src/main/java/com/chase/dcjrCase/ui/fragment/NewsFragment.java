@@ -142,8 +142,10 @@ public class NewsFragment extends BaseFragment {
                 //当前点击的item的标题颜色置灰
                 TextView tvTitle = view.findViewById(R.id.tv_news_title);
                 TextView tvDate = view.findViewById(R.id.tv_news_date);
+                TextView tvFrom = view.findViewById(R.id.tv_news_from);
                 tvTitle.setTextColor(Color.argb(255, 155, 155, 155));
                 tvDate.setTextColor(Color.argb(255, 155, 155, 155));
+                tvFrom.setTextColor(Color.argb(255, 155, 155, 155));
                 //将已读状态持久化到本地
                 //key:read_ids; value:id
                 String readIds = PrefUtils.getString("read_ids", "", mActivity);
