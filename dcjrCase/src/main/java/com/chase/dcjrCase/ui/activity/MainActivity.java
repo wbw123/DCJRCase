@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                         mViewPager.setCurrentItem(0, false);
                         break;
                     case 1:
-                        startActivity(new Intent(MainActivity.this,TechActivity.class));
+                        startActivity(new Intent(MainActivity.this, TechActivity.class));
                         break;
                     case 2:
 
@@ -259,71 +259,14 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.action_search:
                 System.out.println("搜索~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-               startActivity(new Intent(this, SearchActivity.class));
+                startActivity(new Intent(this, CaseSearchActivity.class));
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-
-
-
-
-
-
-
-
-
-
-/*RadioGroup+Fragment*/
-/*--------------------------------------------------------------------------------------------------------*/
-    /*private void initEvent() {
-        mBtnGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction ft = fragmentManager.beginTransaction();
-                switch (checkedId) {
-                    case R.id.rb_bottom_home:
-                        if (homeFragment == null) {
-                            homeFragment = new HomeFragment();
-                        }
-                        ft.replace(R.id.content_frame, homeFragment);
-                        break;
-                    case R.id.rb_bottom_heihei:
-                        if (caseFragment == null) {
-                            caseFragment = new CaseFragment();
-                        }
-                        ft.replace(R.id.content_frame, caseFragment);
-                        break;
-                    case R.id.rb_bottom_xixi:
-                        if (newsFragment == null) {
-                            newsFragment = new NewsFragment();
-                        }
-                        ft.replace(R.id.content_frame, newsFragment);
-                        break;
-                    case R.id.rb_bottom_me:
-                        if (meFragment == null) {
-                            meFragment = new MeFragment();
-                        }
-                        ft.replace(R.id.content_frame, meFragment);
-                        break;
-                }
-
-                ft.commit();
-            }
-
-        });
-
-    }
-
-    private void initHomeData() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction ft = fragmentManager.beginTransaction();
-        if (homeFragment == null) {
-            homeFragment = new HomeFragment();
-        }
-        ft.replace(R.id.content_frame, homeFragment);
-        ft.commit();
+    /*public CaseFragment getCaseFragment() {
+        CaseFragment caseFragment = (CaseFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.view_pager + ":1");
+        return caseFragment;
     }*/
 }

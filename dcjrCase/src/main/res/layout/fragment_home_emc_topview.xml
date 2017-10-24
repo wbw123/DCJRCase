@@ -47,6 +47,7 @@
         </LinearLayout>
     </FrameLayout>
     <LinearLayout
+        android:id="@+id/ll_mid_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -106,17 +107,5 @@
                 style="@style/home_emc_midView" />
         </RelativeLayout>
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#1000"
-        android:layout_gravity="center"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="15dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
-        android:text="推荐图文"
-        android:textSize="14sp"/>
+
 </LinearLayout>

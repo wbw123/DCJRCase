@@ -2,7 +2,6 @@ package com.chase.dcjrCase.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -14,8 +13,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chase.dcjrCase.R;
 import com.chase.dcjrCase.bean.CaseData.DataBean.CaseDataBean;
 import com.chase.dcjrCase.global.Constants;
-import com.chase.dcjrCase.ui.fragment.CaseFragment;
-import com.chase.dcjrCase.uitl.PrefUtils;
 import com.chase.dcjrCase.view.GlideRoundTransform;
 
 import java.util.ArrayList;
@@ -24,28 +21,20 @@ import java.util.ArrayList;
  * Created by chase on 2017/9/7.
  */
 
-public class CaseAdapter extends BaseAdapter {
+public class CaseSearchAdapter extends BaseAdapter {
     private ArrayList<CaseDataBean> mCaseList;
     private Context mContext;
     private int mCount;
 
 
-    public CaseAdapter(Activity mActivity, ArrayList<CaseDataBean> listItems) {
+    public CaseSearchAdapter(Activity mActivity, ArrayList<CaseDataBean> listItems) {
         this.mCaseList = listItems;
         this.mContext = mActivity;
     }
 
     @Override
     public int getCount() {
-        mCount = CaseFragment.getCount();
-        if (mCount >= mCaseList.size()){
-            System.out.println(mCaseList.size()+"===================");
             return mCaseList.size();
-
-        }else {
-            System.out.println(mCount+"========================");
-            return mCount;
-        }
     }
 
     @Override
@@ -62,7 +51,7 @@ public class CaseAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
         if (convertView == null) {
-            convertView = View.inflate(mContext, R.layout.item_case_list, null);
+            convertView = View.inflate(mContext, R.layout.item_case_search, null);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         } else {
@@ -84,7 +73,7 @@ public class CaseAdapter extends BaseAdapter {
         /*
         * 标记已读或未读
         * */
-        String readIds = PrefUtils.getString("read_ids","",mContext);
+       /* String readIds = PrefUtils.getString("read_ids","",mContext);
         CaseDataBean caseDataBean = mCaseList.get(position);
         if (readIds.contains(caseDataBean.id)){
             //已读
@@ -97,7 +86,7 @@ public class CaseAdapter extends BaseAdapter {
             holder.tv_date.setTextColor(Color.argb(170,0,0,0));
             holder.tv_from.setTextColor(Color.argb(170,0,0,0));
         }
-
+*/
         return convertView;
     }
 
@@ -109,10 +98,10 @@ public class CaseAdapter extends BaseAdapter {
         public TextView tv_from;
 
         public ViewHolder(View view) {
-            iv_image = view.findViewById(R.id.iv_case_image);
-            tv_title = view.findViewById(R.id.tv_case_title);
-            tv_date = view.findViewById(R.id.tv_case_date);
-            tv_from = view.findViewById(R.id.tv_case_from);
+            iv_image = view.findViewById(R.id.iv_case_search_image);
+            tv_title = view.findViewById(R.id.tv_case_search_title);
+            tv_date = view.findViewById(R.id.tv_case_search_date);
+            tv_from = view.findViewById(R.id.tv_case_search_from);
         }
     }
 

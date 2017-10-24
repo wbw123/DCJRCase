@@ -60,7 +60,7 @@ public class CaseFragment extends BaseFragment {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case CASEDATA_REQUEST_SUCCESS:
-                    String result = (String) msg.obj;
+                    String result =  (String) msg.obj;
                     mRlError.setVisibility(View.GONE);
                     mListView.setVisibility(View.VISIBLE);
                     //解析json数据
@@ -87,7 +87,7 @@ public class CaseFragment extends BaseFragment {
             }
         }
     };
-
+    private String result;
 
 
     @Override
@@ -141,6 +141,9 @@ public class CaseFragment extends BaseFragment {
     }
     @Override
     public void initData() {
+
+
+
         System.out.println("casefragment 加载了");
         //获取缓存
         mCache = CacheUtils.getCache(Constants.CASEJSON_URL, mActivity);

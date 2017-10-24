@@ -35,6 +35,7 @@ public abstract class BaseChildFragment extends Fragment {
         return contentPage;
     }
 
+
     /**
      * 每个子fragment去实现对应的成功View
      * @return

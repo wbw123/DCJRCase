@@ -44,7 +44,6 @@ public class TopEMCAdapter extends PagerAdapter {
 //                .fitCenter()//指定图片缩放类型为fitCenter
                 .centerCrop()// 指定图片缩放类型为centerCrop
                 .placeholder(R.mipmap.loading)
-                .skipMemoryCache(true)// 跳过内存缓存
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)//缓存转换后的最终图像
                 .into(view);
         container.addView(view);

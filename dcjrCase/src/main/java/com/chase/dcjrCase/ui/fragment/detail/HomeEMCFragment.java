@@ -8,7 +8,10 @@ import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -21,6 +24,7 @@ import com.chase.dcjrCase.bean.EMCData;
 import com.chase.dcjrCase.bean.EMCData.DataBean.EMCDataBean;
 import com.chase.dcjrCase.bean.EMCData.DataBean.TopEMCBean;
 import com.chase.dcjrCase.global.Constants;
+import com.chase.dcjrCase.ui.fragment.BaseFragment;
 import com.chase.dcjrCase.uitl.CacheUtils;
 import com.chase.dcjrCase.uitl.PrefUtils;
 import com.chase.dcjrCase.view.HorizontalScrollViewPager;
@@ -41,7 +45,7 @@ import java.util.ArrayList;
  * Created by chase on 2017/9/6.
  */
 
-public class HomeEMCFragment extends BaseChildFragment implements View.OnClickListener {
+public class HomeEMCFragment extends BaseFragment implements View.OnClickListener {
 
     private static final int HOME_EMCDATA_REQUEST_SUCCESS = 101;
     private static final int HOME_EMCDATA_REQUEST_FAILURE = 102;
@@ -52,6 +56,8 @@ public class HomeEMCFragment extends BaseChildFragment implements View.OnClickLi
     private RelativeLayout mRlTech;
     private static int count;//用来记录第一次加载的条目数,以及在加载更多后加载的条目数
     private String mCache;//条目缓存数据 json字符串
+    //    private int mFlContainerHeight;//轮播图控件高度
+//    private int mLlContainerHeight;//mid控件高度
     /*handler*/
     private Handler mIndicatorHandler = null;
     private Handler mHandler = new Handler() {
@@ -77,7 +83,7 @@ public class HomeEMCFragment extends BaseChildFragment implements View.OnClickLi
                         processResult(mCache);
 //                        mRlError.setVisibility(View.GONE);
                         mListView.setVisibility(View.VISIBLE);
-                    }else {
+                    } else {
                         //没有缓存 添加加载失败布局
 //                        mRlError.setVisibility(View.VISIBLE);
                         mListView.setVisibility(View.GONE);
@@ -88,9 +94,6 @@ public class HomeEMCFragment extends BaseChildFragment implements View.OnClickLi
     };
 
 
-
-
-    private String dataResult;
     private ArrayList<EMCDataBean> mEMCListData;
     private EMCData mEMCData;
     private EMCAdapter mEMCAdapter;
@@ -99,17 +102,28 @@ public class HomeEMCFragment extends BaseChildFragment implements View.OnClickLi
     private HorizontalScrollViewPager mViewPager;
     private CirclePageIndicator mIndicator;
     private TextView mTopEMCTitle;
+    private FrameLayout mFlContainer;
+    private LinearLayout mLlContainer;
+    private TextView mTvTop;
+    private LinearLayout mLlRecom;
+    private TextView mTvRecom;
 
     @Override
-    protected View getSuccessView() {
+    public View initView() {
         View view = View.inflate(mActivity, R.layout.fragment_home_emc, null);
         View topMiddleView = View.inflate(mActivity, R.layout.fragment_home_emc_topview, null);
+        View recommend = View.inflate(mActivity, R.layout.fragment_recommend, null);
 
         mRefreshLayout = view.findViewById(R.id.refresh_layout);
         mListView = view.findViewById(R.id.lv_list);
+        mTvTop = view.findViewById(R.id.tv_top);
+        mFlContainer = topMiddleView.findViewById(R.id.fl_viewpager);
+        mLlContainer = topMiddleView.findViewById(R.id.ll_mid_container);
         mViewPager = topMiddleView.findViewById(R.id.emc_viewpager);
         mIndicator = topMiddleView.findViewById(R.id.indicator);
         mTopEMCTitle = topMiddleView.findViewById(R.id.emc_vp_title);
+        mLlRecom = recommend.findViewById(R.id.ll_recommend);
+        mTvRecom = recommend.findViewById(R.id.tv_recom);
         mRlCase = topMiddleView.findViewById(R.id.rl_case);
         mRlNews = topMiddleView.findViewById(R.id.rl_news);
         mRlTech = topMiddleView.findViewById(R.id.rl_tech);
@@ -119,15 +133,33 @@ public class HomeEMCFragment extends BaseChildFragment implements View.OnClickLi
         mRlTech.setOnClickListener(this);
 
         mListView.addHeaderView(topMiddleView);
+        mListView.addHeaderView(recommend);
+
+        mListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (firstVisibleItem == 1) {
+                    mTvTop.setVisibility(View.VISIBLE);
+                    mTvRecom.setVisibility(View.INVISIBLE);
+                }else if (firstVisibleItem == 0){
+                    mTvTop.setVisibility(View.GONE);
+                    mTvRecom.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 /*点击条目标记已读状态*/
-                EMCDataBean emcDataBean = mEMCListData.get(position-1);
+                EMCDataBean emcDataBean = mEMCListData.get(position - 2);
 
                 /*条目跳转*/
-
 
 
                 //当前点击的item的标题颜色置灰
@@ -155,7 +187,8 @@ public class HomeEMCFragment extends BaseChildFragment implements View.OnClickLi
 
 
     @Override
-    protected Object requestData() {
+    public void initData() {
+
         //获取缓存
         mCache = CacheUtils.getCache(Constants.EMCJSON_URL, mActivity);
         if (!TextUtils.isEmpty(mCache)) {
@@ -182,7 +215,7 @@ public class HomeEMCFragment extends BaseChildFragment implements View.OnClickLi
                             processResult(mCache);
                         }
                         //通过网络获取数据
-                        Object dataFromServer = getDataFromServer();
+                        getDataFromServer();
                         refreshlayout.finishRefresh();//完成刷新
                         refreshlayout.setLoadmoreFinished(false);//可以出发加载更多事件
                     }
@@ -197,7 +230,7 @@ public class HomeEMCFragment extends BaseChildFragment implements View.OnClickLi
                 refreshlayout.getLayout().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        count+=10;
+                        count += 10;
                         if (!TextUtils.isEmpty(mCache)) {
                             // 有缓存 解析json缓存
                             System.out.println("发现缓存....");
@@ -205,7 +238,7 @@ public class HomeEMCFragment extends BaseChildFragment implements View.OnClickLi
                         }
                         // 即使发现有缓存,仍继续调用网络, 获取最新数据
                         //通过网络获取数据
-                        Object dataFromServer = getDataFromServer();
+                        getDataFromServer();
                         refreshlayout.finishLoadmore();//完成加载更多
                         if (count > mEMCListData.size()) {
                             Toast.makeText(mActivity, "数据全部加载完毕", Toast.LENGTH_SHORT).show();
@@ -215,8 +248,6 @@ public class HomeEMCFragment extends BaseChildFragment implements View.OnClickLi
                 }, 1500);
             }
         });
-
-        return "";/*加载成功*/
     }
 
 
@@ -239,16 +270,16 @@ public class HomeEMCFragment extends BaseChildFragment implements View.OnClickLi
     /**
      * 通过网络获取数据
      */
-    public Object getDataFromServer() {
+    public void getDataFromServer() {
         HttpUtils utils = new HttpUtils();
         utils.send(HttpMethod.GET, Constants.EMCJSON_URL, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 System.out.println("请求成功");
-                dataResult = responseInfo.result;
-                System.out.println(dataResult);
+                String result = responseInfo.result;
+                System.out.println(result);
                 Message msg = new Message();
-                msg.obj = dataResult;
+                msg.obj = result;
                 msg.what = HOME_EMCDATA_REQUEST_SUCCESS;
                 mHandler.sendMessage(msg);
 
@@ -265,8 +296,8 @@ public class HomeEMCFragment extends BaseChildFragment implements View.OnClickLi
                 mHandler.sendMessage(message);
             }
         });
-        return dataResult;
     }
+
     /**
      * 解析json数据
      */
@@ -287,7 +318,7 @@ public class HomeEMCFragment extends BaseChildFragment implements View.OnClickLi
 
         /*listview*/
         mEMCListData = mEMCData.data.EMCData;
-        if (mEMCAdapter == null ) {
+        if (mEMCAdapter == null) {
             mEMCAdapter = new EMCAdapter(mActivity, mEMCListData);
             mListView.setAdapter(mEMCAdapter);
         } else {
@@ -300,6 +331,7 @@ public class HomeEMCFragment extends BaseChildFragment implements View.OnClickLi
         //TopNews两秒切换一次
         autoChangeAfter2s();
     }
+
     /**
      * indicator绑定ViewPager
      */
@@ -361,6 +393,7 @@ public class HomeEMCFragment extends BaseChildFragment implements View.OnClickLi
                 private float mDownX;
                 private float mDownY;
                 private long mDownTime;
+
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     switch (event.getAction()) {
@@ -406,5 +439,6 @@ public class HomeEMCFragment extends BaseChildFragment implements View.OnClickLi
     public static int getCount() {
         return count;
     }
+
 
 }
