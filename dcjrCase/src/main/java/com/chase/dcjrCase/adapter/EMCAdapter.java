@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chase.dcjrCase.R;
 import com.chase.dcjrCase.bean.EMCData.DataBean.EMCDataBean;
 import com.chase.dcjrCase.global.Constants;
@@ -70,18 +71,24 @@ public class EMCAdapter extends BaseAdapter {
 //                .fitCenter()//指定图片缩放类型为fitCenter
                 .centerCrop()// 指定图片缩放类型为centerCrop
                 .placeholder(R.mipmap.loading)
+                .skipMemoryCache(true)// 跳过内存缓存
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)//缓存转换后的最终图像
                 .into(holder.iv_emc_image1);
         Glide.with(mContext)
                 .load(Constants.HOME_URL+item.imgUrl2)
 //                .fitCenter()//指定图片缩放类型为fitCenter
                 .centerCrop()// 指定图片缩放类型为centerCrop
                 .placeholder(R.mipmap.loading)
+                .skipMemoryCache(true)// 跳过内存缓存
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)//缓存转换后的最终图像
                 .into(holder.iv_emc_image2);
         Glide.with(mContext)
                 .load(Constants.HOME_URL+item.imgUrl3)
 //                .fitCenter()//指定图片缩放类型为fitCenter
                 .centerCrop()// 指定图片缩放类型为centerCrop
                 .placeholder(R.mipmap.loading)
+                .skipMemoryCache(true)// 跳过内存缓存
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)//缓存转换后的最终图像
                 .into(holder.iv_emc_image3);
         holder.tv_emc_title.setText(item.title);
         holder.tv_emc_from.setText("来源:"+item.from);

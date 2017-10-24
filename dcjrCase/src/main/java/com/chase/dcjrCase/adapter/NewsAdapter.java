@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chase.dcjrCase.R;
 import com.chase.dcjrCase.bean.NewsData.DataBean.NewsDataBean;
 import com.chase.dcjrCase.global.Constants;
@@ -71,6 +72,8 @@ public class NewsAdapter extends BaseAdapter {
 //                .fitCenter()//指定图片缩放类型为fitCenter
                 .centerCrop()// 指定图片缩放类型为centerCrop
                 .placeholder(R.mipmap.loading)
+                .skipMemoryCache(true)// 跳过内存缓存
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)//缓存转换后的最终图像
                 .into(holder.iv_image);
         holder.tv_title.setText(item.title);
         holder.tv_date.setText(item.date);
