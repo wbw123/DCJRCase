@@ -5,27 +5,67 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <SearchView
+        android:id="@+id/searchView"
+        android:queryHint="请输入搜索内容"
+        android:textSize="30sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/et_case_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="请输入搜索的内容"
-            android:textSize="30sp"/>
-        <Button
-            android:id="@+id/btn_case_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="搜索"
-            android:textSize="30sp"
-            android:layout_alignParentRight="true"/>
-    </RelativeLayout>
-    <ListView
-        android:id="@+id/ll_case_search"
+
+    </SearchView>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <ListView
+            android:id="@+id/ll_case_search"
+            android:background="#fff"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </ListView>
+        </ListView>
+        <LinearLayout
+            android:id="@+id/ll_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:orientation="vertical">
+            <ListView
+                android:id="@+id/listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </ListView>
+            <TextView
+                android:id="@+id/tv_delete_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:gravity="center"
+                android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                android:text="清除历史记录"
+                android:textColor="#7000"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall" />
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+
 </LinearLayout>
+    <!--<RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/et_case_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="请输入搜索的内容"
+                android:textSize="30sp"/>
+            <Button
+                android:id="@+id/btn_case_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="搜索"
+                android:textSize="30sp"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>-->
