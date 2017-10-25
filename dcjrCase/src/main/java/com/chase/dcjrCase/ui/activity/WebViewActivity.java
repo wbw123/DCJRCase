@@ -13,11 +13,24 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.chase.dcjrCase.R;
+import com.chase.dcjrCase.bean.CollectionBean;
+import com.chase.dcjrCase.dao.CollecDao;
 
 public class WebViewActivity extends AppCompatActivity {
     private WebView mWebView;
     private ProgressBar pbLoading;
     private String mUrl;
+    private String mId;
+    private String mTitle;
+    private String mDate;
+    private String mFrom;
+    private String mAuthor;
+    private String mImgUrl;
+    private String mImgUrl1;
+    private String mImgUrl2;
+    private String mImgUrl3;
+    private String mType;
+    private CollecDao mDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +43,20 @@ public class WebViewActivity extends AppCompatActivity {
         pbLoading = (ProgressBar) findViewById(R.id.pb_loading);
 
 
+        /*用于收藏的数据*/
         mUrl = getIntent().getStringExtra("url");
+        mId = getIntent().getStringExtra("id");
+        mTitle = getIntent().getStringExtra("title");
+        mDate = getIntent().getStringExtra("date");
+        mFrom = getIntent().getStringExtra("from");
+        mAuthor = getIntent().getStringExtra("author");
+        mImgUrl = getIntent().getStringExtra("imgUrl");
+        mImgUrl1 = getIntent().getStringExtra("imgUrl1");
+        mImgUrl2 = getIntent().getStringExtra("imgUrl2");
+        mImgUrl3 = getIntent().getStringExtra("imgUrl3");
+        mType = String.valueOf(getIntent().getIntExtra("type",1));
+
+        mDao = CollecDao.getInstance(this);
 
         System.out.println("mUrl:" + mUrl);
         // 加载网页
@@ -109,17 +135,54 @@ public class WebViewActivity extends AppCompatActivity {
     }
 
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.action_menu_back, menu);
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        System.out.println("onCreateOptionsMenu");
+        getMenuInflater().inflate(R.menu.action_menu_collec, menu);
+        MenuItem item = menu.findItem(R.id.action_collec);
+        /*每次创建都要判断是否已经收藏*/
+        if (mDao.query(mId)) {
+            item.setIcon(R.drawable.actionbar_collec_on);
+        } else {
+            item.setIcon(R.drawable.actionbar_collec_off);
+        }
         return super.onCreateOptionsMenu(menu);
-    }*/
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                break;
+            case R.id.action_collec:
+                CollectionBean collectionBean = new CollectionBean();
+                collectionBean.author=mAuthor;
+                collectionBean.url=mUrl;
+                collectionBean.from=mFrom;
+                collectionBean.date=mDate;
+                collectionBean.imgUrl=mImgUrl;
+                collectionBean.imgUrl1=mImgUrl1;
+                collectionBean.imgUrl2=mImgUrl2;
+                collectionBean.imgUrl3=mImgUrl3;
+                collectionBean.title=mTitle;
+                collectionBean.type=mType;
+                collectionBean.id=mId;
+
+                /*已收藏的不再收藏,并从数据库中清除*/
+                /*没收藏的添加收藏,并添加到数据库中*/
+                if (mDao.query(collectionBean.id)) {
+                    //删除数据库中该条数据
+                    mDao.delete(collectionBean.id);
+                    item.setIcon(R.drawable.actionbar_collec_off);//取消收藏
+                } else {
+                    mDao.insert(collectionBean);
+                    item.setIcon(R.drawable.actionbar_collec_on);//添加收藏
+                }
+
+                /*测试*/
+                mDao.queryAll();
+
                 break;
         }
         return super.onOptionsItemSelected(item);

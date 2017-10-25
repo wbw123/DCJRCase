@@ -135,6 +135,14 @@ public class NewsFragment extends BaseFragment {
                 NewsDataBean newsDataBean = mListNews.get(position);
                 Intent intent = new Intent(mActivity, WebViewActivity.class);
                 intent.putExtra("url", Constants.HOME_URL + newsDataBean.url);//webView链接
+                /*收藏*/
+                intent.putExtra("title",newsDataBean.title);
+                intent.putExtra("author",newsDataBean.author);
+                intent.putExtra("date",newsDataBean.date);
+                intent.putExtra("imgUrl",newsDataBean.imgUrl);
+                intent.putExtra("from",newsDataBean.from);
+                intent.putExtra("type",newsDataBean.type);
+                intent.putExtra("id",newsDataBean.id);
                 mActivity.startActivity(intent);
 
                 /*点击条目标记已读状态*/
@@ -377,9 +385,17 @@ public class NewsFragment extends BaseFragment {
 //                                onClickListener.onClick(mViewPager.getCurrentItem() % mTopnews.size());
                                     int positon = mViewPager.getCurrentItem();
                                     System.out.println("当前viewpager："+positon);
-                                    Intent TopNewIntent = new Intent(mActivity, WebViewActivity.class);
-                                    TopNewIntent.putExtra("url", Constants.HOME_URL + mTopnews.get(positon).url);//webView链接
-                                    mActivity.startActivity(TopNewIntent);
+                                    Intent topNewIntent = new Intent(mActivity, WebViewActivity.class);
+                                    topNewIntent.putExtra("url", Constants.HOME_URL + mTopnews.get(positon).url);//webView链接
+                                    /*收藏*/
+                                    topNewIntent.putExtra("title",mTopnews.get(positon).title);
+                                    topNewIntent.putExtra("author",mTopnews.get(positon).author);
+                                    topNewIntent.putExtra("date",mTopnews.get(positon).date);
+                                    topNewIntent.putExtra("imgUrl",mTopnews.get(positon).imgUrl);
+                                    topNewIntent.putExtra("from",mTopnews.get(positon).from);
+                                    topNewIntent.putExtra("type",mTopnews.get(positon).type);
+                                    topNewIntent.putExtra("id",mTopnews.get(positon).id);
+                                    mActivity.startActivity(topNewIntent);
                                 }
                             }
                             // 延时2秒切换广告条

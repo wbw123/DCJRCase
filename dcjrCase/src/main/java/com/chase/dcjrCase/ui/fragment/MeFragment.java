@@ -1,20 +1,15 @@
 package com.chase.dcjrCase.ui.fragment;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chase.dcjrCase.R;
+import com.chase.dcjrCase.ui.activity.CollectionActivity;
 import com.chase.dcjrCase.ui.activity.HistoryActivity;
 import com.chase.dcjrCase.ui.activity.LoginActivity;
-import com.chase.dcjrCase.ui.activity.WebViewActivity;
 
 /**
  * Created by chase on 2017/9/5.
@@ -67,6 +62,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 getHistory();
                 break;
             case R.id.ll_collection:
+                getCollection();
                 break;
             case R.id.ll_night_mode:
                 switchDayNightMode();
@@ -84,7 +80,10 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 break;
         }
     }
-
+    public void getCollection() {
+        Intent intent = new Intent(mActivity, CollectionActivity.class);
+        mActivity.startActivity(intent);
+    }
     private void getHistory() {
         Intent intent = new Intent(mActivity, HistoryActivity.class);
         mActivity.startActivity(intent);
@@ -101,4 +100,6 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
             tv_nightText.setText(R.string.night_name);
         }
     }
+
+
 }

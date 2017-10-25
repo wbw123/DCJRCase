@@ -115,6 +115,14 @@ public class CaseFragment extends BaseFragment {
                 CaseDataBean caseDataBean = mCaseList.get(position);
                 Intent intent = new Intent(mActivity, WebViewActivity.class);
                 intent.putExtra("url", Constants.HOME_URL+caseDataBean.url);//webView链接
+                /*收藏*/
+                intent.putExtra("title",caseDataBean.title);
+                intent.putExtra("author",caseDataBean.author);
+                intent.putExtra("date",caseDataBean.date);
+                intent.putExtra("imgUrl",caseDataBean.imgUrl);
+                intent.putExtra("from",caseDataBean.from);
+                intent.putExtra("type",caseDataBean.type);
+                intent.putExtra("id",caseDataBean.id);
                 mActivity.startActivity(intent);
 
                 /*点击条目标记已读状态*/

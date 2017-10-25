@@ -144,6 +144,14 @@ public class TechActivity extends AppCompatActivity {
                 System.out.println(mListTech.size());
                 Intent intent = new Intent(TechActivity.this, WebViewActivity.class);
                 intent.putExtra("url", Constants.HOME_URL + techDataBean.url);//webView链接
+                /*收藏*/
+                intent.putExtra("title",techDataBean.title);
+                intent.putExtra("author",techDataBean.author);
+                intent.putExtra("date",techDataBean.date);
+                intent.putExtra("imgUrl",techDataBean.imgUrl);
+                intent.putExtra("from",techDataBean.from);
+                intent.putExtra("type",techDataBean.type);
+                intent.putExtra("id",techDataBean.id);
                 startActivity(intent);
 
                  /*点击条目标记已读状态*/
@@ -390,7 +398,17 @@ public class TechActivity extends AppCompatActivity {
                                     System.out.println("当前mTopTech：" + topTechBean);
                                     Intent TopTechIntent = new Intent(getApplicationContext(), WebViewActivity.class);
                                     TopTechIntent.putExtra("url", Constants.HOME_URL + mTopTech.get(position).url);//webView链接
+                                    /*收藏*/
+                                    TopTechIntent.putExtra("title",mTopTech.get(position).title);
+                                    TopTechIntent.putExtra("author",mTopTech.get(position).author);
+                                    TopTechIntent.putExtra("date",mTopTech.get(position).date);
+                                    TopTechIntent.putExtra("imgUrl",mTopTech.get(position).imgUrl);
+                                    TopTechIntent.putExtra("from",mTopTech.get(position).from);
+                                    TopTechIntent.putExtra("type",mTopTech.get(position).type);
+                                    TopTechIntent.putExtra("id",mTopTech.get(position).id);
                                     startActivity(TopTechIntent);
+
+
 //                                    mTopTechHistory = new ArrayList<>();
                                     mTopTechHistoeyBean = new HistoryBean();
                                     mTopTechHistoeyBean.id = topTechBean.id;
