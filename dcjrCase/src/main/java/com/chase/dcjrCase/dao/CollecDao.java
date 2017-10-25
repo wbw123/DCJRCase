@@ -104,6 +104,7 @@ public class CollecDao {
 
 		ArrayList<CollectionBean> collecList = new ArrayList<>();
 		while(cursor.moveToNext()){
+
 			CollectionBean collectionBean = new CollectionBean();
 			collectionBean.id = cursor.getString(cursor.getColumnIndex(CollecConstacts.ID));
 			collectionBean.title = cursor.getString(cursor.getColumnIndex(CollecConstacts.TITLE));
