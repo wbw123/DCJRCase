@@ -120,6 +120,14 @@ public class CaseSearchActivity extends AppCompatActivity {
                 CaseDataBean caseDataBean = mCaseSearchedData.get(position);
                 Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
                 intent.putExtra("url", Constants.HOME_URL + caseDataBean.url);//webView链接
+                /*收藏*/
+                intent.putExtra("title", caseDataBean.title);
+                intent.putExtra("author", caseDataBean.author);
+                intent.putExtra("date", caseDataBean.date);
+                intent.putExtra("imgUrl", caseDataBean.imgUrl);
+                intent.putExtra("from", caseDataBean.from);
+                intent.putExtra("type", caseDataBean.type);
+                intent.putExtra("id", caseDataBean.id);
                 startActivity(intent);
             }
         });
