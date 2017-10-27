@@ -34,4 +34,10 @@ public class CollectionBean {
                 ", type=" + type +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        CollectionBean c = (CollectionBean) obj;
+        return this.id.equals(c.id);
+    }
 }
