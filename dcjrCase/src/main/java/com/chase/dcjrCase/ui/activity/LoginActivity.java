@@ -26,10 +26,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btn_login:
                 break;
             case R.id.iv_qq :
+
                 break;
             case R.id.iv_wechat:
+
                 break;
             case R.id.iv_sina:
+
                 break;
             case R.id.tv_create_account:
                 enterRegister();

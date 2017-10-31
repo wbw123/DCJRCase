@@ -13,6 +13,7 @@ public class DCJRCaseApp extends Application{
         super.onCreate();
         mainContext = this;
         mainHandler = new Handler();
+//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
     }
 
     public static Context getContext(){
@@ -22,4 +23,5 @@ public class DCJRCaseApp extends Application{
     public static Handler getHandler(){
         return mainHandler;
     }
+
 }

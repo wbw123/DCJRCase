@@ -18,6 +18,7 @@
         app:tabTextAppearance="@style/TabLayoutTextStyle">
 
     </android.support.design.widget.TabLayout>
+
     <com.chase.dcjrCase.view.HomeViewPager
         android:id="@+id/viewpager_home_content"
         android:layout_width="match_parent"

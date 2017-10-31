@@ -1,5 +1,6 @@
 package com.chase.dcjrCase.ui.fragment.detail;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Looper;
@@ -13,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +26,7 @@ import com.chase.dcjrCase.bean.EMCData;
 import com.chase.dcjrCase.bean.EMCData.DataBean.EMCDataBean;
 import com.chase.dcjrCase.bean.EMCData.DataBean.TopEMCBean;
 import com.chase.dcjrCase.global.Constants;
+import com.chase.dcjrCase.ui.activity.TechActivity;
 import com.chase.dcjrCase.ui.fragment.BaseFragment;
 import com.chase.dcjrCase.uitl.CacheUtils;
 import com.chase.dcjrCase.uitl.PrefUtils;
@@ -255,15 +258,17 @@ public class HomeEMCFragment extends BaseFragment implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_case:
-
+                RadioButton rCaseBtn = getActivity().findViewById(R.id.rb_bottom_case);
+                rCaseBtn.performClick();
                 break;
             case R.id.rl_news:
-
+                RadioButton rNewsBtn = getActivity().findViewById(R.id.rb_bottom_news);
+                rNewsBtn.performClick();
                 break;
             case R.id.rl_tech:
-
+                Intent intent = new Intent(mActivity, TechActivity.class);
+                startActivity(intent);
                 break;
-
         }
     }
 

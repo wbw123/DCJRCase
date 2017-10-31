@@ -1,6 +1,7 @@
 package com.chase.dcjrCase.ui.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -68,6 +69,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 switchDayNightMode();
                 break;
             case R.id.ll_clean:
+                cleanCache();
                 break;
             case R.id.ll_feedback:
                 break;
@@ -80,6 +82,15 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 break;
         }
     }
+
+    private void cleanCache() {
+        String pkName = getContext().getPackageName();
+        Intent intent = new Intent(
+                "android.settings.APPLICATION_DETAILS_SETTINGS");
+        intent.setData(Uri.parse("package:" + pkName));
+        startActivity(intent);
+    }
+
     public void getCollection() {
         Intent intent = new Intent(mActivity, CollectionActivity.class);
         mActivity.startActivity(intent);
