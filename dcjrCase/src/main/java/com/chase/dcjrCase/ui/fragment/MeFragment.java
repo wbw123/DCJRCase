@@ -1,6 +1,9 @@
 package com.chase.dcjrCase.ui.fragment;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.Color;
+import android.support.v7.app.AppCompatDelegate;
 import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,6 +14,8 @@ import com.chase.dcjrCase.R;
 import com.chase.dcjrCase.ui.activity.CollectionActivity;
 import com.chase.dcjrCase.ui.activity.HistoryActivity;
 import com.chase.dcjrCase.ui.activity.LoginActivity;
+import com.chase.dcjrCase.ui.activity.MainActivity;
+import com.chase.dcjrCase.ui.activity.SwitchModeActivity;
 
 /**
  * Created by chase on 2017/9/5.
@@ -66,7 +71,11 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 getCollection();
                 break;
             case R.id.ll_night_mode:
+                Intent intent = new Intent(mActivity, SwitchModeActivity.class);
+                mActivity.startActivity(intent);
                 switchDayNightMode();
+                getActivity().overridePendingTransition(R.anim.activity_in,R.anim
+                .activity_out);//淡出淡入动画效果
                 break;
             case R.id.ll_clean:
                 cleanCache();
@@ -101,14 +110,31 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void switchDayNightMode() {
-        isNightMode = !isNightMode;
-        if (isNightMode) {
-            iv_nightImg.setImageResource(R.drawable.ic_day_nor);
-            tv_nightText.setText(R.string.day_name);
+        int mode = getActivity().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+//        int mode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+//        if (mode == Configuration.UI_MODE_NIGHT_NO) {
+//            iv_nightImg.setImageResource(R.drawable.ic_day_nor);
+//            tv_nightText.setText(R.string.day_name);
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//        }else if (mode == Configuration.UI_MODE_NIGHT_YES){
+//            iv_nightImg.setImageResource(R.drawable.ic_night_pre);
+//            tv_nightText.setText(R.string.night_name);
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//        }
+//
+        switch (mode){
+            case Configuration.UI_MODE_NIGHT_NO:
 
-        }else {
-            iv_nightImg.setImageResource(R.drawable.ic_night_pre);
-            tv_nightText.setText(R.string.night_name);
+                tv_nightText.setTextColor(Color.argb(136,0,0,0));
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                getActivity().recreate();
+                break;
+            case Configuration.UI_MODE_NIGHT_YES:
+
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                getActivity().recreate();
+                break;
+
         }
     }
 

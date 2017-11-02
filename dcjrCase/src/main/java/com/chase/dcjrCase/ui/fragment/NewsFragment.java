@@ -19,9 +19,11 @@ import android.widget.Toast;
 import com.chase.dcjrCase.R;
 import com.chase.dcjrCase.adapter.NewsAdapter;
 import com.chase.dcjrCase.adapter.TopNewsAdapter;
+import com.chase.dcjrCase.bean.HistoryBean;
 import com.chase.dcjrCase.bean.NewsData;
 import com.chase.dcjrCase.bean.NewsData.DataBean.NewsDataBean;
 import com.chase.dcjrCase.bean.NewsData.DataBean.TopNewsBean;
+import com.chase.dcjrCase.dao.HistoryDao;
 import com.chase.dcjrCase.global.Constants;
 import com.chase.dcjrCase.ui.activity.WebViewActivity;
 import com.chase.dcjrCase.uitl.CacheUtils;
@@ -103,6 +105,10 @@ public class NewsFragment extends BaseFragment {
             }
         }
     };
+    private HistoryDao mDao;
+    private TopNewsBean topNewsBean;
+    private HistoryBean historyBean;
+    private HistoryBean historyBean1;
 
     @Override
     public View initView() {
@@ -161,6 +167,18 @@ public class NewsFragment extends BaseFragment {
                     readIds = readIds + newsDataBean.id + ",";
                     PrefUtils.putString("read_ids", readIds, mActivity);
                 }
+
+                //将已读条目插入数据库
+                historyBean = new HistoryBean();
+                historyBean.id = newsDataBean.id;
+                historyBean.title = newsDataBean.title;
+                historyBean.date = newsDataBean.date;
+                historyBean.imgUrl = newsDataBean.imgUrl;
+                historyBean.url = newsDataBean.url;
+                historyBean.author = newsDataBean.author;
+                historyBean.from = newsDataBean.from;
+                historyBean.type = String.valueOf(newsDataBean.type);
+                IsInsert();
             }
         });
 
@@ -169,7 +187,7 @@ public class NewsFragment extends BaseFragment {
 
     @Override
     public void initData() {
-
+        mDao = new HistoryDao(getActivity());
         //获取缓存
         mCache = CacheUtils.getCache(Constants.NEWSJSON_URL, mActivity);
         //触发自动刷新
@@ -361,6 +379,7 @@ public class NewsFragment extends BaseFragment {
                 private float mDownX;
                 private float mDownY;
                 private long mDownTime;
+
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     switch (event.getAction()) {
@@ -396,6 +415,21 @@ public class NewsFragment extends BaseFragment {
                                     topNewIntent.putExtra("type",mTopnews.get(positon).type);
                                     topNewIntent.putExtra("id",mTopnews.get(positon).id);
                                     mActivity.startActivity(topNewIntent);
+
+                                    //将已读条目插入数据库
+                                    topNewsBean = mTopnews.get(positon);
+                                    historyBean = new HistoryBean();
+                                    historyBean.id = topNewsBean.id;
+                                    historyBean.title = topNewsBean.title;
+                                    historyBean.date = topNewsBean.date;
+                                    historyBean.imgUrl = topNewsBean.imgUrl;
+                                    historyBean.url = topNewsBean.url;
+                                    historyBean.author = topNewsBean.author;
+                                    historyBean.from = topNewsBean.from;
+                                    historyBean.type = String.valueOf(topNewsBean.type);
+                                    //判断是否添加到历史记录
+                                    IsInsert();
+
                                 }
                             }
                             // 延时2秒切换广告条
@@ -407,6 +441,19 @@ public class NewsFragment extends BaseFragment {
                     return false;
                 }
             });
+        }
+    }
+    /*判断是否添加到历史记录
+   * 如果已经添加到历史记录则先删除后添加
+   * 如果没有添加则添加到历史记录*/
+    public void IsInsert(){
+        if (mDao.query(historyBean.id)){
+            mDao.deleteID(historyBean.id);
+            mDao.insert(historyBean);
+            System.out.println("delete______________________");
+        }else {
+            mDao.insert(historyBean);
+            System.out.println("insert___________________");
         }
     }
 

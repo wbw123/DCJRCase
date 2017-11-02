@@ -3,6 +3,9 @@
     package="com.chase.dcjrCase">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".global.DCJRCaseApp"
@@ -38,9 +41,12 @@
             android:name=".ui.activity.TechActivity"
             android:label="@string/tech_activity_name" />
         <activity android:name=".ui.activity.SearchActivity" />
-        <activity android:name=".ui.activity.HistoryActivity" />
+        <activity
+            android:name=".ui.activity.HistoryActivity"
+            android:label="@string/history_activity_name" />
         <activity android:name=".ui.activity.CaseSearchActivity" />
-        <activity android:name=".ui.activity.CollectionActivity"></activity>
+        <activity android:name=".ui.activity.CollectionActivity" />
+        <activity android:name=".ui.activity.SwitchModeActivity"></activity>
     </application>
 
 </manifest>

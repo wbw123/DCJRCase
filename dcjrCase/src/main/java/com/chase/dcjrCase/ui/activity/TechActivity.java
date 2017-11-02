@@ -26,6 +26,7 @@ import com.chase.dcjrCase.bean.HistoryBean;
 import com.chase.dcjrCase.bean.TechData;
 import com.chase.dcjrCase.bean.TechData.DataBean.TechDataBean;
 import com.chase.dcjrCase.bean.TechData.DataBean.TopTechBean;
+import com.chase.dcjrCase.dao.HistoryDao;
 import com.chase.dcjrCase.global.Constants;
 import com.chase.dcjrCase.uitl.CacheUtils;
 import com.chase.dcjrCase.uitl.PrefUtils;
@@ -104,9 +105,10 @@ public class TechActivity extends AppCompatActivity {
         }
     };
     private TechDataBean techDataBean;
-    private HistoryBean mTeachHistoryBean;
-    private HistoryBean mTopTechHistoeyBean;
     private TopTechBean topTechBean;
+    private HistoryDao mDao;
+    private HistoryBean historyBean;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,21 +171,25 @@ public class TechActivity extends AppCompatActivity {
                     readIds = readIds + techDataBean.id + ",";
                     PrefUtils.putString("read_ids", readIds, getApplicationContext());
                 }
-
-//                mTechHistory= new ArrayList<>();
-                mTeachHistoryBean = new HistoryBean();
-                mTeachHistoryBean.id = techDataBean.id;
-                mTeachHistoryBean.title = techDataBean.title;
-                mTeachHistoryBean.date = techDataBean.date;
-                mTeachHistoryBean.imgUrl = techDataBean.imgUrl;
-                mTeachHistoryBean.url = Constants.HOME_URL + "/dcjr/tech/tech" + id + ".html";
-                mTechHistory.add(mTeachHistoryBean);
+                //将已读条目插入数据库
+                historyBean = new HistoryBean();
+                historyBean.id = techDataBean.id;
+                historyBean.title = techDataBean.title;
+                historyBean.date = techDataBean.date;
+                historyBean.imgUrl = techDataBean.imgUrl;
+                historyBean.url = techDataBean.url;
+                historyBean.author = techDataBean.author;
+                historyBean.from = techDataBean.from;
+                historyBean.type = String.valueOf(techDataBean.type);
+//                mDao.insert(historyBean);
+                IsInsert();
             }
         });
 
     }
 
     public void initData() {
+        mDao = new HistoryDao(this);
         //获取缓存
         mCache = CacheUtils.getCache(Constants.TECHJSON_URL, this);
         if (!TextUtils.isEmpty(mCache)) {
@@ -408,16 +414,18 @@ public class TechActivity extends AppCompatActivity {
                                     TopTechIntent.putExtra("id",mTopTech.get(position).id);
                                     startActivity(TopTechIntent);
 
-
-//                                    mTopTechHistory = new ArrayList<>();
-                                    mTopTechHistoeyBean = new HistoryBean();
-                                    mTopTechHistoeyBean.id = topTechBean.id;
-                                    mTopTechHistoeyBean.title = topTechBean.title;
-                                    mTopTechHistoeyBean.date = topTechBean.date;
-                                    mTopTechHistoeyBean.imgUrl = topTechBean.imgUrl;
-                                    mTopTechHistoeyBean.url = Constants.HOME_URL + topTechBean.url;
-                                    mTopTechHistory.add(mTopTechHistoeyBean);
-
+                                    //将已读条目插入数据库
+                                    historyBean = new HistoryBean();
+                                    historyBean.id = topTechBean.id;
+                                    historyBean.title = topTechBean.title;
+                                    historyBean.date = topTechBean.date;
+                                    historyBean.imgUrl = topTechBean.imgUrl;
+                                    historyBean.url = topTechBean.url;
+                                    historyBean.author = topTechBean.author;
+                                    historyBean.from = topTechBean.from;
+                                    historyBean.type = String.valueOf(topTechBean.type);
+                                    //判断是否添加到历史记录
+                                    IsInsert();
                                 }
                             }
 
@@ -432,6 +440,20 @@ public class TechActivity extends AppCompatActivity {
                 }
 
             });
+        }
+    }
+
+    /*判断是否添加到历史记录
+    * 如果已经添加到历史记录则先删除后添加
+    * 如果没有添加则添加到历史记录*/
+    public void IsInsert(){
+        if (mDao.query(historyBean.id)){
+            mDao.deleteID(historyBean.id);
+            mDao.insert(historyBean);
+            System.out.println("delete______________________");
+        }else {
+            mDao.insert(historyBean);
+            System.out.println("insert___________________");
         }
     }
 
