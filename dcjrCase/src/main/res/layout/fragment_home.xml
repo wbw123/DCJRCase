@@ -22,7 +22,8 @@
     <com.chase.dcjrCase.view.HomeViewPager
         android:id="@+id/viewpager_home_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/nightModeColor">
 
     </com.chase.dcjrCase.view.HomeViewPager>
 

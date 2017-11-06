@@ -3,6 +3,10 @@ package com.chase.dcjrCase.uitl;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.chase.dcjrCase.bean.HistoryBean;
+
+import java.util.ArrayList;
+
 /**
  * 对SharePreference的封装
  * 
@@ -52,4 +56,5 @@ public class PrefUtils {
 				Context.MODE_PRIVATE);
 		sp.edit().remove(key).commit();
 	}
+
 }

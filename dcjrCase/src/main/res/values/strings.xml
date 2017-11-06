@@ -2,7 +2,6 @@
     <string name="app_name">电磁兼容案例库</string>
     <string name="open">open</string>
     <string name="close">close</string>
-    <string name="tech_activity_name">前沿技术</string>
 
     <!--项目标题-->
     <string name="title">"电磁兼容案例库"</string>
@@ -20,6 +19,10 @@
         <item>EMC测试</item>
 
     </string-array>
+
+    <!--activity标题-->
+    <string name="tech_activity_name">前沿技术</string>
+    <string name="history_activity_name">电磁兼容案例库历史记录</string>
 
     <!--MeFragment-->
     <string name="history_name">历史记录</string>

@@ -9,9 +9,12 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.util.Util;
 import com.chase.dcjrCase.R;
 import com.chase.dcjrCase.bean.EMCData.DataBean.TopEMCBean;
 import com.chase.dcjrCase.global.Constants;
+import com.chase.dcjrCase.ui.activity.MainActivity;
+import com.chase.dcjrCase.ui.fragment.HomeFragment;
 
 import java.util.ArrayList;
 
@@ -39,14 +42,18 @@ public class TopEMCAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         ImageView view = new ImageView(mContext);
-        Glide.with(mContext)
-                .load(Constants.HOME_URL + mTopEMCData.get(position).imgUrl)
+        try {
+            Glide.with(mContext)
+                    .load(Constants.HOME_URL + mTopEMCData.get(position).imgUrl)
 //                .fitCenter()//指定图片缩放类型为fitCenter
-                .centerCrop()// 指定图片缩放类型为centerCrop
-                .placeholder(R.mipmap.loading)
-                .diskCacheStrategy(DiskCacheStrategy.RESULT)//缓存转换后的最终图像
-                .into(view);
-        container.addView(view);
+                    .centerCrop()// 指定图片缩放类型为centerCrop
+                    .placeholder(R.mipmap.loading)
+                    .diskCacheStrategy(DiskCacheStrategy.RESULT)//缓存转换后的最终图像
+                    .into(view);
+                    container.addView(view);
+        }catch (Exception e){
+
+        }
         return view;
     }
 

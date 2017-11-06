@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#35464e</color>
+    <color name="colorPrimaryDark">#212a2f</color>
+    <color name="colorAccent">#212a2f</color>
+    <color name="textColorPrimary">#616161</color>
+    <color name="viewBackground">#212a2f</color>
+
+    <color name="menu_bg_press">#cecece</color>
+    <color name="background_tab_pressed">#35464e</color>
+
+    <!--TabLayout颜色属性-->
+    <color name="tab_background">@android:color/transparent</color>
+    <color name="tab_Selected_TextColor">#35464e</color>
+    <color name="tab_TextColor">#cecece</color>
+    <color name="tab_IndicatorColor">#35464e</color>
+
+    <color name="nightModeColor">#616161</color>
+    <color name="meFragmentColor">#616161</color>
+
+</resources>

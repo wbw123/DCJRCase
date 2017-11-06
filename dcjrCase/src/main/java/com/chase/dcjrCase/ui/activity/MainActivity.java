@@ -1,6 +1,7 @@
 package com.chase.dcjrCase.ui.activity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,6 +23,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.util.Util;
 import com.chase.dcjrCase.R;
 import com.chase.dcjrCase.adapter.DrawerListAdapter;
 import com.chase.dcjrCase.adapter.MyFragmentPageAdapter;
@@ -91,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
 //        initHomeData();//初始化首页数据
 
         initMenuEvent();//侧滑菜单listview条目点击事件
+
     }
 
     private void initViewPager() {
@@ -305,5 +309,10 @@ public class MainActivity extends AppCompatActivity {
             System.exit(0);
         }
     }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Glide.with(getApplicationContext()).pauseRequests();
 
+    }
 }

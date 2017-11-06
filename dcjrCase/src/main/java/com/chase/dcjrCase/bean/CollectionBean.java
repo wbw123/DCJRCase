@@ -4,7 +4,7 @@ package com.chase.dcjrCase.bean;
  * Created by chase on 2017/10/25.
  */
 
-public class CollectionBean {
+public class    CollectionBean {
 
     public String id;
     public String title;

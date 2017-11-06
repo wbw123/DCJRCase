@@ -19,6 +19,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.util.Util;
 import com.chase.dcjrCase.R;
 import com.chase.dcjrCase.adapter.EMCAdapter;
 import com.chase.dcjrCase.adapter.TopEMCAdapter;
@@ -439,6 +441,7 @@ public class HomeEMCFragment extends BaseFragment implements View.OnClickListene
             });
         }
     }
+
 
 
     public static int getCount() {

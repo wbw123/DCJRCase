@@ -1,6 +1,17 @@
 <resources>
 
     <!-- Base application theme. -->
+    <!--<style name="AppBaseTheme_Day" parent="Theme.AppCompat.Light.DarkActionBar">-->
+
+        <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+
+        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
+        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
+        <!--&lt;!&ndash;修改actionbar高度(换成toolbar后没效果)&ndash;&gt;-->
+
+        <!--<item name="actionBarSize">40dp</item>-->
+    <!--</style>-->
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Customize your theme here. -->
 

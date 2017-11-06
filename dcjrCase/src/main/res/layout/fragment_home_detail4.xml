@@ -19,11 +19,13 @@
     <ListView
         android:id="@+id/lv_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/nightModeColor">
     </ListView>
 
     <com.scwang.smartrefresh.layout.footer.ClassicsFooter
         android:id="@+id/refresh_footer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@color/nightModeColor"/>
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>

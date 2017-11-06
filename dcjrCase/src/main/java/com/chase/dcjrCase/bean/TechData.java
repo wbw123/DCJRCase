@@ -36,7 +36,7 @@ public class TechData {
                     '}';
         }
 
-        public  class TechDataBean {
+        public class TechDataBean {
             /**
              * id : 4024
              * title : 简述个人整理的emc整改思路

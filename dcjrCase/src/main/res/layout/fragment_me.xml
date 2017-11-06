@@ -10,7 +10,7 @@
         android:paddingBottom="10dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:background="#fff">
+        android:background="@color/meFragmentColor">
         <ImageView
             android:id="@+id/iv_me_login"
             android:clickable="true"
@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:clickable="true"
-        android:background="#fff"
+        android:background="@color/meFragmentColor"
         android:orientation="horizontal">
         <ImageView
             android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:clickable="true"
-        android:background="#fff"
+        android:background="@color/meFragmentColor"
         android:orientation="horizontal">
         <ImageView
             android:layout_width="wrap_content"
@@ -82,21 +82,18 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:clickable="true"
-        android:background="#fff"
+        android:background="@color/meFragmentColor"
         android:orientation="horizontal">
         <ImageView
             android:id="@+id/iv_night_img"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_night_pre"/>
+            android:src="@drawable/btn_night_mode_selector"/>
         <TextView
             android:id="@+id/tv_night_text"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/night_name"
-            android:textSize="15sp"/>
+            style="@style/meFrag_tv_style"
+            android:text="@string/night_name" />
     </LinearLayout>
 
     <View
@@ -111,7 +108,7 @@
         android:onClick="onClick"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#fff"
+        android:background="@color/meFragmentColor"
         android:clickable="true"
         android:orientation="horizontal">
         <ImageView
@@ -136,7 +133,7 @@
         android:onClick="onClick"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#fff"
+        android:background="@color/meFragmentColor"
         android:clickable="true"
         android:orientation="horizontal">
         <ImageView
@@ -156,7 +153,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:clickable="true"
-        android:background="#fff"
+        android:background="@color/meFragmentColor"
         android:orientation="horizontal">
         <ImageView
             android:layout_width="wrap_content"

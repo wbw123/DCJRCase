@@ -3,6 +3,7 @@ package com.chase.dcjrCase.global;
 import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
+import android.support.v7.app.AppCompatDelegate;
 
 public class DCJRCaseApp extends Application{
     private static Context mainContext;
@@ -23,5 +24,4 @@ public class DCJRCaseApp extends Application{
     public static Handler getHandler(){
         return mainHandler;
     }
-
 }

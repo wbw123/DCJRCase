@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void enterForgetPwd() {
         Intent intent = new Intent(this, ForgetPasswordActivity.class);
         startActivity(intent);
-        finish();
+
     }
 
     //跳过登录页
@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void enterRegister() {
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
-        finish();
+
     }
 
 }
