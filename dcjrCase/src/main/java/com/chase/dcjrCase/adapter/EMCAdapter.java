@@ -14,7 +14,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chase.dcjrCase.R;
 import com.chase.dcjrCase.bean.EMCData.DataBean.EMCDataBean;
 import com.chase.dcjrCase.global.Constants;
-import com.chase.dcjrCase.ui.fragment.NewsFragment;
+import com.chase.dcjrCase.ui.fragment.detail.HomeEMCFragment;
 import com.chase.dcjrCase.uitl.PrefUtils;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class EMCAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        mCount = NewsFragment.getCount();
+        mCount = HomeEMCFragment.getCount();
         if (mCount >= mEMCList.size()){
             return mEMCList.size();
         }else {

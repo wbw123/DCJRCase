@@ -19,8 +19,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.util.Util;
 import com.chase.dcjrCase.R;
 import com.chase.dcjrCase.adapter.EMCAdapter;
 import com.chase.dcjrCase.adapter.TopEMCAdapter;
@@ -59,7 +57,7 @@ public class HomeEMCFragment extends BaseFragment implements View.OnClickListene
     private RelativeLayout mRlCase;
     private RelativeLayout mRlNews;
     private RelativeLayout mRlTech;
-    private static int count;//用来记录第一次加载的条目数,以及在加载更多后加载的条目数
+    private static int count = 10;//用来记录第一次加载的条目数,以及在加载更多后加载的条目数
     private String mCache;//条目缓存数据 json字符串
     //    private int mFlContainerHeight;//轮播图控件高度
 //    private int mLlContainerHeight;//mid控件高度
@@ -196,6 +194,7 @@ public class HomeEMCFragment extends BaseFragment implements View.OnClickListene
 
         //获取缓存
         mCache = CacheUtils.getCache(Constants.EMCJSON_URL, mActivity);
+        System.out.println("mCache:"+mCache);
         if (!TextUtils.isEmpty(mCache)) {
             System.out.println("有缓存  不自动刷新");
             processResult(mCache);
