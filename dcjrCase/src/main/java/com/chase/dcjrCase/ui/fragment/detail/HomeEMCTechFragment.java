@@ -1,5 +1,6 @@
 package com.chase.dcjrCase.ui.fragment.detail;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +16,7 @@ import com.chase.dcjrCase.adapter.EMCTechAdapter;
 import com.chase.dcjrCase.bean.EMCTechData;
 import com.chase.dcjrCase.bean.EMCTechData.TechEMCdataBean;
 import com.chase.dcjrCase.global.Constants;
+import com.chase.dcjrCase.ui.activity.WebViewActivity;
 import com.chase.dcjrCase.ui.fragment.BaseFragment;
 import com.chase.dcjrCase.uitl.CacheUtils;
 import com.chase.dcjrCase.uitl.PrefUtils;
@@ -90,7 +92,22 @@ public class HomeEMCTechFragment extends BaseFragment {
                 TechEMCdataBean techEMCdataBean = mTechEMCList.get(position);
                 System.out.println("position:"+position);
                 System.out.println("techEMCdataBean:"+techEMCdataBean);
+
                 /*条目跳转*/
+                Intent intent = new Intent(mActivity, WebViewActivity.class);
+                intent.putExtra("url", Constants.HOME_URL+techEMCdataBean.url);//webView链接
+                /*收藏*/
+                intent.putExtra("title",techEMCdataBean.title);
+                intent.putExtra("author",techEMCdataBean.author);
+                intent.putExtra("date",techEMCdataBean.date);
+                intent.putExtra("imgUrl",techEMCdataBean.imgUrl);
+                intent.putExtra("imgUrl1",techEMCdataBean.imgUrl1);
+                intent.putExtra("imgUrl2",techEMCdataBean.imgUrl2);
+                intent.putExtra("imgUrl3",techEMCdataBean.imgUrl3);
+                intent.putExtra("from",techEMCdataBean.from);
+                intent.putExtra("type",techEMCdataBean.type);
+                intent.putExtra("id",techEMCdataBean.id);
+                mActivity.startActivity(intent);
 
                 /*点击条目标记已读状态*/
                 int type = techEMCdataBean.type;

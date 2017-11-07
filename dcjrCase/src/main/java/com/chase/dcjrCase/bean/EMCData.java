@@ -90,8 +90,8 @@ public class EMCData {
              * url : /dcjr/EMC/topEMC1.jpg
              */
 
-            public int id;
-            public String type;
+            public String id;
+            public int type;
             public String title;
             public String author;
             public String from;

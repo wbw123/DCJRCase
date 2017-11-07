@@ -1,5 +1,6 @@
 package com.chase.dcjrCase.ui.fragment.detail;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +16,7 @@ import com.chase.dcjrCase.adapter.EMCTestAdapter;
 import com.chase.dcjrCase.bean.EMCTestData;
 import com.chase.dcjrCase.bean.EMCTestData.TestEMCdataBean;
 import com.chase.dcjrCase.global.Constants;
+import com.chase.dcjrCase.ui.activity.WebViewActivity;
 import com.chase.dcjrCase.ui.fragment.BaseFragment;
 import com.chase.dcjrCase.uitl.CacheUtils;
 import com.chase.dcjrCase.uitl.PrefUtils;
@@ -91,7 +93,23 @@ public class HomeEMCTestFragment extends BaseFragment {
                 TestEMCdataBean testEMCdataBean = mTestEMCList.get(position);
                 System.out.println("position:"+position);
                 System.out.println("testEMCdataBean:"+testEMCdataBean);
+
                 /*条目跳转*/
+                Intent intent = new Intent(mActivity, WebViewActivity.class);
+                intent.putExtra("url", Constants.HOME_URL+testEMCdataBean.url);//webView链接
+                /*收藏*/
+                intent.putExtra("title",testEMCdataBean.title);
+                intent.putExtra("author",testEMCdataBean.author);
+                intent.putExtra("date",testEMCdataBean.date);
+                intent.putExtra("imgUrl",testEMCdataBean.imgUrl);
+                intent.putExtra("imgUrl1",testEMCdataBean.imgUrl1);
+                intent.putExtra("imgUrl2",testEMCdataBean.imgUrl2);
+                intent.putExtra("imgUrl3",testEMCdataBean.imgUrl3);
+                intent.putExtra("from",testEMCdataBean.from);
+                intent.putExtra("type",testEMCdataBean.type);
+                intent.putExtra("id",testEMCdataBean.id);
+                mActivity.startActivity(intent);
+
 
                 /*点击条目标记已读状态*/
                 int type = testEMCdataBean.type;

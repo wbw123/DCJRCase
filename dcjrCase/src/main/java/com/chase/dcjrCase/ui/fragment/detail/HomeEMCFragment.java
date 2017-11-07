@@ -27,6 +27,7 @@ import com.chase.dcjrCase.bean.EMCData.DataBean.EMCDataBean;
 import com.chase.dcjrCase.bean.EMCData.DataBean.TopEMCBean;
 import com.chase.dcjrCase.global.Constants;
 import com.chase.dcjrCase.ui.activity.TechActivity;
+import com.chase.dcjrCase.ui.activity.WebViewActivity;
 import com.chase.dcjrCase.ui.fragment.BaseFragment;
 import com.chase.dcjrCase.uitl.CacheUtils;
 import com.chase.dcjrCase.uitl.PrefUtils;
@@ -163,7 +164,19 @@ public class HomeEMCFragment extends BaseFragment implements View.OnClickListene
                 EMCDataBean emcDataBean = mEMCListData.get(position - 2);
 
                 /*条目跳转*/
-
+                Intent intent = new Intent(mActivity, WebViewActivity.class);
+                intent.putExtra("url", Constants.HOME_URL+emcDataBean.url);//webView链接
+                /*收藏*/
+                intent.putExtra("title",emcDataBean.title);
+                intent.putExtra("author",emcDataBean.author);
+                intent.putExtra("date",emcDataBean.date);
+                intent.putExtra("imgUrl1",emcDataBean.imgUrl1);
+                intent.putExtra("imgUrl2",emcDataBean.imgUrl2);
+                intent.putExtra("imgUrl3",emcDataBean.imgUrl3);
+                intent.putExtra("from",emcDataBean.from);
+                intent.putExtra("type",emcDataBean.type);
+                intent.putExtra("id",emcDataBean.id);
+                mActivity.startActivity(intent);
 
                 //当前点击的item的标题颜色置灰
                 TextView tvTitle = view.findViewById(R.id.tv_emc_title);
@@ -422,11 +435,19 @@ public class HomeEMCFragment extends BaseFragment implements View.OnClickListene
                             if (mDownX == upX && mDownY == upY) {
                                 if (upTime - mDownTime < 500) {
 //                                onClickListener.onClick(mViewPager.getCurrentItem() % mTopnews.size());
-//                                    int positon = mViewPager.getCurrentItem();
-//                                    System.out.println("当前viewpager："+positon);
-//                                    Intent TopNewIntent = new Intent(mActivity, WebViewActivity.class);
-//                                    TopNewIntent.putExtra("url", Constants.HOME_URL + mEMCTopData.get(positon).url);//webView链接
-//                                    mActivity.startActivity(TopNewIntent);
+                                    int positon = mViewPager.getCurrentItem();
+                                    System.out.println("当前viewpager："+positon);
+                                    Intent topIntent = new Intent(mActivity, WebViewActivity.class);
+                                    topIntent.putExtra("url", Constants.HOME_URL + mEMCTopData.get(positon).url);//webView链接
+                                    /*收藏*/
+                                    topIntent.putExtra("title",mEMCTopData.get(positon).title);
+                                    topIntent.putExtra("author",mEMCTopData.get(positon).author);
+                                    topIntent.putExtra("date",mEMCTopData.get(positon).date);
+                                    topIntent.putExtra("imgUrl",mEMCTopData.get(positon).imgUrl);
+                                    topIntent.putExtra("from",mEMCTopData.get(positon).from);
+                                    topIntent.putExtra("type",mEMCTopData.get(positon).type);
+                                    topIntent.putExtra("id",mEMCTopData.get(positon).id);
+                                    mActivity.startActivity(topIntent);
                                 }
                             }
                             // 延时2秒切换广告条
