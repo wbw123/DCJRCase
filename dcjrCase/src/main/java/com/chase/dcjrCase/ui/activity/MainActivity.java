@@ -1,7 +1,6 @@
 package com.chase.dcjrCase.ui.activity;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -24,7 +23,6 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.util.Util;
 import com.chase.dcjrCase.R;
 import com.chase.dcjrCase.adapter.DrawerListAdapter;
 import com.chase.dcjrCase.adapter.MyFragmentPageAdapter;
@@ -45,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 //    private RelativeLayout mDrawerRight;
     private ListView mDrawerList;
     /*定义模拟数据*/
-    private String mMenuName[] = {"首页", "前沿技术", "展会信息", "招聘信息", "关于我们"};
+    private String mMenuName[] = {"首页", "前沿技术", "展会信息", "热门下载", "关于我们"};
     private int mMenuPicId[] = {R.mipmap.ic_launcher, R.mipmap.ic_launcher,
             R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher};
     private ArrayList<Menu> mMenuList;
@@ -216,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(MainActivity.this, TechActivity.class));
                         break;
                     case 2:
-
+                        startActivity(new Intent(MainActivity.this, ExhibitionActivity.class));
                         break;
                     case 3:
 

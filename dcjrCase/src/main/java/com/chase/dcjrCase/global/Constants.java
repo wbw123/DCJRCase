@@ -7,6 +7,8 @@ public class Constants {
     public static final String CHILD_CASEJSON_URL = "/dcjr/caseItem.json";
     //newsjson后半部分url
     public static final String CHILD_NEWSJSON_URL = "/dcjr/news.json";
+    //exhibitionjson后半部分url
+    public static final String CHILD_EXHIJSON_URL = "/dcjr/exhibitionItem.json";
     //techjson后半部分url
     public static final String CHILD_TECHJSON_URL = "/dcjr/tech.json";
     //EMC后半部分url
@@ -21,6 +23,8 @@ public class Constants {
     public static final String CASEJSON_URL = HOME_URL+CHILD_CASEJSON_URL;
     //newsjson url
     public static final String NEWSJSON_URL = HOME_URL+CHILD_NEWSJSON_URL;
+    //exhibitionjson url
+    public static final String EXHIJSON_URL = HOME_URL+CHILD_EXHIJSON_URL;
     //techjson url
     public static final String TECHJSON_URL = HOME_URL+CHILD_TECHJSON_URL;
     //emcjson url

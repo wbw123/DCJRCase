@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp">
+
+    <ImageView
+        android:id="@+id/iv_image"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:padding="8dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/loading" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_weight="5">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:paddingBottom="5dp"
+            android:text="标题"
+            android:textColor="#a000"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/tv_addr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:paddingBottom="5dp"
+            android:text="来源"
+            android:textColor="#a000"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/tv_by"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_addr"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:paddingBottom="5dp"
+            android:text="主办"
+            android:textColor="#a000"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_by"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:text="日期"
+            android:textColor="#a000"
+            android:textSize="13dp" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>
